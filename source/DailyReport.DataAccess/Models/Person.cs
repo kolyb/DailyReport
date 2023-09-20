@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace DailyReport.DataAccess.Models
+﻿namespace DailyReport.DataAccess.Models
 {
     public class Person
     {
@@ -19,6 +17,10 @@ namespace DailyReport.DataAccess.Models
         public string WorkLocation { get; set; }
 
         public string PositionWorkLocation { get; set; }
+
+        public int UserIdentityId { get; set; }
+
+        public int EventId { get; set; }
 
         public string PhoneNumber { get; set; }
     }

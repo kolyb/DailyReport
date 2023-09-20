@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace DailyReport.DataAccess.Models
+﻿namespace DailyReport.DataAccess.Models
 {
     public class WorkLocation
     {
