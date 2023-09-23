@@ -6,6 +6,6 @@
 
         public string? Description { get; set; }
 
-        public DateTime EventTime { get; set; }
+        public DateTime? EventTime { get; set; }
     }
 }

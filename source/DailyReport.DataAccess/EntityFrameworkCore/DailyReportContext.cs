@@ -26,6 +26,7 @@ namespace DailyReport.DataAccess.EntityFrameworkCore
         {
             if (!optionsBuilder.IsConfigured)
             {
+                optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=DailyReport;Trusted_Connection=True;");
             }
         }
 
