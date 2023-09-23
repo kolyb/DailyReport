@@ -18,6 +18,10 @@ namespace DailyReport.DataAccess.EntityFrameworkCore
         }
         public DbSet<Person> Persons { get; set; }
 
+        public DbSet<Event> Events { get; set; }
+
+        public DbSet<WorkLocation> WorkLocations { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
