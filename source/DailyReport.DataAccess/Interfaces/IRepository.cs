@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-
-namespace DailyReport.DataAccess.Interfaces
+﻿namespace DailyReport.DataAccess.Interfaces
 {
     public interface IRepository<T> where T : class
     {

@@ -2,8 +2,6 @@
 using DailyReport.DataAccess.Interfaces;
 using DailyReport.DataAccess.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace DailyReport.DataAccess.Repositories
 {
@@ -36,7 +34,13 @@ namespace DailyReport.DataAccess.Repositories
 
         public async Task<Person> GetByIdAsync(int id)
         {
-            return await _db.Persons.FindAsync(id);
+            var result = await _db.Persons.FindAsync(id);
+            if (result == null) 
+            {   
+                //
+                throw new Exception();
+            }
+            return result;
         }
 
         public async Task UpdateAsync(Person item)
