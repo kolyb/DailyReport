@@ -11,8 +11,6 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "DailyReportDatabase", "sour
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DailyReport.BusinessLogic", "source\DailyReport.BusinessLogic\DailyReport.BusinessLogic.csproj", "{366A7329-5DB6-47F8-BF0C-D7E5F8ED7A38}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DailyReport.WebLayer", "source\DailyReport.WebLayer\DailyReport.WebLayer.csproj", "{4CF17CCB-4268-420D-9FD7-71DD2EBD9B9E}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,10 +31,6 @@ Global
 		{366A7329-5DB6-47F8-BF0C-D7E5F8ED7A38}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{366A7329-5DB6-47F8-BF0C-D7E5F8ED7A38}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{366A7329-5DB6-47F8-BF0C-D7E5F8ED7A38}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4CF17CCB-4268-420D-9FD7-71DD2EBD9B9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4CF17CCB-4268-420D-9FD7-71DD2EBD9B9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4CF17CCB-4268-420D-9FD7-71DD2EBD9B9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4CF17CCB-4268-420D-9FD7-71DD2EBD9B9E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -45,7 +39,6 @@ Global
 		{01C2AF62-0CAA-4752-B120-82A54146E244} = {843EE270-2BBD-430F-A011-AE4C9288CF59}
 		{3A7545EA-F6A2-4531-B35B-7949A9E23A8A} = {843EE270-2BBD-430F-A011-AE4C9288CF59}
 		{366A7329-5DB6-47F8-BF0C-D7E5F8ED7A38} = {843EE270-2BBD-430F-A011-AE4C9288CF59}
-		{4CF17CCB-4268-420D-9FD7-71DD2EBD9B9E} = {843EE270-2BBD-430F-A011-AE4C9288CF59}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E736667C-30C3-458E-9055-2AE6DF243F85}
