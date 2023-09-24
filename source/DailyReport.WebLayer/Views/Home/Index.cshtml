@@ -1,0 +1,25 @@
+﻿@* @{
+    ViewData["Title"] = "Home Page";
+}
+ *@
+@using Microsoft.AspNetCore.Mvc.Localization
+
+
+@if (User.Identity.IsAuthenticated)
+{
+    <p>@User.Identity.Name</p>
+    <div>
+        <form method="post" asp-controller="Account" asp-action="Logout">
+            <input type="submit" value=Exit />
+        </form>
+    </div>
+}
+else
+{
+    <div>
+        <a asp-controller="Account" asp-action="Register">Registration</a>
+    </div>
+    <div>
+        <a asp-controller="Account" asp-action="Login">Login</a>
+    </div>
+}

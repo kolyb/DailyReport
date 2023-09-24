@@ -13,13 +13,11 @@ namespace DailyReport.DataAccess.Configuration
         public static void ConfigureDailyReportDataAccess(this IServiceCollection services)
         {
             services.AddDbContext<DailyReportContext>();
-            services.AddIdentityCore<UserIdentity>()
+            services.AddIdentity<UserIdentity, IdentityRole>()
                 .AddEntityFrameworkStores<DailyReportContext>();
-            services.AddIdentityCore<IdentityRole>()
-                .AddEntityFrameworkStores<DailyReportContext>();
-            services.AddScoped<IRepository<Event>, EventRepository>();
-            services.AddScoped<IRepository<Person>, PersonRepository>();
+            services.AddScoped<IRepository<Person>, PersonRepository>();         
             services.AddScoped<IRepository<WorkLocation>, WorkLocationRepository>();
+            services.AddScoped<IRepository<Event>, EventRepository>();
         }
     }
 }

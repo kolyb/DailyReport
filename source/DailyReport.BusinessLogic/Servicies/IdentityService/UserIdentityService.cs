@@ -45,7 +45,7 @@ namespace DailyReport.BusinessLogic.Servicies.IdentityService
         //Registration
         public async Task CreateAsync(UserIdentityDTO item)
         {
-            if (item.Id == null)
+            if (item == null)
             {
                 throw new Exception("There is no current user!");
             }
