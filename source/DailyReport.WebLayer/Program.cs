@@ -8,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddMvc();
 builder.Services.ConfigureDailyReportBusinessLogic();
 builder.Services.AddHttpContextAccessor();
+builder.Services.AddRazorPages();
 //builder.Services.Configure<IdentityOptions>(options =>
 //{
 //    // Default Password settings.
@@ -38,8 +39,14 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+//app.MapControllerRoute(
+//    name: "default",
+//    pattern: "{controller=Home}/{action=Index}/{id?}");
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapDefaultControllerRoute();
+    endpoints.MapRazorPages();
+
+});
 
 app.Run();

@@ -1,0 +1,64 @@
+﻿@page
+@model DailyReport.WebLayer.Pages.Person.CreatePersonModel
+
+<h2>Create a new customer"</h2>
+<form method="post">
+    <div asp-validation-summary="All"></div>
+    <div>
+        <label>Birthday"</label>
+        <div>
+            <input asp-for="Birthday" />
+            <span asp-validation-for="Birthday"></span>
+        </div>
+    </div>
+    <div>
+        <label>First Name</label>
+        <div>
+            <input asp-for="FirstName" />
+            <span asp-validation-for="FirstName"></span>
+        </div>
+    </div>
+    <div>
+        <label>Middle Name</label>
+        <div>
+            <input asp-for="MiddleName" />
+            <span asp-validation-for="MiddleName"></span>
+        </div>
+    </div>
+    <div>
+        <label>Last Name</label>
+        <div>
+            <input asp-for="LastName" />
+            <span asp-validation-for="LastName"></span>
+        </div>
+    </div>
+    <div>
+        <label>Work location</label>
+        <div>
+            <input asp-for="WorkLocation" />
+            <span asp-validation-for="WorkLocation"></span>
+        </div>
+    </div>
+    <div>
+        <label>Position work location</label>
+        <div>
+            <input asp-for="PositionWorkLocation" />
+            <span asp-validation-for="PositionWorkLocation"></span>
+        </div>
+    </div>
+    <div>
+        <label>Phone number</label>
+        <div>
+            <input asp-for="PhoneNumber" />
+            <span asp-validation-for="PhoneNumber"></span>
+        </div>
+    </div>
+    <div>
+        <input type="submit" value=Create class="btn btn-info btn-md" />
+        &nbsp;
+        <input asp-page-handler="Cancel" type="submit" value=Refuse class="btn btn-info btn-md" />
+    </div>
+</form>
+<div>
+    <a asp-controller="Home" asp-action="Index">Back</a>
+</div>

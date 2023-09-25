@@ -1,0 +1,74 @@
+﻿@page
+@model DailyReport.WebLayer.Pages.Person.IndexModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<div>
+    <a asp-area="" asp-page="/Person/CreatePerson">Create person</a>
+</div>
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Birthday</th>
+                <th>*</th>
+                <th>First Name</th>
+                <th>*</th>
+                <th>Middle Name</th>
+                <th>
+                    *
+                </th>
+                <th>Last Name"</th>
+                <th>*</th>
+                <th>Work location</th>
+                <th>*</th>
+                <th>Position work location</th>
+                <th>
+                    *
+                </th>
+                <th>Phone number</th>
+                <th>*</th>
+                <th>Edit"</th>
+                <th>*</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.PersonDTOs)
+            {
+                <tr>
+                    <td>@item.Birthday</td>
+                    <td>*</td>
+                    <td>@item.FirstName</td>
+                    <td>*</td>
+                    <td>@item.MiddleName</td>
+                    <td>*</td>
+                    <td>@item.LastName</td>
+                    <td>*</td>
+                    <td>@item.WorkLocation</td>
+                    <td>*</td>
+                    <td>@item.PositionWorkLocation</td>
+                    <td>*</td>
+                    <td>@item.PhoneNumber</td>
+                    <td>*</td>
+                    <td>
+                        <form method="post">
+                            <a asp-page="EditCustomer" asp-route-id="@item.Id">Edit</a>
+                        </form>
+                    </td>
+                    <td>*</td>
+                    <td>
+                        <form method="post">
+                            <a asp-page="" DeleteCustomer" asp-route-id="@item.Id">Delete</a>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+    <div>
+        <a asp-controller="Home" asp-action="Index">Back"</a>
+    </div>
+

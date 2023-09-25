@@ -11,7 +11,7 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "DailyReportDatabase", "sour
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DailyReport.BusinessLogic", "source\DailyReport.BusinessLogic\DailyReport.BusinessLogic.csproj", "{366A7329-5DB6-47F8-BF0C-D7E5F8ED7A38}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DailyReport.WebLayer", "source\DailyReport.WebLayer\DailyReport.WebLayer.csproj", "{B3E17244-6EC1-45F1-BCB7-FF726449EFB5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DailyReport.WebLayer", "source\DailyReport.WebLayer\DailyReport.WebLayer.csproj", "{B3E17244-6EC1-45F1-BCB7-FF726449EFB5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
