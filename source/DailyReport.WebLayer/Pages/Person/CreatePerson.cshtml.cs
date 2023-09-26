@@ -18,8 +18,8 @@ namespace DailyReport.WebLayer.Pages.Person
             _serviceWorkLocationDTO = serviceWorkLocationDTO;
         }
 
-        [BindProperty(SupportsGet = true)]
-        public int Id { get; set; }
+        //[BindProperty(SupportsGet = true)]
+        //public int Id { get; set; }
 
         [BindProperty]
         public string? Birthday { get; set; }
@@ -45,7 +45,7 @@ namespace DailyReport.WebLayer.Pages.Person
         [BindProperty]
         public string? PhoneNumber { get; set; }
 
-        public IEnumerable<WorkLocationDTO> WorkLocationDTOs { get; set; }
+        public IEnumerable<WorkLocationDTO>? WorkLocationDTOs { get; set; }
 
         public void OnGet()
         {
@@ -70,7 +70,6 @@ namespace DailyReport.WebLayer.Pages.Person
             if (ModelState.IsValid)
             {
                 PersonDTO personDTO = new PersonDTO();
-                personDTO.Id = Id;
                 personDTO.Birthday = Birthday;
                 personDTO.FirstName = FirstName;
                 personDTO.MiddleName = MiddleName;

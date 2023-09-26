@@ -9,7 +9,5 @@
 	[WorkLocation] nvarchar(120) NULL,
 	[PositionWorkLocation] nvarchar(120) NULL,
 	[UserIdentityId] int NOT NULL,
-	[EventId] int NOT NULL,
-	[PhoneNumber] nvarchar(120) NULL,
-	
+	[PhoneNumber] nvarchar(120) NULL,	
 )
