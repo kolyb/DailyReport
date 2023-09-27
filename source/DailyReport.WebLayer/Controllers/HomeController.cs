@@ -22,13 +22,6 @@ namespace DailyReport.WebLayer.Controllers
             return View();
         }
 
-        public IActionResult SearchWorkLocation(string searchString)
-        {
-            IEnumerable<WorkLocationDTO> workLocationDTO = _serviceWorkLocationDTO.GetAll()
-            .Where(l => l.Description == searchString);
-            return View();
-        }
-
         public IActionResult Privacy()
         {
             return View();

@@ -31,13 +31,13 @@
                 <td>*</td>
                 <td>
                     <form method="post">
-                        <a asp-page="EditCustomer" asp-route-id="@item.Id">Edit</a>
+                        <a asp-page="EditWorkLocation" asp-route-id="@item.Id">Edit</a>
                     </form>
                 </td>
                 <td>*</td>
                 <td>
                     <form method="post">
-                        <a asp-page="" DeleteCustomer" asp-route-id="@item.Id">Delete</a>
+                        <a asp-page="DeleteWorkLocation" asp-route-id="@item.Id">Delete</a>
                     </form>
                 </td>
             </tr>
@@ -47,5 +47,5 @@
 
 
 <div>
-    <a asp-controller="Home" asp-action="Index">Back"</a>
+    <a asp-controller="Home" asp-action="Index">Back</a>
 </div>
