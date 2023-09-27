@@ -2,6 +2,7 @@ using DailyReport.BusinessLogic.Interfaces;
 using DailyReport.BusinessLogic.ModelsDTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace DailyReport.WebLayer.Pages.Person
 {
@@ -17,9 +18,6 @@ namespace DailyReport.WebLayer.Pages.Person
             _servicePersonDTO = servicePersonDTO;
             _serviceWorkLocationDTO = serviceWorkLocationDTO;
         }
-
-        //[BindProperty(SupportsGet = true)]
-        //public int Id { get; set; }
 
         [BindProperty]
         public string? Birthday { get; set; }
@@ -47,19 +45,26 @@ namespace DailyReport.WebLayer.Pages.Person
 
         public IEnumerable<WorkLocationDTO>? WorkLocationDTOs { get; set; }
 
+        public List<SelectListItem>? Options { get; set; }
+
         public void OnGet()
         {
-
+            Options = _serviceWorkLocationDTO.GetAll().Select(a =>
+                                  new SelectListItem
+                                  {
+                                      Value = a.Id.ToString(),
+                                      Text = a.Description
+                                  }).ToList();
         }
 
         public async Task<IActionResult> OnPost()
         {
 
-            WorkLocationDTOs = _serviceWorkLocationDTO.GetAll().Where(i => i.Description == WorkLocation);
+            WorkLocationDTOs = _serviceWorkLocationDTO.GetAll().Where(i => i.Id == WorkLocationId);
 
             foreach (var item in WorkLocationDTOs)
             {
-                WorkLocationId = item.Id;
+                WorkLocation = item.Description;
             }
 
             if (WorkLocationId == 0)
