@@ -60,13 +60,15 @@
     <Folder Include="Tables" />
     <Folder Include="ForeignKeys" />
     <Folder Include="Post" />
+    <Folder Include="StoryProcedures" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\Events.sql" />
     <Build Include="Tables\WorkLocations.sql" />
     <Build Include="Tables\Persons.sql" />
-    <Build Include="ForeignKeys\FK_Person_WorkLocation.sql" />
+    <Build Include="ForeignKeys\FK_WorkLocation_Person.sql" />
     <Build Include="ForeignKeys\FK_Person_Event.sql" />
+    <Build Include="StoryProcedures\UpdatePerson.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Post\UserIdentity.PostDeployment.sql" />

@@ -32,7 +32,7 @@ namespace DailyReport.WebLayer.Pages.Person
         public string? LastName { get; set; }
 
         [BindProperty]
-        public int WorkLocationId { get; set; }
+        public int? Id { get; set; }
 
         [BindProperty]
         public string? WorkLocation { get; set; }
@@ -43,8 +43,10 @@ namespace DailyReport.WebLayer.Pages.Person
         [BindProperty]
         public string? PhoneNumber { get; set; }
 
+        [BindProperty]
         public IEnumerable<WorkLocationDTO>? WorkLocationDTOs { get; set; }
 
+        [BindProperty]
         public List<SelectListItem>? Options { get; set; }
 
         public void OnGet()
@@ -60,14 +62,14 @@ namespace DailyReport.WebLayer.Pages.Person
         public async Task<IActionResult> OnPost()
         {
 
-            WorkLocationDTOs = _serviceWorkLocationDTO.GetAll().Where(i => i.Id == WorkLocationId);
+            WorkLocationDTOs = _serviceWorkLocationDTO.GetAll().Where(i => i.Id == Id);
 
             foreach (var item in WorkLocationDTOs)
             {
                 WorkLocation = item.Description;
             }
 
-            if (WorkLocationId == 0)
+            if (Id == 0)
             {
                 return RedirectToPage("Index");
             }
@@ -79,7 +81,7 @@ namespace DailyReport.WebLayer.Pages.Person
                 personDTO.FirstName = FirstName;
                 personDTO.MiddleName = MiddleName;
                 personDTO.LastName = LastName;
-                personDTO.WorkLocationId = WorkLocationId;
+                //personDTO.WorkLocationId = WorkLocationId;
                 personDTO.WorkLocation = WorkLocation;
                 personDTO.PositionWorkLocation = PositionWorkLocation;
                 personDTO.PhoneNumber = PhoneNumber;

@@ -5,11 +5,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace DailyReport.WebLayer.Pages.Person
 {
-    public class DeletePersonModel : PageModel
+    public class EditPersonModel : PageModel
     {
         private readonly IService<PersonDTO> _servicePersonDTO;
 
-        public DeletePersonModel(IService<PersonDTO> servicePersonDTO)
+        public EditPersonModel(IService<PersonDTO> servicePersonDTO)
         {
             _servicePersonDTO = servicePersonDTO;
         }
@@ -44,6 +44,7 @@ namespace DailyReport.WebLayer.Pages.Person
         public async Task OnGet(int id)
         {
             PersonDTO personDTO = await _servicePersonDTO.GetByIdAsync(id);
+            Id = personDTO.Id;
             Birthday = personDTO.Birthday;
             FirstName = personDTO.FirstName;
             MiddleName = personDTO.MiddleName;
@@ -72,7 +73,7 @@ namespace DailyReport.WebLayer.Pages.Person
                     personDTO.PhoneNumber = PhoneNumber;
 
 
-                    await _servicePersonDTO.DeleteAsync(personDTO);
+                    await _servicePersonDTO.UpdateAsync(personDTO);
                 }
             }
 

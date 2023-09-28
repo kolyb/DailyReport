@@ -12,13 +12,13 @@
 
         public string? LastName { get; set; }
 
-        public int WorkLocationId { get; set; }
+        //public int WorkLocationId { get; set; }
 
         public string? WorkLocation { get; set; }
 
         public string? PositionWorkLocation { get; set; }
 
-        public int UserIdentityId { get; set; }
+       // public int UserIdentityId { get; set; }
 
         public string? PhoneNumber { get; set; }
 

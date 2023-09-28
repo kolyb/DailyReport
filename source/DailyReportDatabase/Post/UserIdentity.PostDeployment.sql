@@ -196,3 +196,13 @@ GO
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_AspNetUserTokens_AspNetUsers_UserId]') AND parent_object_id = OBJECT_ID(N'[dbo].[AspNetUserTokens]'))
 ALTER TABLE [dbo].[AspNetUserTokens] CHECK CONSTRAINT [FK_AspNetUserTokens_AspNetUsers_UserId]
 GO
+
+----- Person
+--insert into dbo.Persons
+--values (1, '12.12','First', 'First','First','ГЦГП', 'First', '123 45 678 90 12')
+
+--- WorkLocation
+--insert into dbo.WorkLocations
+--values (1, 1, 'ГЦГП', 'Гомель')
+
+
