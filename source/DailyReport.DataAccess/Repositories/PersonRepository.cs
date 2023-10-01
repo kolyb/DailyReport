@@ -94,10 +94,8 @@ namespace DailyReport.DataAccess.Repositories
 
         public async Task UpdateAsync(Person item)
         {
-            //_db.Database.ExecuteSqlRaw("DeleteFK @workLocationId={0}", item.WorkLocationId);
             _db.Entry(item).State = EntityState.Modified;
             await _db.SaveChangesAsync();
-            //_db.Database.ExecuteSqlRaw("AlterFK @workLocationId={0}", item.WorkLocationId);
             //_db.Database.ExecuteSqlRaw("UpdatePerson @personId ={0},@birthday ={1}," +
             //    "@firstName ={2},@middleName={3}, @lastName={4}, @workLocationId={5}," +
             //    "@workLocation={6}, @positionWorkLocation={7}, @userIdentityId={8}, @phoneNumber={9}",

@@ -10,47 +10,49 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Birthday</th>
-                <th>*</th>
+                @* <th>Birthday</th>
+                <th>*</th> *@
                 <th>First Name</th>
                 <th>*</th>
-                <th>Middle Name</th>
+                @* <th>Middle Name</th>
                 <th>
                     *
-                </th>
+                </th> *@
                 <th>Last Name"</th>
                 <th>*</th>
-                <th>Work location</th>
-                <th>*</th>
-                <th>Position work location</th>
-                <th>
+                @* <th>Work location</th>
+                <th>*</th> *@
+                <th>Position</th>
+                @* <th>
                     *
                 </th>
-                <th>Phone number</th>
+                <th>Phone number</th> *@
                 <th>*</th>
                 <th>Edit"</th>
                 <th>*</th>
                 <th>Delete</th>
+                <th>*</th>
+                <th>Details</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model.PersonDTOs)
             {  
                 <tr>
-                    <td>@item.Birthday</td>
-                    <td>*</td>
+                    @* <td>@item.Birthday</td>
+                    <td>*</td> *@
                     <td>@item.FirstName</td>
                     <td>*</td>
-                    <td>@item.MiddleName</td>
-                    <td>*</td>
+                    @* <td>@item.MiddleName</td>
+                    <td>*</td> *@
                     <td>@item.LastName</td>
                     <td>*</td>
                     @* <td>@item.WorkLocation</td>
                     <td>*</td> *@
                     <td>@item.Position</td>
                     <td>*</td>
-                    <td>@item.PhoneNumber</td>
-                    <td>*</td>
+                    @* <td>@item.PhoneNumber</td>
+                    <td>*</td> *@
                     <td>
                         <form method="post">
                             <a asp-page="EditPerson" asp-route-id="@item.Id">Edit</a>
@@ -60,6 +62,12 @@
                     <td>
                         <form method="post">
                             <a asp-page="DeletePerson" asp-route-id="@item.Id">Delete</a>
+                        </form>
+                    </td>
+                    <td>*</td>
+                    <td>
+                        <form method="post">
+                            <a asp-page="DetailsPerson" asp-route-id="@item.Id">Details</a>
                         </form>
                     </td>
                 </tr>

@@ -17,7 +17,7 @@ namespace DailyReport.WebLayer.Pages.Person
 
         public void OnGet()
         {
-            PersonDTOs = _servicePersonDTO.GetAll();
+            PersonDTOs = _servicePersonDTO.GetAll();                           
         }
     }
 }

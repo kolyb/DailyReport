@@ -71,8 +71,6 @@
     <Build Include="ForeignKeys\FK_Person_WorkLocation.sql" />
     <Build Include="ForeignKeys\FK_Person_Event.sql" />
     <Build Include="StoryProcedures\UpdatePerson.sql" />
-    <Build Include="StoryProcedures\DeleteFK.sql" />
-    <Build Include="StoryProcedures\AlterFK.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Post\UserIdentity.PostDeployment.sql" />
