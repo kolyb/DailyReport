@@ -32,13 +32,13 @@ namespace DailyReport.WebLayer.Pages.Person
         public string? LastName { get; set; }
 
         [BindProperty]
-        public int? Id { get; set; }
+        public int WorkLocationId { get; set; }
+
+        //[BindProperty]
+        //public string? WorkLocation { get; set; }
 
         [BindProperty]
-        public string? WorkLocation { get; set; }
-
-        [BindProperty]
-        public string? PositionWorkLocation { get; set; }
+        public string? Position { get; set; }
 
         [BindProperty]
         public string? PhoneNumber { get; set; }
@@ -62,14 +62,14 @@ namespace DailyReport.WebLayer.Pages.Person
         public async Task<IActionResult> OnPost()
         {
 
-            WorkLocationDTOs = _serviceWorkLocationDTO.GetAll().Where(i => i.Id == Id);
+            WorkLocationDTOs = _serviceWorkLocationDTO.GetAll().Where(i => i.Id == WorkLocationId);
 
-            foreach (var item in WorkLocationDTOs)
-            {
-                WorkLocation = item.Description;
-            }
+            //foreach (var item in WorkLocationDTOs)
+            //{
+            //    WorkLocation = item.Description;
+            //}
 
-            if (Id == 0)
+            if (WorkLocationId == 0)
             {
                 return RedirectToPage("Index");
             }
@@ -81,9 +81,9 @@ namespace DailyReport.WebLayer.Pages.Person
                 personDTO.FirstName = FirstName;
                 personDTO.MiddleName = MiddleName;
                 personDTO.LastName = LastName;
-                //personDTO.WorkLocationId = WorkLocationId;
-                personDTO.WorkLocation = WorkLocation;
-                personDTO.PositionWorkLocation = PositionWorkLocation;
+                personDTO.WorkLocationId = WorkLocationId;
+                //personDTO.WorkLocation = WorkLocation;
+                personDTO.Position = Position;
                 personDTO.PhoneNumber = PhoneNumber;
 
 

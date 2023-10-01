@@ -32,6 +32,11 @@ namespace DailyReport.BusinessLogic.Servicies
             await _workLocationRepository.DeleteAsync(workLocation);
         }
 
+        public void Dispose()
+        {
+            _workLocationRepository.Dispose();
+        }
+
         public IList<WorkLocationDTO> GetAll()
         {
             List<WorkLocation> workLocations = _workLocationRepository.GetAll().ToList();

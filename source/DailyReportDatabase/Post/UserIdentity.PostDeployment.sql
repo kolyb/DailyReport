@@ -197,12 +197,34 @@ IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[
 ALTER TABLE [dbo].[AspNetUserTokens] CHECK CONSTRAINT [FK_AspNetUserTokens_AspNetUsers_UserId]
 GO
 
+----- WorkLocation
+--insert into dbo.WorkLocations
+--values (1, 'ГЦГП', 'Гомель')
+
+
 ----- Person
 --insert into dbo.Persons
---values (1, '12.12','First', 'First','First','ГЦГП', 'First', '123 45 678 90 12')
+--values (1, '12.12','First', 'First','First',1, 'First','err', '123 45 678 90 12')
 
---- WorkLocation
---insert into dbo.WorkLocations
---values (1, 1, 'ГЦГП', 'Гомель')
+--IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Person_WorkLocation') AND parent_object_id = OBJECT_ID(N'[dbo].[Persons]'))
+--ALTER TABLE [dbo].[Persons]  WITH CHECK ADD  CONSTRAINT [FK_Person_WorkLocation] FOREIGN KEY([WorkLocationId])
+--REFERENCES [dbo].[WorkLocations] ([Id])
+--ON DELETE CASCADE
+--GO
+
+--ALTER TABLE Persons
+--DROP Constraint FK_Person_WorkLocation
+--GO
+
+--ALTER TABLE Persons
+--ADD CONSTRAINT [FK_Person_Work]
+--FOREIGN KEY (WorkLocationId)
+--	REFERENCES WorkLocations (Id)
+--ON DELETE CASCADE ON UPDATE CASCADE
+--GO 
+
+
+
+
 
 

@@ -32,6 +32,11 @@ namespace DailyReport.BusinessLogic.Servicies
             await _personRepository.DeleteAsync(person);
         }
 
+        public void Dispose()
+        {
+            _personRepository.Dispose();
+        }
+
         public IList<PersonDTO> GetAll()
         {
             List<Person> persons = _personRepository.GetAll().ToList();

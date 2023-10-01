@@ -83,8 +83,7 @@ namespace DailyReport.WebLayer.Controllers
 
                     await _userIdentity.CreateAsync(userDto);
 
-
-                    RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Home");
                 }
                 return View(model);
             }
@@ -92,7 +91,7 @@ namespace DailyReport.WebLayer.Controllers
             {
                 return Content(ex.Message);
 
-            }        
+            }
 
         }
 

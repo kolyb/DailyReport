@@ -10,7 +10,6 @@ namespace DailyReport.BusinessLogic.Mappers
             WorkLocation workLocation = new WorkLocation
             {
                 Id = item.Id,
-                PersonId = item.PersonId,
                 Description = item.Description,
                 AdressWorkLocation = item.AdressWorkLocation,
             };
@@ -22,7 +21,6 @@ namespace DailyReport.BusinessLogic.Mappers
             WorkLocationDTO workLoacationDTO = new WorkLocationDTO
             {
                 Id = item.Id,
-                PersonId = item.PersonId,
                 Description = item.Description,
                 AdressWorkLocation = item.AdressWorkLocation,
             };
@@ -37,7 +35,6 @@ namespace DailyReport.BusinessLogic.Mappers
                 workLocationDTOs.Add(new WorkLocationDTO
                 {
                     Id = item.Id,
-                    PersonId = item.PersonId,
                     Description = item.Description,
                     AdressWorkLocation = item.AdressWorkLocation,
                 });

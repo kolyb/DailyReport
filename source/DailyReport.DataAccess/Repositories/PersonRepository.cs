@@ -9,6 +9,9 @@ namespace DailyReport.DataAccess.Repositories
     {
         private readonly DailyReportContext _db;
 
+        private IDisposable? _disposableResource = new MemoryStream();
+        private IAsyncDisposable? _asyncDisposableResource = new MemoryStream();
+
         public PersonRepository(DailyReportContext db)
         {
             _db = db;
@@ -25,6 +28,52 @@ namespace DailyReport.DataAccess.Repositories
         {
             _db.Persons.Remove(item);
             await _db.SaveChangesAsync();
+        }
+
+        public void Dispose()
+        {
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
+        }
+
+        public async ValueTask DisposeAsync()
+        {
+            await DisposeAsyncCore();
+
+            Dispose(disposing: false);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _disposableResource?.Dispose();
+                (_asyncDisposableResource as IDisposable)?.Dispose();
+            }
+
+            _disposableResource = null;
+            _asyncDisposableResource = null;
+        }
+
+        protected virtual async ValueTask DisposeAsyncCore()
+        {
+            if (_asyncDisposableResource != null)
+            {
+                await _asyncDisposableResource.DisposeAsync().ConfigureAwait(false);
+            }
+
+            if (_disposableResource is IAsyncDisposable disposable)
+            {
+                await disposable.DisposeAsync().ConfigureAwait(false);
+            }
+            else
+            {
+                _disposableResource?.Dispose();
+            }
+
+            _asyncDisposableResource = null;
+            _disposableResource = null;
         }
 
         public IEnumerable<Person> GetAll()
@@ -45,8 +94,10 @@ namespace DailyReport.DataAccess.Repositories
 
         public async Task UpdateAsync(Person item)
         {
+            //_db.Database.ExecuteSqlRaw("DeleteFK @workLocationId={0}", item.WorkLocationId);
             _db.Entry(item).State = EntityState.Modified;
             await _db.SaveChangesAsync();
+            //_db.Database.ExecuteSqlRaw("AlterFK @workLocationId={0}", item.WorkLocationId);
             //_db.Database.ExecuteSqlRaw("UpdatePerson @personId ={0},@birthday ={1}," +
             //    "@firstName ={2},@middleName={3}, @lastName={4}, @workLocationId={5}," +
             //    "@workLocation={6}, @positionWorkLocation={7}, @userIdentityId={8}, @phoneNumber={9}",

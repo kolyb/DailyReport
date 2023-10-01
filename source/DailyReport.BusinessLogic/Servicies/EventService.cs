@@ -32,6 +32,11 @@ namespace DailyReport.BusinessLogic.Servicies
             await _eventRepository.DeleteAsync(@event);
         }
 
+        public void Dispose()
+        {
+            _eventRepository.Dispose();
+        }
+
         public IList<EventDTO> GetAll()
         {
             List<Event> events = _eventRepository.GetAll().ToList();

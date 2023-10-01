@@ -1,6 +1,7 @@
 ﻿namespace DailyReport.BusinessLogic.Interfaces
 {
-    public interface IService<T> where T : class
+    public interface IService<T> : IDisposable
+        where T : class
     {
         Task CreateAsync(T item);
 

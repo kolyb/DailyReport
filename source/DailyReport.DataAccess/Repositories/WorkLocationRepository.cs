@@ -9,6 +9,9 @@ namespace DailyReport.DataAccess.Repositories
     {
         private readonly DailyReportContext _db;
 
+        private IDisposable? _disposableResource = new MemoryStream();
+        private IAsyncDisposable? _asyncDisposableResource = new MemoryStream();
+
         public WorkLocationRepository(DailyReportContext db)
         {
             _db = db;
@@ -25,6 +28,52 @@ namespace DailyReport.DataAccess.Repositories
         {
             _db.WorkLocations.Remove(item);
             await _db.SaveChangesAsync();
+        }
+
+        public void Dispose()
+        {
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
+        }
+
+        public async ValueTask DisposeAsync()
+        {
+            await DisposeAsyncCore();
+
+            Dispose(disposing: false);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _disposableResource?.Dispose();
+                (_asyncDisposableResource as IDisposable)?.Dispose();
+            }
+
+            _disposableResource = null;
+            _asyncDisposableResource = null;
+        }
+
+        protected virtual async ValueTask DisposeAsyncCore()
+        {
+            if (_asyncDisposableResource != null)
+            {
+                await _asyncDisposableResource.DisposeAsync().ConfigureAwait(false);
+            }
+
+            if (_disposableResource is IAsyncDisposable disposable)
+            {
+                await disposable.DisposeAsync().ConfigureAwait(false);
+            }
+            else
+            {
+                _disposableResource?.Dispose();
+            }
+
+            _asyncDisposableResource = null;
+            _disposableResource = null;
         }
 
         public IEnumerable<WorkLocation> GetAll()

@@ -2,7 +2,7 @@
 {
     public class Person
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         public string? Birthday { get; set; }
 
@@ -12,11 +12,11 @@
 
         public string? LastName { get; set; }
 
-        //public int WorkLocationId { get; set; }
+        public int WorkLocationId { get; set; }
 
-        public string? WorkLocation { get; set; }
+        ///public string? WorkLocation { get; set; }
 
-        public string? PositionWorkLocation { get; set; }
+        public string? Position { get; set; }
 
         //public int UserIdentityId { get; set; }
 
