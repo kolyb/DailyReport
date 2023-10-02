@@ -1,6 +1,5 @@
 using DailyReport.BusinessLogic.Configuration;
 using Microsoft.AspNetCore.DataProtection;
-using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 

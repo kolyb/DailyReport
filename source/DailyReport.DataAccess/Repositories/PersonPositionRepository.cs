@@ -20,13 +20,13 @@ namespace DailyReport.DataAccess.Repositories
 
         public async Task CreateAsync(PersonPosition item)
         {
-            _db.Positions.Add(item);
+            _db.PersonPositions.Add(item);
             await _db.SaveChangesAsync();
         }
 
         public async Task DeleteAsync(PersonPosition item)
         {
-            _db.Positions.Remove(item);
+            _db.PersonPositions.Remove(item);
             await _db.SaveChangesAsync();
         }
 
@@ -78,12 +78,12 @@ namespace DailyReport.DataAccess.Repositories
 
         public IEnumerable<PersonPosition> GetAll()
         {
-            return _db.Positions.AsQueryable();
+            return _db.PersonPositions.AsQueryable();
         }
 
         public async Task<PersonPosition> GetByIdAsync(int id)
         {
-            var result = await _db.Positions.FindAsync(id);
+            var result = await _db.PersonPositions.FindAsync(id);
             if (result == null)
             {
                 //

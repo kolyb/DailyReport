@@ -9,14 +9,16 @@ namespace DailyReport.WebLayer.Pages.Person
     public class CreatePersonModel : PageModel
     {
         private readonly IService<PersonDTO> _servicePersonDTO;
-
         private readonly IService<WorkLocationDTO> _serviceWorkLocationDTO;
+        private readonly IService<PersonPositionDTO> _servicePersonPositionDTO;
 
         public CreatePersonModel(IService<PersonDTO> servicePersonDTO,
-            IService<WorkLocationDTO> serviceWorkLocationDTO)
+            IService<WorkLocationDTO> serviceWorkLocationDTO,
+            IService<PersonPositionDTO> servicePersonPositionDTO)
         {
             _servicePersonDTO = servicePersonDTO;
             _serviceWorkLocationDTO = serviceWorkLocationDTO;
+            _servicePersonPositionDTO = servicePersonPositionDTO;
         }
 
         [BindProperty]
@@ -34,8 +36,8 @@ namespace DailyReport.WebLayer.Pages.Person
         [BindProperty]
         public int WorkLocationId { get; set; }
 
-        //[BindProperty]
-        //public string? WorkLocation { get; set; }
+        [BindProperty]
+        public int PositionId { get; set; }
 
         [BindProperty]
         public string? Position { get; set; }
@@ -47,7 +49,13 @@ namespace DailyReport.WebLayer.Pages.Person
         public IEnumerable<WorkLocationDTO>? WorkLocationDTOs { get; set; }
 
         [BindProperty]
+        public IEnumerable<PersonPositionDTO>? PersonPositionDTOs { get; set; }
+
+        [BindProperty]
         public List<SelectListItem>? Options { get; set; }
+
+        [BindProperty]
+        public List<SelectListItem>? Positions { get; set; }
 
         public void OnGet()
         {
@@ -57,12 +65,19 @@ namespace DailyReport.WebLayer.Pages.Person
                                       Value = a.Id.ToString(),
                                       Text = a.Description
                                   }).ToList();
+            Positions = _servicePersonPositionDTO.GetAll().Select(a =>
+                                  new SelectListItem
+                                  {
+                                      Value = a.Id.ToString(),
+                                      Text = a.Expert
+                                  }).ToList();
         }
 
         public async Task<IActionResult> OnPost()
         {
 
             WorkLocationDTOs = _serviceWorkLocationDTO.GetAll().Where(i => i.Id == WorkLocationId);
+            PersonPositionDTOs = _servicePersonPositionDTO.GetAll().Where(i => i.Id == PositionId);
 
             //foreach (var item in WorkLocationDTOs)
             //{
@@ -83,7 +98,7 @@ namespace DailyReport.WebLayer.Pages.Person
                 personDTO.LastName = LastName;
                 personDTO.WorkLocationId = WorkLocationId;
                 //personDTO.WorkLocation = WorkLocation;
-                personDTO.Position = Position;
+                personDTO.PositionId = PositionId;
                 personDTO.PhoneNumber = PhoneNumber;
 
 

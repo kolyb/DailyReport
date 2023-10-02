@@ -15,7 +15,7 @@ namespace DailyReport.BusinessLogic.Mappers
                 MiddleName = item.MiddleName,
                 LastName = item.LastName,
                 WorkLocationId = item.WorkLocationId,
-                Position = item.Position,
+                PositionId = item.PositionId,
                 //UserIdentityId = item.UserIdentityId,
                 PhoneNumber = item.PhoneNumber,
             };
@@ -32,7 +32,7 @@ namespace DailyReport.BusinessLogic.Mappers
                 MiddleName = item.MiddleName,
                 LastName = item.LastName,
                 WorkLocationId = item.WorkLocationId,
-                Position = item.Position,
+                PositionId = item.PositionId,
                 //UserIdentityId = item.UserIdentityId,
                 PhoneNumber = item.PhoneNumber,
             };
@@ -52,7 +52,7 @@ namespace DailyReport.BusinessLogic.Mappers
                     MiddleName = item.MiddleName,
                     LastName = item.LastName,
                     WorkLocationId = item.WorkLocationId,
-                    Position = item.Position,
+                    PositionId = item.PositionId,
                     //UserIdentityId = item.UserIdentityId,
                     PhoneNumber = item.PhoneNumber,
                 });

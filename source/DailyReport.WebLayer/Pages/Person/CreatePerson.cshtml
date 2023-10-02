@@ -40,11 +40,9 @@
      </div>
 
     <div>
-        <label>Position work location</label>
-        <div>
-            <input asp-for="Position" />
-            <span asp-validation-for="Position"></span>
-        </div>
+        <select asp-for="PositionId" asp-items="Model.Positions">
+        </select>
+        <span asp-validation-for="PositionId"></span>
     </div>
     <div>
         <label>Phone number</label>

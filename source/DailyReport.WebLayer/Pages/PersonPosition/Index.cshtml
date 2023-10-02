@@ -1,0 +1,49 @@
+﻿@page
+@model DailyReport.WebLayer.Pages.PersonPosition.IndexModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<div>
+    <a asp-area="" asp-page="/PersonPosition/CreatePersonPosition">Create PersonPosition</a>
+</div>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Position</th>
+            <th>*</th>
+            <th>Expert</th>
+            <th>*</th>
+            <th>Edit</th>
+            <th>*</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.PersonPositionDTOs)
+        {
+            <tr>
+                <td>@item.Position</td>
+                <td>*</td>
+                <td>@item.Expert</td>
+                <td>*</td>
+                <td>
+                    <form method="post">
+                        <a asp-page="EditPersonPosition" asp-route-id="@item.Id">Edit</a>
+                    </form>
+                </td>
+                <td>*</td>
+                <td>
+                    <form method="post">
+                        <a asp-page="DeletePersonPosition" asp-route-id="@item.Id">Delete</a>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<div>
+    <a asp-controller="Home" asp-action="Index">Back</a>
+</div>
