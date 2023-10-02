@@ -14,7 +14,7 @@
 
         public int WorkLocationId { get; set; }
 
-        public string? Position { get; set; }
+        public int PositionId { get; set; }
 
         //public int UserIdentityId { get; set; }
 

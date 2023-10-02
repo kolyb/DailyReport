@@ -68,9 +68,10 @@
       <CopyToOutputDirectory>DoNotCopy</CopyToOutputDirectory>
     </Build>
     <Build Include="Tables\Persons.sql" />
-    <Build Include="ForeignKeys\FK_Person_WorkLocation.sql" />
-    <Build Include="ForeignKeys\FK_Person_Event.sql" />
+    <Build Include="ForeignKeys\FK_WorkLocation_Person.sql" />
+    <Build Include="ForeignKeys\FK_Position_Person.sql" />
     <Build Include="StoryProcedures\UpdatePerson.sql" />
+    <Build Include="Tables\Positions.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Post\UserIdentity.PostDeployment.sql" />
