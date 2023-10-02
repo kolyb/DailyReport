@@ -22,7 +22,13 @@ namespace DailyReport.WebLayer.Pages.WorkLocation
         public string? Description { get; set; }
 
         [BindProperty]
-        public string? AdressWorkLocation { get; set; }
+        public string? AdressCity { get; set; }
+
+        [BindProperty]
+        public string? AdressStreet { get; set; }
+
+        [BindProperty]
+        public string? AdressHouse { get; set; }
 
         public void OnGet()
         {
@@ -36,7 +42,9 @@ namespace DailyReport.WebLayer.Pages.WorkLocation
             {
                 WorkLocationDTO workLocationDTO = new WorkLocationDTO();
                 workLocationDTO.Description = Description;
-                workLocationDTO.AdressWorkLocation = AdressWorkLocation;
+                workLocationDTO.AdressCity = AdressCity;
+                workLocationDTO.AdressStreet = AdressStreet;
+                workLocationDTO.AdressHouse = AdressHouse;
 
                 await _serviceWorkLocationDTO.CreateAsync(workLocationDTO);
 

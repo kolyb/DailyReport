@@ -39,6 +39,15 @@ namespace DailyReport.WebLayer.Pages.Person
         public string? WorkLocation { get; set; }
 
         [BindProperty]
+        public string? AdressCity { get; set; }
+
+        [BindProperty]
+        public string? AdressStreet { get; set; }
+
+        [BindProperty]
+        public string? AdressHouse { get; set; }
+
+        [BindProperty]
         public string? Position { get; set; }
 
         [BindProperty]
@@ -63,6 +72,15 @@ namespace DailyReport.WebLayer.Pages.Person
             WorkLocation = (from wl in WorkLocationDTOs
                             where wl.Id == personDTO.WorkLocationId
                             select wl.Description).FirstOrDefault();
+            AdressCity = (from wl in WorkLocationDTOs
+                            where wl.Id == personDTO.WorkLocationId
+                            select wl.AdressCity).FirstOrDefault();
+            AdressStreet = (from wl in WorkLocationDTOs
+                            where wl.Id == personDTO.WorkLocationId
+                            select wl.AdressStreet).FirstOrDefault();
+            AdressHouse = (from wl in WorkLocationDTOs
+                            where wl.Id == personDTO.WorkLocationId
+                            select wl.AdressHouse).FirstOrDefault();
             Position = personDTO.Position;
             PhoneNumber = personDTO.PhoneNumber;   
 

@@ -6,6 +6,10 @@
 
         public string? Description { get; set; }
 
-        public string? AdressWorkLocation { get; set; } 
+        public string? AdressCity { get; set; } 
+
+        public string? AdressStreet { get; set; }
+        
+        public string? AdressHouse { get; set; } 
     }
 }

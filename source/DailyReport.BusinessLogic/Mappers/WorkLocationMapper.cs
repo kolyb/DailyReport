@@ -11,7 +11,9 @@ namespace DailyReport.BusinessLogic.Mappers
             {
                 Id = item.Id,
                 Description = item.Description,
-                AdressWorkLocation = item.AdressWorkLocation,
+                AdressCity = item.AdressCity,
+                AdressStreet = item.AdressStreet,
+                AdressHouse = item.AdressHouse,
             };
             return workLocation;
         }
@@ -22,7 +24,9 @@ namespace DailyReport.BusinessLogic.Mappers
             {
                 Id = item.Id,
                 Description = item.Description,
-                AdressWorkLocation = item.AdressWorkLocation,
+                AdressCity = item.AdressCity,
+                AdressStreet = item.AdressStreet,
+                AdressHouse = item.AdressHouse,
             };
             return workLoacationDTO;
         }
@@ -36,7 +40,9 @@ namespace DailyReport.BusinessLogic.Mappers
                 {
                     Id = item.Id,
                     Description = item.Description,
-                    AdressWorkLocation = item.AdressWorkLocation,
+                    AdressCity = item.AdressCity,
+                    AdressStreet = item.AdressStreet,
+                    AdressHouse = item.AdressHouse,
                 });
             }
             return workLocationDTOs;

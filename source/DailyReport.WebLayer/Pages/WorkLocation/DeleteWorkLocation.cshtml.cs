@@ -21,13 +21,21 @@ namespace DailyReport.WebLayer.Pages.WorkLocation
         public string? Description { get; set; }
 
         [BindProperty]
-        public string? AdressWorkLocation { get; set; }
+        public string? AdressCity { get; set; }
+
+        [BindProperty]
+        public string? AdressStreet { get; set; }
+
+        [BindProperty]
+        public string? AdressHouse { get; set; }
 
         public async Task OnGet(int id)
         {
             WorkLocationDTO workLocationDTO = await _serviceWorkLocationDTO.GetByIdAsync(id);
             Description = workLocationDTO.Description;
-            AdressWorkLocation = workLocationDTO.AdressWorkLocation;
+            AdressCity = workLocationDTO.AdressCity;
+            AdressStreet = workLocationDTO.AdressStreet;
+            AdressHouse = workLocationDTO.AdressHouse;
         }
 
         public async Task<IActionResult> OnPost()
@@ -39,7 +47,9 @@ namespace DailyReport.WebLayer.Pages.WorkLocation
                 {
                     workLocationDTO.Id = Id;
                     workLocationDTO.Description = Description;
-                    workLocationDTO.AdressWorkLocation = AdressWorkLocation;
+                    workLocationDTO.AdressCity = AdressCity;
+                    workLocationDTO.AdressStreet = AdressStreet;
+                    workLocationDTO.AdressHouse = AdressHouse;
 
 
                     await _serviceWorkLocationDTO.DeleteAsync(workLocationDTO);
