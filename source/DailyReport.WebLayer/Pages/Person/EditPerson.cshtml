@@ -39,13 +39,11 @@
             <span asp-validation-for="LastName"></span>
         </div>
     </div>
-    @* <div>
-        <label>Work Location Id</label>
-        <div>
-            <input asp-for="WorkLocationId" disabled />
-            <span asp-validation-for="WorkLocationId"></span>
-        </div>
-    </div> *@  
+    <div>
+        <select asp-for="WorkLocationId" asp-items="Model.Options">
+        </select>
+        <span asp-validation-for="WorkLocationId"></span>
+    </div>
     @* <div>
         <label>Work Location</label>
         <div>
