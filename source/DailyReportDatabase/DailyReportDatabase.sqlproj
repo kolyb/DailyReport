@@ -64,11 +64,11 @@
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\Events.sql" />
-    <Build Include="Tables\WorkLocations.sql">
+    <Build Include="Tables\Workplaces.sql">
       <CopyToOutputDirectory>DoNotCopy</CopyToOutputDirectory>
     </Build>
     <Build Include="Tables\Persons.sql" />
-    <Build Include="ForeignKeys\FK_WorkLocation_Person.sql" />
+    <Build Include="ForeignKeys\FK_Workplace_Person.sql" />
     <Build Include="ForeignKeys\FK_PersonPosition_Person.sql" />
     <Build Include="StoryProcedures\UpdatePerson.sql" />
     <Build Include="Tables\PersonPositions.sql" />

@@ -22,7 +22,7 @@ namespace DailyReport.DataAccess.EntityFrameworkCore
 
         public DbSet<Event> Events { get; set; }
 
-        public DbSet<WorkLocation> WorkLocations { get; set; }
+        public DbSet<Workplace> Workplaces { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

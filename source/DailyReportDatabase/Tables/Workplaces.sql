@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[WorkLocations]
+﻿CREATE TABLE [dbo].[Workplaces]
 (
 	[Id] int primary key identity,
 	[Description] nvarchar(120) NULL,

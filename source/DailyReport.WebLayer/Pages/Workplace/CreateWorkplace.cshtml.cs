@@ -4,17 +4,17 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace DailyReport.WebLayer.Pages.WorkLocation
+namespace DailyReport.WebLayer.Pages.Workplace
 {
-    public class CreateWorkLocationModel : PageModel
+    public class CreateWorkplaceModel : PageModel
     {
-        private readonly IService<WorkLocationDTO> _serviceWorkLocationDTO;
+        private readonly IService<WorkplaceDTO> _serviceWorkplaceDTO;
         private readonly IService<PersonDTO> _servicePersonDTO;
 
-        public CreateWorkLocationModel(IService<WorkLocationDTO> serviceWorkLocationDTO, 
+        public CreateWorkplaceModel(IService<WorkplaceDTO> serviceWorkplaceDTO, 
             IService<PersonDTO> servicePersonDTO)
         {
-            _serviceWorkLocationDTO = serviceWorkLocationDTO;
+            _serviceWorkplaceDTO = serviceWorkplaceDTO;
             _servicePersonDTO = servicePersonDTO;
         }
 
@@ -40,13 +40,13 @@ namespace DailyReport.WebLayer.Pages.WorkLocation
 
             if (ModelState.IsValid)
             {
-                WorkLocationDTO workLocationDTO = new WorkLocationDTO();
-                workLocationDTO.Description = Description;
-                workLocationDTO.AdressCity = AdressCity;
-                workLocationDTO.AdressStreet = AdressStreet;
-                workLocationDTO.AdressHouse = AdressHouse;
+                WorkplaceDTO workplaceDTO = new WorkplaceDTO();
+                workplaceDTO.Description = Description;
+                workplaceDTO.AdressCity = AdressCity;
+                workplaceDTO.AdressStreet = AdressStreet;
+                workplaceDTO.AdressHouse = AdressHouse;
 
-                await _serviceWorkLocationDTO.CreateAsync(workLocationDTO);
+                await _serviceWorkplaceDTO.CreateAsync(workplaceDTO);
 
             }
             return RedirectToPage("Index");

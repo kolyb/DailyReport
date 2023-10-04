@@ -8,15 +8,15 @@ namespace DailyReport.WebLayer.Pages.Person
     public class DetailsPersonModel : PageModel
     {
         private readonly IService<PersonDTO> _servicePersonDTO;
-        private readonly IService<WorkLocationDTO> _serviceWorkLocationDTO;
+        private readonly IService<WorkplaceDTO> _serviceWorkplaceDTO;
         private readonly IService<PersonPositionDTO> _servicePersonPositionDTO;
 
         public DetailsPersonModel(IService<PersonDTO> servicePersonDTO,
-            IService<WorkLocationDTO> serviceWorkLocationDTO,
+            IService<WorkplaceDTO> serviceWorkplaceDTO,
             IService<PersonPositionDTO> servicePersonPositionDTO)
         {
             _servicePersonDTO = servicePersonDTO;
-            _serviceWorkLocationDTO = serviceWorkLocationDTO;
+            _serviceWorkplaceDTO = serviceWorkplaceDTO;
             _servicePersonPositionDTO = servicePersonPositionDTO;
         }
 
@@ -36,13 +36,13 @@ namespace DailyReport.WebLayer.Pages.Person
         public string? LastName { get; set; }
 
         [BindProperty]
-        public int WorkLocationId { get; set; }
+        public int WorkplaceId { get; set; }
 
         [BindProperty]
         public int PositionId { get; set; }
 
         [BindProperty]
-        public string? WorkLocation { get; set; }
+        public string? Workplace { get; set; }
 
         [BindProperty]
         public string? AdressCity { get; set; }
@@ -64,14 +64,14 @@ namespace DailyReport.WebLayer.Pages.Person
 
         public List<PersonDTO>? PersonDTOs { get; set; }
 
-        public List<WorkLocationDTO>? WorkLocationDTOs { get; set; }
+        public List<WorkplaceDTO>? WorkplaceDTOs { get; set; }
 
         public List<PersonPositionDTO>? PersonPositionDTOs { get; set; }
 
         public async Task OnGetAsync(int id)
         {
             PersonDTOs = _servicePersonDTO.GetAll().ToList();
-            WorkLocationDTOs = _serviceWorkLocationDTO.GetAll().ToList();
+            WorkplaceDTOs = _serviceWorkplaceDTO.GetAll().ToList();
             PersonPositionDTOs = _servicePersonPositionDTO.GetAll().ToList();
 
             PersonDTO personDTO = await _servicePersonDTO.GetByIdAsync(id);
@@ -79,19 +79,19 @@ namespace DailyReport.WebLayer.Pages.Person
             Birthday = personDTO.Birthday;
             FirstName = personDTO.FirstName;
             MiddleName = personDTO.MiddleName;
-            WorkLocationId = personDTO.WorkLocationId;
+            WorkplaceId = personDTO.WorkplaceId;
             LastName = personDTO.LastName;
-            WorkLocation = (from wl in WorkLocationDTOs
-                            where wl.Id == personDTO.WorkLocationId
+            Workplace = (from wl in WorkplaceDTOs
+                            where wl.Id == personDTO.WorkplaceId
                             select wl.Description).FirstOrDefault();
-            AdressCity = (from wl in WorkLocationDTOs
-                            where wl.Id == personDTO.WorkLocationId
+            AdressCity = (from wl in WorkplaceDTOs
+                            where wl.Id == personDTO.WorkplaceId
                             select wl.AdressCity).FirstOrDefault();
-            AdressStreet = (from wl in WorkLocationDTOs
-                            where wl.Id == personDTO.WorkLocationId
+            AdressStreet = (from wl in WorkplaceDTOs
+                            where wl.Id == personDTO.WorkplaceId
                             select wl.AdressStreet).FirstOrDefault();
-            AdressHouse = (from wl in WorkLocationDTOs
-                            where wl.Id == personDTO.WorkLocationId
+            AdressHouse = (from wl in WorkplaceDTOs
+                            where wl.Id == personDTO.WorkplaceId
                             select wl.AdressHouse).FirstOrDefault();
             Position = (from ps in PersonPositionDTOs
                         where ps.Id == personDTO.PositionId

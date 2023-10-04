@@ -5,7 +5,7 @@
 	[FirstName] nvarchar(120) NULL,
 	[MiddleName] nvarchar(120) NULL,
 	[LastName] nvarchar(120) NULL,
-	[WorkLocationId] int NOT NULL,
+	[WorkplaceId] int NOT NULL,
 	[PositionId] int NOT NULL,
 	[PhoneNumber] nvarchar(120) NULL
 )

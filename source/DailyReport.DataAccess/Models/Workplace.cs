@@ -1,6 +1,6 @@
 ﻿namespace DailyReport.DataAccess.Models
 {
-    public class WorkLocation
+    public class Workplace
     {
         public int Id { get; set; }
 

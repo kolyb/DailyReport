@@ -9,12 +9,12 @@ namespace DailyReport.WebLayer.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IService<WorkLocationDTO> _serviceWorkLocationDTO;
+        private readonly IService<WorkplaceDTO> _serviceWorkplaceDTO;
 
-        public HomeController(ILogger<HomeController> logger, IService<WorkLocationDTO> serviceWorkLocationDTO)
+        public HomeController(ILogger<HomeController> logger, IService<WorkplaceDTO> serviceWorkplaceDTO)
         {
             _logger = logger;
-            _serviceWorkLocationDTO = serviceWorkLocationDTO;
+            _serviceWorkplaceDTO = serviceWorkplaceDTO;
         }
 
         public IActionResult Index()

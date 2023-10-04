@@ -16,7 +16,7 @@ namespace DailyReport.DataAccess.Configuration
             services.AddIdentity<UserIdentity, IdentityRole>()
                 .AddEntityFrameworkStores<DailyReportContext>();
             services.AddScoped<IRepository<Person>, PersonRepository>();         
-            services.AddScoped<IRepository<WorkLocation>, WorkLocationRepository>();
+            services.AddScoped<IRepository<Workplace>, WorkplaceRepository>();
             services.AddScoped<IRepository<Event>, EventRepository>();
             services.AddScoped<IRepository<PersonPosition>, PersonPositionRepository>();
         }

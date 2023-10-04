@@ -3,11 +3,11 @@ using DailyReport.DataAccess.Models;
 
 namespace DailyReport.BusinessLogic.Mappers
 {
-    public static class WorkLocationMapper
+    public static class WorkplaceMapper
     {
-        public static WorkLocation FromDTO(WorkLocationDTO item)
+        public static Workplace FromDTO(WorkplaceDTO item)
         {
-            WorkLocation workLocation = new WorkLocation
+            Workplace workplace = new Workplace
             {
                 Id = item.Id,
                 Description = item.Description,
@@ -15,12 +15,12 @@ namespace DailyReport.BusinessLogic.Mappers
                 AdressStreet = item.AdressStreet,
                 AdressHouse = item.AdressHouse,
             };
-            return workLocation;
+            return workplace;
         }
 
-        public static WorkLocationDTO ToDTO(WorkLocation item)
+        public static WorkplaceDTO ToDTO(Workplace item)
         {
-            WorkLocationDTO workLoacationDTO = new WorkLocationDTO
+            WorkplaceDTO workplaceDTO = new WorkplaceDTO
             {
                 Id = item.Id,
                 Description = item.Description,
@@ -28,15 +28,15 @@ namespace DailyReport.BusinessLogic.Mappers
                 AdressStreet = item.AdressStreet,
                 AdressHouse = item.AdressHouse,
             };
-            return workLoacationDTO;
+            return workplaceDTO;
         }
 
-        public static List<WorkLocationDTO> ToDTO(List<WorkLocation> list)
+        public static List<WorkplaceDTO> ToDTO(List<Workplace> list)
         {
-            List<WorkLocationDTO> workLocationDTOs = new List<WorkLocationDTO>();
+            List<WorkplaceDTO> workplaceDTOs = new List<WorkplaceDTO>();
             foreach (var item in list)
             {
-                workLocationDTOs.Add(new WorkLocationDTO
+                workplaceDTOs.Add(new WorkplaceDTO
                 {
                     Id = item.Id,
                     Description = item.Description,
@@ -45,7 +45,7 @@ namespace DailyReport.BusinessLogic.Mappers
                     AdressHouse = item.AdressHouse,
                 });
             }
-            return workLocationDTOs;
+            return workplaceDTOs;
         }
     }
 }

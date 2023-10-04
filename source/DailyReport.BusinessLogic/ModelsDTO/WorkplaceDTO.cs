@@ -1,6 +1,6 @@
 ﻿namespace DailyReport.BusinessLogic.ModelsDTO
 {
-    public class WorkLocationDTO
+    public class WorkplaceDTO
     {
         public int Id { get; set; }
 

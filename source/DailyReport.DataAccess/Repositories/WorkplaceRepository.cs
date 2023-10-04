@@ -5,28 +5,28 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DailyReport.DataAccess.Repositories
 {
-    public class WorkLocationRepository : IRepository<WorkLocation>
+    public class WorkplaceRepository : IRepository<Workplace>
     {
         private readonly DailyReportContext _db;
 
         private IDisposable? _disposableResource = new MemoryStream();
         private IAsyncDisposable? _asyncDisposableResource = new MemoryStream();
 
-        public WorkLocationRepository(DailyReportContext db)
+        public WorkplaceRepository(DailyReportContext db)
         {
             _db = db;
             _db.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
         }
 
-        public async Task CreateAsync(WorkLocation item)
+        public async Task CreateAsync(Workplace item)
         {
-            _db.WorkLocations.Add(item);
+            _db.Workplaces.Add(item);
             await _db.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(WorkLocation item)
+        public async Task DeleteAsync(Workplace item)
         {
-            _db.WorkLocations.Remove(item);
+            _db.Workplaces.Remove(item);
             await _db.SaveChangesAsync();
         }
 
@@ -76,14 +76,14 @@ namespace DailyReport.DataAccess.Repositories
             _disposableResource = null;
         }
 
-        public IEnumerable<WorkLocation> GetAll()
+        public IEnumerable<Workplace> GetAll()
         {
-            return _db.WorkLocations.AsQueryable();
+            return _db.Workplaces.AsQueryable();
         }
 
-        public async Task<WorkLocation> GetByIdAsync(int id)
+        public async Task<Workplace> GetByIdAsync(int id)
         {
-            var result = await _db.WorkLocations.FindAsync(id);
+            var result = await _db.Workplaces.FindAsync(id);
             if (result == null)
             {
                 //
@@ -92,7 +92,7 @@ namespace DailyReport.DataAccess.Repositories
             return result;
         }
 
-        public async Task UpdateAsync(WorkLocation item)
+        public async Task UpdateAsync(Workplace item)
         {
             _db.Entry(item).State = EntityState.Modified;
             await _db.SaveChangesAsync();

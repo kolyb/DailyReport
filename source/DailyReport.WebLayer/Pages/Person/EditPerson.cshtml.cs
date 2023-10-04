@@ -9,12 +9,13 @@ namespace DailyReport.WebLayer.Pages.Person
     public class EditPersonModel : PageModel
     {
         private readonly IService<PersonDTO> _servicePersonDTO;
-        private readonly IService<WorkLocationDTO> _serviceWorkLocationDTO;
+        private readonly IService<WorkplaceDTO> _serviceWorkplaceDTO;
 
-        public EditPersonModel(IService<PersonDTO> servicePersonDTO, IService<WorkLocationDTO> serviceWorkLocationDTO)
+        public EditPersonModel(IService<PersonDTO> servicePersonDTO, 
+            IService<WorkplaceDTO> serviceWorkplaceDTO)
         {
             _servicePersonDTO = servicePersonDTO;
-            _serviceWorkLocationDTO = serviceWorkLocationDTO;
+            _serviceWorkplaceDTO = serviceWorkplaceDTO;
         }
 
         [BindProperty]
@@ -33,30 +34,30 @@ namespace DailyReport.WebLayer.Pages.Person
         public string? LastName { get; set; }
 
         [BindProperty(SupportsGet = true)]
-        public int WorkLocationId { get; set; }
+        public int WorkplaceId { get; set; }
 
         [BindProperty]
-        public string? WorkLocation { get; set; }
+        public string? Workplace { get; set; }
 
         
         [BindProperty]
         public string? PhoneNumber { get; set; }
 
-        public List<WorkLocationDTO>? WorkLocationDTOs { get; set; }
+        public List<WorkplaceDTO>? WorkplaceDTOs { get; set; }
 
         [BindProperty]
         public List<SelectListItem>? Options { get; set; }
 
         public async Task OnGet(int id)
         {
-            Options = _serviceWorkLocationDTO.GetAll().Select(a =>
+            Options = _serviceWorkplaceDTO.GetAll().Select(a =>
                                   new SelectListItem
                                   {
                                       Value = a.Id.ToString(),
                                       Text = a.Description
                                   }).ToList();
 
-            WorkLocationDTOs = _serviceWorkLocationDTO.GetAll().ToList();
+            WorkplaceDTOs = _serviceWorkplaceDTO.GetAll().ToList();
 
             PersonDTO personDTO = await _servicePersonDTO.GetByIdAsync(id);
             Birthday = personDTO.Birthday;
@@ -64,8 +65,8 @@ namespace DailyReport.WebLayer.Pages.Person
             MiddleName = personDTO.MiddleName;
             LastName = personDTO.LastName;
             //WorkLocationId = personDTO.WorkLocationId;
-            WorkLocation = (from wl in WorkLocationDTOs
-                            where wl.Id == personDTO.WorkLocationId
+            Workplace = (from wl in WorkplaceDTOs
+                            where wl.Id == personDTO.WorkplaceId
                             select wl.Description).FirstOrDefault();
             //Position = personDTO.Position;
             PhoneNumber = personDTO.PhoneNumber;
@@ -82,7 +83,7 @@ namespace DailyReport.WebLayer.Pages.Person
                 personDTO.FirstName = FirstName;
                 personDTO.MiddleName = MiddleName;
                 personDTO.LastName = LastName;
-                personDTO.WorkLocationId = WorkLocationId;
+                personDTO.WorkplaceId = WorkplaceId;
                 //personDTO.WorkLocation = WorkLocation;
                 personDTO.PositionId = 1;
                 personDTO.PhoneNumber = PhoneNumber;
@@ -94,7 +95,7 @@ namespace DailyReport.WebLayer.Pages.Person
                 personNewDTO.FirstName = FirstName;
                 personNewDTO.MiddleName = MiddleName;
                 personNewDTO.LastName = LastName;
-                personNewDTO.WorkLocationId = WorkLocationId;
+                personNewDTO.WorkplaceId = WorkplaceId;
                 //personDTO.WorkLocation = WorkLocation;
                 personNewDTO.PositionId = 1;
                 personNewDTO.PhoneNumber = PhoneNumber;
