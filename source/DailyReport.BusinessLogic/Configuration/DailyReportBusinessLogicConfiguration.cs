@@ -17,7 +17,7 @@ namespace DailyReport.BusinessLogic.Configuration
             services.AddScoped<IService<PersonDTO>, PersonService>();
             services.AddScoped<IService<WorkplaceDTO>, WorkplaceService>();
             services.AddScoped<IService<EventDTO>, EventService>();
-            services.AddScoped<IService<PersonPositionDTO>, PersonPositionService>();
+            services.AddScoped<IService<PositionDTO>, PositionService>();
 
         }
     }

@@ -18,7 +18,7 @@ namespace DailyReport.DataAccess.EntityFrameworkCore
         }
         public DbSet<Person> Persons { get; set; }
 
-        public DbSet<PersonPosition> PersonPositions { get; set; }
+        public DbSet<Position> Positions { get; set; }
 
         public DbSet<Event> Events { get; set; }
 

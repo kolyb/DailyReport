@@ -9,15 +9,15 @@ namespace DailyReport.WebLayer.Pages.Person
     {
         private readonly IService<PersonDTO> _servicePersonDTO;
         private readonly IService<WorkplaceDTO> _serviceWorkplaceDTO;
-        private readonly IService<PersonPositionDTO> _servicePersonPositionDTO;
+        private readonly IService<PositionDTO> _servicePositionDTO;
 
         public DetailsPersonModel(IService<PersonDTO> servicePersonDTO,
             IService<WorkplaceDTO> serviceWorkplaceDTO,
-            IService<PersonPositionDTO> servicePersonPositionDTO)
+            IService<PositionDTO> servicePositionDTO)
         {
             _servicePersonDTO = servicePersonDTO;
             _serviceWorkplaceDTO = serviceWorkplaceDTO;
-            _servicePersonPositionDTO = servicePersonPositionDTO;
+            _servicePositionDTO = servicePositionDTO;
         }
 
         [BindProperty]
@@ -54,10 +54,7 @@ namespace DailyReport.WebLayer.Pages.Person
         public string? AdressHouse { get; set; }
 
         [BindProperty]
-        public string? Position { get; set; }
-
-        [BindProperty]
-        public string? Expert { get; set; }
+        public string? Description { get; set; }
 
         [BindProperty]
         public string? PhoneNumber { get; set; }
@@ -66,13 +63,13 @@ namespace DailyReport.WebLayer.Pages.Person
 
         public List<WorkplaceDTO>? WorkplaceDTOs { get; set; }
 
-        public List<PersonPositionDTO>? PersonPositionDTOs { get; set; }
+        public List<PositionDTO>? PositionDTOs { get; set; }
 
         public async Task OnGetAsync(int id)
         {
             PersonDTOs = _servicePersonDTO.GetAll().ToList();
             WorkplaceDTOs = _serviceWorkplaceDTO.GetAll().ToList();
-            PersonPositionDTOs = _servicePersonPositionDTO.GetAll().ToList();
+            PositionDTOs = _servicePositionDTO.GetAll().ToList();
 
             PersonDTO personDTO = await _servicePersonDTO.GetByIdAsync(id);
             Id = personDTO.Id;
@@ -93,12 +90,9 @@ namespace DailyReport.WebLayer.Pages.Person
             AdressHouse = (from wl in WorkplaceDTOs
                             where wl.Id == personDTO.WorkplaceId
                             select wl.AdressHouse).FirstOrDefault();
-            Position = (from ps in PersonPositionDTOs
+            Description = (from ps in PositionDTOs
                         where ps.Id == personDTO.PositionId
-                        select ps.Position).FirstOrDefault();
-            Expert = (from ps in PersonPositionDTOs
-                      where ps.Id == personDTO.PositionId
-                      select ps.Expert).FirstOrDefault();
+                        select ps.Description).FirstOrDefault();
             PhoneNumber = personDTO.PhoneNumber;   
 
         }

@@ -5,28 +5,28 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DailyReport.DataAccess.Repositories
 {
-    public class PersonPositionRepository : IRepository<PersonPosition>
+    public class PositionRepository : IRepository<Position>
     {
         private readonly DailyReportContext _db;
 
         private IDisposable? _disposableResource = new MemoryStream();
         private IAsyncDisposable? _asyncDisposableResource = new MemoryStream();
 
-        public PersonPositionRepository(DailyReportContext db)
+        public PositionRepository(DailyReportContext db)
         {
             _db = db;
             _db.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
         }
 
-        public async Task CreateAsync(PersonPosition item)
+        public async Task CreateAsync(Position item)
         {
-            _db.PersonPositions.Add(item);
+            _db.Positions.Add(item);
             await _db.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(PersonPosition item)
+        public async Task DeleteAsync(Position item)
         {
-            _db.PersonPositions.Remove(item);
+            _db.Positions.Remove(item);
             await _db.SaveChangesAsync();
         }
 
@@ -76,14 +76,14 @@ namespace DailyReport.DataAccess.Repositories
             _disposableResource = null;
         }
 
-        public IEnumerable<PersonPosition> GetAll()
+        public IEnumerable<Position> GetAll()
         {
-            return _db.PersonPositions.AsQueryable();
+            return _db.Positions.AsQueryable();
         }
 
-        public async Task<PersonPosition> GetByIdAsync(int id)
+        public async Task<Position> GetByIdAsync(int id)
         {
-            var result = await _db.PersonPositions.FindAsync(id);
+            var result = await _db.Positions.FindAsync(id);
             if (result == null)
             {
                 //
@@ -92,7 +92,7 @@ namespace DailyReport.DataAccess.Repositories
             return result;
         }
 
-        public async Task UpdateAsync(PersonPosition item)
+        public async Task UpdateAsync(Position item)
         {
             _db.Entry(item).State = EntityState.Modified;
             await _db.SaveChangesAsync();
