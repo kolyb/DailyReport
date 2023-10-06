@@ -84,8 +84,8 @@ namespace DailyReport.WebLayer.Pages.Person
                 personDTO.MiddleName = MiddleName;
                 personDTO.LastName = LastName;
                 personDTO.WorkplaceId = WorkplaceId;
-                //personDTO.WorkLocation = WorkLocation;
                 personDTO.PositionId = 1;
+                personDTO.ProfessionId = 1;
                 personDTO.PhoneNumber = PhoneNumber;
 
                 await _servicePersonDTO.DeleteAsync(personDTO);
@@ -96,8 +96,8 @@ namespace DailyReport.WebLayer.Pages.Person
                 personNewDTO.MiddleName = MiddleName;
                 personNewDTO.LastName = LastName;
                 personNewDTO.WorkplaceId = WorkplaceId;
-                //personDTO.WorkLocation = WorkLocation;
                 personNewDTO.PositionId = 1;
+                personNewDTO.ProfessionId = 1;
                 personNewDTO.PhoneNumber = PhoneNumber;
 
                 await _servicePersonDTO.CreateAsync(personNewDTO);

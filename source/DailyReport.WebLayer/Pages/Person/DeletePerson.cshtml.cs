@@ -32,11 +32,11 @@ namespace DailyReport.WebLayer.Pages.Person
         [BindProperty]
         public int WorkplaceId { get; set; }
 
-        //[BindProperty]
-        //public string? WorkLocation { get; set; }
-
         [BindProperty]
         public int PositionId { get; set; }
+
+        [BindProperty]
+        public int ProfessionId { get; set; }
 
         [BindProperty]
         public string? PhoneNumber { get; set; }
@@ -49,8 +49,8 @@ namespace DailyReport.WebLayer.Pages.Person
             MiddleName = personDTO.MiddleName;
             LastName = personDTO.LastName;
             WorkplaceId = personDTO.WorkplaceId;
-            //WorkLocation = personDTO.WorkLocation;
             PositionId = personDTO.PositionId;
+            ProfessionId = personDTO.ProfessionId;
             PhoneNumber = personDTO.PhoneNumber;
         }
 
@@ -67,8 +67,8 @@ namespace DailyReport.WebLayer.Pages.Person
                     personDTO.MiddleName = MiddleName;
                     personDTO.LastName = LastName;
                     personDTO.WorkplaceId = WorkplaceId;
-                    //personDTO.WorkLocation = WorkLocation;
                     personDTO.PositionId = PositionId;
+                    personDTO.ProfessionId = ProfessionId;
                     personDTO.PhoneNumber = PhoneNumber;
 
 

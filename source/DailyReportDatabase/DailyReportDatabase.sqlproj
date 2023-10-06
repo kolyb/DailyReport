@@ -72,6 +72,8 @@
     <Build Include="ForeignKeys\FK_Position_Person.sql" />
     <Build Include="StoryProcedures\UpdatePerson.sql" />
     <Build Include="Tables\Positions.sql" />
+    <Build Include="Tables\Professions.sql" />
+    <Build Include="ForeignKeys\FK_Profession_Person.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Post\UserIdentity.PostDeployment.sql" />

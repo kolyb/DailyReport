@@ -10,14 +10,17 @@ namespace DailyReport.WebLayer.Pages.Person
         private readonly IService<PersonDTO> _servicePersonDTO;
         private readonly IService<WorkplaceDTO> _serviceWorkplaceDTO;
         private readonly IService<PositionDTO> _servicePositionDTO;
+        private readonly IService<ProfessionDTO> _serviceProfessionDTO;
 
         public DetailsPersonModel(IService<PersonDTO> servicePersonDTO,
             IService<WorkplaceDTO> serviceWorkplaceDTO,
-            IService<PositionDTO> servicePositionDTO)
+            IService<PositionDTO> servicePositionDTO,
+            IService<ProfessionDTO> serviceProfessionDTO)
         {
             _servicePersonDTO = servicePersonDTO;
             _serviceWorkplaceDTO = serviceWorkplaceDTO;
             _servicePositionDTO = servicePositionDTO;
+            _serviceProfessionDTO = serviceProfessionDTO;
         }
 
         [BindProperty]
@@ -57,6 +60,9 @@ namespace DailyReport.WebLayer.Pages.Person
         public string? Description { get; set; }
 
         [BindProperty]
+        public string? DescriptionProfession { get; set; }
+
+        [BindProperty]
         public string? PhoneNumber { get; set; }
 
         public List<PersonDTO>? PersonDTOs { get; set; }
@@ -65,11 +71,14 @@ namespace DailyReport.WebLayer.Pages.Person
 
         public List<PositionDTO>? PositionDTOs { get; set; }
 
+        public List<ProfessionDTO>? ProfessionDTOs { get; set; }
+
         public async Task OnGetAsync(int id)
         {
             PersonDTOs = _servicePersonDTO.GetAll().ToList();
             WorkplaceDTOs = _serviceWorkplaceDTO.GetAll().ToList();
             PositionDTOs = _servicePositionDTO.GetAll().ToList();
+            ProfessionDTOs = _serviceProfessionDTO.GetAll().ToList();
 
             PersonDTO personDTO = await _servicePersonDTO.GetByIdAsync(id);
             Id = personDTO.Id;
@@ -93,6 +102,9 @@ namespace DailyReport.WebLayer.Pages.Person
             Description = (from ps in PositionDTOs
                         where ps.Id == personDTO.PositionId
                         select ps.Description).FirstOrDefault();
+            DescriptionProfession = (from pr in ProfessionDTOs
+                                     where pr.Id == personDTO.ProfessionId
+                                     select pr.Description).FirstOrDefault();
             PhoneNumber = personDTO.PhoneNumber;   
 
         }
