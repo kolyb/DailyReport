@@ -4,13 +4,6 @@
 
 <form method="post">
     <div asp-validation-summary="All"></div>
-    @* <div>
-        <label>Id</label>
-        <div>
-            <input asp-for="Id" disabled />
-            <span asp-validation-for="Id"></span>
-        </div>
-    </div> *@
     <div>
         <label>Birthday</label>
         <div>
@@ -40,24 +33,32 @@
         </div>
     </div>
     <div>
-        <select asp-for="WorkplaceId" asp-items="Model.Options">
-        </select>
-        <span asp-validation-for="WorkplaceId"></span>
+        <label>Workplace</label>
+        <div>
+           <select asp-for="WorkplaceId" asp-items="Model.Options">
+                <option value="">Select</option>
+           </select>
+           <span asp-validation-for="WorkplaceId"></span>
+        </div>
     </div>
-    @* <div>
-        <label>Work Location</label>
+    <div>
+        <label>Position</label>
         <div>
-            <input asp-for="WorkLocation" />
-            <span asp-validation-for="WorkLocation"></span>
+            <select asp-for="PositionId" asp-items="Model.Positions">
+                <option value="">Select</option>
+            </select>
+            <span asp-validation-for="PositionId"></span>
         </div>
-    </div> *@
-    @* <div>
-        <label>Position work location</label>
+    </div>
+    <div>
+        <label>Profession</label>
         <div>
-            <input asp-for="Position" />
-            <span asp-validation-for="Position"></span>
+            <select asp-for="ProfessionId" asp-items="Model.Professions">
+                <option value="">Select</option>
+            </select>
+            <span asp-validation-for="ProfessionId"></span>
         </div>
-    </div> *@
+    </div>
     <div>
         <label>Phone number</label>
         <div>
