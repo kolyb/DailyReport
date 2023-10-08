@@ -20,6 +20,7 @@ namespace DailyReport.DataAccess.Configuration
             services.AddScoped<IRepository<Event>, EventRepository>();
             services.AddScoped<IRepository<Position>, PositionRepository>();
             services.AddScoped<IRepository<Profession>, ProfessionRepository>();
+            services.AddScoped<IRepository<Plan>, PlanRepository>();
         }
     }
 }

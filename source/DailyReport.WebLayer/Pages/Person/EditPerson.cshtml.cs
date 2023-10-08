@@ -128,9 +128,9 @@ namespace DailyReport.WebLayer.Pages.Person
                 personDTO.FirstName = FirstName;
                 personDTO.MiddleName = MiddleName;
                 personDTO.LastName = LastName;
-                personDTO.WorkplaceId = WorkplaceId;
-                personDTO.PositionId = PositionId;
-                personDTO.ProfessionId = ProfessionId;
+                //personDTO.WorkplaceId = WorkplaceId;
+                //personDTO.PositionId = PositionId;
+                //personDTO.ProfessionId = ProfessionId;
                 personDTO.PhoneNumber = PhoneNumber;
 
                 await _servicePersonDTO.DeleteAsync(personDTO);

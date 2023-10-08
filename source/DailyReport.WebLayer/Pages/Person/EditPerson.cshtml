@@ -35,8 +35,14 @@
     <div>
         <label>Workplace</label>
         <div>
-           <select asp-for="WorkplaceId" asp-items="Model.Options">
-                <option value="">Select</option>
+            <input asp-for="Workplace" />
+            <span asp-validation-for="Workplace"></span>
+        </div>
+    </div>
+    <div>
+        <label style="color:red">Change workplace</label>
+        <div>
+           <select asp-for="WorkplaceId" asp-items="Model.Options" style="coloe:green font-style:italic">
            </select>
            <span asp-validation-for="WorkplaceId"></span>
         </div>
@@ -44,8 +50,14 @@
     <div>
         <label>Position</label>
         <div>
+            <input asp-for="Position" />
+            <span asp-validation-for="Position"></span>
+        </div>
+    </div>
+    <div>
+        <label style="color:red">Change position</label>
+        <div>
             <select asp-for="PositionId" asp-items="Model.Positions">
-                <option value="">Select</option>
             </select>
             <span asp-validation-for="PositionId"></span>
         </div>
@@ -53,8 +65,14 @@
     <div>
         <label>Profession</label>
         <div>
+            <input asp-for="Profession" />
+            <span asp-validation-for="Profession"></span>
+        </div>
+    </div>
+    <div>
+        <label style="color:red">Change profession</label>
+        <div>
             <select asp-for="ProfessionId" asp-items="Model.Professions">
-                <option value="">Select</option>
             </select>
             <span asp-validation-for="ProfessionId"></span>
         </div>
