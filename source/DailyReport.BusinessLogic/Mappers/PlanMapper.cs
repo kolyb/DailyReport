@@ -1,10 +1,5 @@
 ﻿using DailyReport.BusinessLogic.ModelsDTO;
 using DailyReport.DataAccess.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DailyReport.BusinessLogic.Mappers
 {
@@ -15,8 +10,9 @@ namespace DailyReport.BusinessLogic.Mappers
             Plan plan = new Plan
             {
                 Id = item.Id,
-                UserIdentityId = item.UserIdentityId,
+                //UserIdentityId = item.UserIdentityId,
                 PersonId = item.PersonId,
+                PlanDateId = item.PlanDateId,
                 PlanTime = item.PlanTime,
             };
             return plan;
@@ -27,8 +23,9 @@ namespace DailyReport.BusinessLogic.Mappers
             PlanDTO planDTO = new PlanDTO
             {
                 Id = item.Id,
-                UserIdentityId = item.UserIdentityId,
+                //UserIdentityId = item.UserIdentityId,
                 PersonId = item.PersonId,
+                PlanDateId = item.PlanDateId,
                 PlanTime = item.PlanTime,
             };
             return planDTO;
@@ -42,8 +39,9 @@ namespace DailyReport.BusinessLogic.Mappers
                 planDTOs.Add(new PlanDTO
                 {
                     Id = item.Id,
-                    UserIdentityId = item.UserIdentityId,
+                    //UserIdentityId = item.UserIdentityId,
                     PersonId = item.PersonId,
+                    PlanDateId = item.PlanDateId,
                     PlanTime = item.PlanTime,
                 });
             }
