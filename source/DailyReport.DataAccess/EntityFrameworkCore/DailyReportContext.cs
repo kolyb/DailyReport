@@ -20,6 +20,8 @@ namespace DailyReport.DataAccess.EntityFrameworkCore
 
         public DbSet<Plan> Plans { get; set; }
 
+        public DbSet<Report> Reports { get; set; }
+
         public DbSet<PlanDate> PlanDates { get; set; }
 
         public DbSet<Position> Positions { get; set; }

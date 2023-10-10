@@ -21,6 +21,7 @@ namespace DailyReport.BusinessLogic.Configuration
             services.AddScoped<IService<ProfessionDTO>, ProfessionService>();
             services.AddScoped<IService<PlanDTO>, PlanService>();
             services.AddScoped<IService<PlanDateDTO>, PlanDateService>();
+            services.AddScoped<IService<ReportDTO>, ReportService>();
 
         }
     }

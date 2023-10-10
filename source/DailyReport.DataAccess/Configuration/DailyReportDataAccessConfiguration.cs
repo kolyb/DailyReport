@@ -22,6 +22,7 @@ namespace DailyReport.DataAccess.Configuration
             services.AddScoped<IRepository<Profession>, ProfessionRepository>();
             services.AddScoped<IRepository<Plan>, PlanRepository>();
             services.AddScoped<IRepository<PlanDate>, PlanDateRepository>();
+            services.AddScoped<IRepository<Report>, ReportRepository>();
         }
     }
 }

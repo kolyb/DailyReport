@@ -3,11 +3,6 @@ using DailyReport.BusinessLogic.Mappers;
 using DailyReport.BusinessLogic.ModelsDTO;
 using DailyReport.DataAccess.Interfaces;
 using DailyReport.DataAccess.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DailyReport.BusinessLogic.Servicies
 {

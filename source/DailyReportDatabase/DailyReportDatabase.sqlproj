@@ -78,6 +78,7 @@
     <Build Include="ForeignKeys\FK_Person_Plan.sql" />
     <Build Include="Tables\PlanDates.sql" />
     <Build Include="ForeignKeys\FK_PlanDate_Plan.sql" />
+    <Build Include="Tables\Reports.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Post\UserIdentity.PostDeployment.sql" />
