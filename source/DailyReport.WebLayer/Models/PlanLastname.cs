@@ -1,8 +1,10 @@
-﻿namespace DailyReport.WebLayer.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace DailyReport.WebLayer.Models
 {
     public class PlanLastname
     {   
-        public DateTime DateTime { get; set; }
+        public TimeSpan DateTime { get; set; }
 
         public string? Lastname{ get; set; }
     }

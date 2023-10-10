@@ -37,6 +37,7 @@ namespace DailyReport.WebLayer.Pages.Plan
             PlanLastnames = (from p in PersonDTOs
                              join pl in PlanDTOs
                              on p.Id equals pl.PersonId
+                             orderby pl.PlanTime
                              where pl.PlanDateId == id
                              select new PlanLastname{ DateTime = pl.PlanTime,Lastname = p.LastName }).ToList();
         }

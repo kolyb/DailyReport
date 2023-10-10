@@ -22,7 +22,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model.PersonDTOs)
+            @foreach (var item in Model.PersonDTOs.OrderBy(i =>i.LastName))
             {  
                 <tr>
                     <td>@item.LastName</td>

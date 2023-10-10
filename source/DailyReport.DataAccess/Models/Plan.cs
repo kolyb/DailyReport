@@ -1,4 +1,6 @@
-﻿namespace DailyReport.DataAccess.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace DailyReport.DataAccess.Models
 {
     public class Plan
     {
@@ -10,6 +12,6 @@
 
         public int PlanDateId { get; set; }
 
-        public DateTime PlanTime { get; set; }
+        public TimeSpan PlanTime { get; set; }
     }
 }

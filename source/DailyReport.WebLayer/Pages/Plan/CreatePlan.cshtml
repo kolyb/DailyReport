@@ -7,25 +7,24 @@
     <div asp-validation-summary="All"></div>
     <div>
         <label>PlanTime</label>
-        <div>
-            <input asp-for="PlanTime" />
-            <span asp-validation-for="PlanTime"></span>
+        <div class="form-group">
+            <label asp-for="PlanTime" class="control-label">PlanTime</label>
+            <input type="time" asp-for="PlanTime" class="form-control" />
         </div>
     </div>
     <div>
         <label>Person</label>
         <div>
-            <select asp-for="PersonId" asp-items="Model.Persons">
+            <select asp-for="PersonId" asp-items="Model.Persons.OrderBy(i => i.Text)">
             </select>
             <span asp-validation-for="PersonId"></span>
         </div>
     </div>
     <div>
-        <label>Plan day</label>
-        <div>
-            <select asp-for="PlanDateId" asp-items="Model.PlanDates">
-            </select>
-            <span asp-validation-for="PlanDateId"></span>
+        <label>PlanDay</label>
+        <div class="form-group">
+            <label asp-for="PlanDay" class="control-label">Plan day</label>
+            <input type="date" asp-for="PlanDay" class="form-control"  disabled/>
         </div>
     </div>
     <div>

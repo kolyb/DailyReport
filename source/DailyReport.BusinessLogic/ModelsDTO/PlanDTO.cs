@@ -1,4 +1,6 @@
-﻿namespace DailyReport.BusinessLogic.ModelsDTO
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace DailyReport.BusinessLogic.ModelsDTO
 {
     public class PlanDTO
     {
@@ -10,6 +12,6 @@
 
         public int PlanDateId { get; set; }
 
-        public DateTime PlanTime { get; set; }
+        public TimeSpan PlanTime { get; set; }
     }
 }
