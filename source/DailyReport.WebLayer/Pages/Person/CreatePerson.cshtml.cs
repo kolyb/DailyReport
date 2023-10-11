@@ -107,6 +107,7 @@ namespace DailyReport.WebLayer.Pages.Person
             if (ModelState.IsValid)
             {
                 PersonDTO personDTO = new PersonDTO();
+                personDTO.UserIdentityEmail = User.Identity?.Name;
                 personDTO.Birthday = Birthday;
                 personDTO.FirstName = FirstName;
                 personDTO.MiddleName = MiddleName;

@@ -1,6 +1,7 @@
 ﻿CREATE TABLE [dbo].[Persons]
 (
 	[Id] int primary key identity,
+	[UserIdentityEmail] nvarchar(120) NULL,
 	[Birthday] nvarchar(120) NULL,
 	[FirstName] nvarchar(120) NULL,
 	[MiddleName] nvarchar(120) NULL,

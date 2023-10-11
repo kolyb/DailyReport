@@ -42,7 +42,7 @@
     <div>
         <label style="color:red">Change workplace</label>
         <div>
-           <select asp-for="WorkplaceId" asp-items="Model.Options" style="coloe:green font-style:italic">
+           <select asp-for="WorkplaceId" asp-items="Model.Options">
            </select>
            <span asp-validation-for="WorkplaceId"></span>
         </div>
@@ -91,5 +91,5 @@
     </div>
 </form>
 <div>
-    <a asp-controller="Home" asp-action="Index">Back</a>
+    <a asp-page="Index">Back</a>
 </div>

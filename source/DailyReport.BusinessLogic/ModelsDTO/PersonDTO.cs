@@ -18,7 +18,7 @@
 
         public int ProfessionId { get; set; }
 
-       // public int UserIdentityId { get; set; }
+        public string? UserIdentityEmail { get; set; }
 
         public string? PhoneNumber { get; set; }
 

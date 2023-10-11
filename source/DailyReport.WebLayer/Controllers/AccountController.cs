@@ -36,6 +36,7 @@ namespace DailyReport.WebLayer.Controllers
                     UserIdentityDTO userDto = new UserIdentityDTO
                     {
                         Email = model.Email,
+                        UserName = model.Email,
                         Password = model.Password,
                         RememberMe = model.RememberMe,
                     };

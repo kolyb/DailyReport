@@ -16,8 +16,9 @@ namespace DailyReport.WebLayer.Pages.Person
         public IEnumerable<PersonDTO>? PersonDTOs { get; set; }
 
         public void OnGet()
-        {
-            PersonDTOs = _servicePersonDTO.GetAll();                           
+        {   
+            PersonDTOs = _servicePersonDTO.GetAll().Where(i =>i.UserIdentityEmail
+            == User.Identity?.Name);                           
         }
     }
 }
