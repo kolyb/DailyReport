@@ -1,6 +1,5 @@
 using DailyReport.BusinessLogic.Interfaces;
 using DailyReport.BusinessLogic.ModelsDTO;
-using DailyReport.WebLayer.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -72,17 +71,11 @@ namespace DailyReport.WebLayer.Pages.Person
 
         public void OnGet()
         {   
-            WorkplaceDTOs = _serviceWorkplaceDTO.GetAll();
-            PersonDTOs = _servicePersonDTO.GetAll();
-
-            Options = (from wp in WorkplaceDTOs
-                       join ps in PersonDTOs
-                       on wp.Id equals ps.WorkplaceId
-                       where ps.UserIdentityEmail == User.Identity?.Name
-                       select new SelectListItem
+            Options = _serviceWorkplaceDTO.GetAll().Select(a =>
+                                  new SelectListItem
                                   {
-                                      Value = wp.Id.ToString(),
-                                      Text = wp.Description
+                                      Value = a.Id.ToString(),
+                                      Text = a.Description
                                   }).ToList();
             Positions = _servicePositionDTO.GetAll().Select(a =>
                                   new SelectListItem

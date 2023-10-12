@@ -28,7 +28,7 @@ namespace DailyReport.WebLayer.Pages.Workplace
         {
             //PersonDTOs = _servicePersonDTO.GetAll();
 
-            WorkplaceDTOs = _serviceWorkplaceDTO.GetAll().OrderBy(i =>i.Description);
+            WorkplaceDTOs = _serviceWorkplaceDTO.GetAll().OrderBy(i =>i.AdressCity);
 
             //WorkplaceViewModels = (from wp in WorkplaceDTOs
             //                    join ps in PersonDTOs

@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace DailyReport.DataAccess.Models
+﻿namespace DailyReport.DataAccess.Models
 {
     public class Plan
     {

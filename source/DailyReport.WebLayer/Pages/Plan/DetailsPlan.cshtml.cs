@@ -27,7 +27,7 @@ namespace DailyReport.WebLayer.Pages.Plan
 
         public List<PlanDateDTO>? PlanDateDTOs { get; set; }
 
-        public List<PlanLastname>? PlanLastnames { get; set; }
+        public List<PlanLastnameViewModel>? PlanLastnames { get; set; }
 
         public void OnGetAsync(int id)
         {
@@ -39,7 +39,7 @@ namespace DailyReport.WebLayer.Pages.Plan
                              on p.Id equals pl.PersonId
                              orderby pl.PlanTime
                              where pl.PlanDateId == id
-                             select new PlanLastname{ DateTime = pl.PlanTime,Lastname = p.LastName }).ToList();
+                             select new PlanLastnameViewModel{ DateTime = pl.PlanTime,Lastname = p.LastName }).ToList();
         }
 
         public ActionResult OnPostCancel()

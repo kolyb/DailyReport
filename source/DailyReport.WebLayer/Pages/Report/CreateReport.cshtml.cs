@@ -4,20 +4,20 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace DailyReport.WebLayer.Pages.Plan
+namespace DailyReport.WebLayer.Pages.Report
 {
-    public class CreatePlanModel : PageModel
+    public class CreateReportModel : PageModel
     {
         private readonly IService<PersonDTO> _servicePersonDTO;
-        private readonly IService<PlanDTO> _servicePlanDTO;
+        private readonly IService<ReportDTO> _serviceReportDTO;
         private readonly IService<PlanDateDTO> _servicePlanDateDTO;
 
-        public CreatePlanModel(IService<PersonDTO> servicePersonDTO,
-            IService<PlanDTO> servicePlanDTO,
+        public CreateReportModel(IService<PersonDTO> servicePersonDTO,
+            IService<ReportDTO> serviceReportDTO,
             IService<PlanDateDTO> servicePlanDateDTO)
         {
             _servicePersonDTO = servicePersonDTO;
-            _servicePlanDTO = servicePlanDTO;
+            _serviceReportDTO = serviceReportDTO;
             _servicePlanDateDTO = servicePlanDateDTO;
         }
 
@@ -31,7 +31,7 @@ namespace DailyReport.WebLayer.Pages.Plan
         public int PlanDateId { get; set; }
 
         [BindProperty]
-        public TimeSpan PlanTime { get; set; }
+        public TimeSpan Time { get; set; }
 
         [BindProperty]
         public DateTime PlanDay { get; set; }
@@ -61,12 +61,12 @@ namespace DailyReport.WebLayer.Pages.Plan
         {
             if (ModelState.IsValid)
             {
-                PlanDTO planDTO = new PlanDTO();
-                planDTO.PlanTime = PlanTime;
-                planDTO.PersonId = PersonId;
-                planDTO.PlanDateId = Id;
+                ReportDTO reportDTO = new ReportDTO();
+                reportDTO.Time = Time;
+                reportDTO.PersonId = PersonId;
+                reportDTO.PlanDateId = Id;
 
-                await _servicePlanDTO.CreateAsync(planDTO);
+                await _serviceReportDTO.CreateAsync(reportDTO);
 
             }
             return RedirectToPage("Index");

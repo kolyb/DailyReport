@@ -12,11 +12,13 @@
         <tr>
             <th>Day</th>
             <th>*</th>
-            <th>Edit"</th>
+            <th>Create plan</th>
             <th>*</th>
             <th>Delete</th>
             <th>*</th>
             <th>Details</th>
+            <th>*</th>
+            <th>Create report</th>
         </tr>
     </thead>
     <tbody>
@@ -39,7 +41,13 @@
                 <td>*</td>
                 <td>
                     <form method="post">
-                        <a asp-page="DetailsPlan" asp-route-id="@item.Id">Details</a>
+                        <a asp-page="DetailsPlan" asp-route-id="@item.Id">Details plan</a>
+                    </form>
+                </td>
+                <td>*</td>
+                <td>
+                    <form method="post">
+                        <a asp-page="/Report/CreateReport" asp-route-id="@item.Id">Create report</a>
                     </form>
                 </td>
             </tr>
