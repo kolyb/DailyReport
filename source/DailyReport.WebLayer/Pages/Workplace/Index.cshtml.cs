@@ -26,20 +26,20 @@ namespace DailyReport.WebLayer.Pages.Workplace
 
         public void OnGet()
         {
-            PersonDTOs = _servicePersonDTO.GetAll();
+            //PersonDTOs = _servicePersonDTO.GetAll();
 
-            WorkplaceDTOs = _serviceWorkplaceDTO.GetAll();
+            WorkplaceDTOs = _serviceWorkplaceDTO.GetAll().OrderBy(i =>i.Description);
 
-            WorkplaceViewModels = (from wp in WorkplaceDTOs
-                                join ps in PersonDTOs
-                                on wp.Id equals ps.WorkplaceId
-                                where ps.UserIdentityEmail == User.Identity?.Name
-                                select new WorkplaceViewModel { 
-                                    Id = wp.Id,
-                                    Description = wp.Description,
-                                    AdressCity = wp.AdressCity,
-                                    AdressStreet = wp.AdressStreet,
-                                    AdressHouse = wp.AdressHouse}).ToList();
+            //WorkplaceViewModels = (from wp in WorkplaceDTOs
+            //                    join ps in PersonDTOs
+            //                    on wp.Id equals ps.WorkplaceId
+            //                    where ps.UserIdentityEmail == User.Identity?.Name
+            //                    select new WorkplaceViewModel { 
+            //                        Id = wp.Id,
+            //                        Description = wp.Description,
+            //                        AdressCity = wp.AdressCity,
+            //                        AdressStreet = wp.AdressStreet,
+            //                        AdressHouse = wp.AdressHouse}).ToList();
         }
     }
 }
