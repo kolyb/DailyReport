@@ -16,9 +16,11 @@
             <th>*</th>
             <th>Delete</th>
             <th>*</th>
-            <th>Details</th>
+            <th>Details plan</th>
             <th>*</th>
             <th>Create report</th>
+            <th>*</th>
+            <th>Details report</th>
         </tr>
     </thead>
     <tbody>
@@ -48,6 +50,12 @@
                 <td>
                     <form method="post">
                         <a asp-page="/Report/CreateReport" asp-route-id="@item.Id">Create report</a>
+                    </form>
+                </td>
+                <td>*</td>
+                <td>
+                    <form method="post">
+                        <a asp-page="/Report/DetailsReport" asp-route-id="@item.Id">Details report</a>
                     </form>
                 </td>
             </tr>
