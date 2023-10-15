@@ -39,7 +39,7 @@ namespace DailyReport.WebLayer.Pages.Plan
                              on p.Id equals pl.PersonId
                              orderby pl.PlanTime
                              where pl.PlanDateId == id
-                             select new PlanLastnameViewModel{ DateTime = pl.PlanTime,Lastname = p.LastName }).ToList();
+                             select new PlanLastnameViewModel{ Id = pl.Id, DateTime = pl.PlanTime,Lastname = p.LastName }).ToList();
         }
 
         public ActionResult OnPostCancel()

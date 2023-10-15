@@ -14,7 +14,7 @@ namespace DailyReport.WebLayer.Pages.Workplace
             _serviceWorkplaceDTO = serviceWorkplaceDTO;
         }
 
-        [BindProperty(SupportsGet = true)]
+        [BindProperty]
         public int Id { get; set; }
 
         [BindProperty]
@@ -43,7 +43,7 @@ namespace DailyReport.WebLayer.Pages.Workplace
         {
             if (ModelState.IsValid)
             {
-                WorkplaceDTO workplaceDTO = await _serviceWorkplaceDTO.GetByIdAsync(Id);
+                WorkplaceDTO workplaceDTO =  await _serviceWorkplaceDTO.GetByIdAsync(Id);
                 if (workplaceDTO != null)
                 {
                     workplaceDTO.Id = Id;

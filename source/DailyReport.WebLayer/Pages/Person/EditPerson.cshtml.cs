@@ -106,8 +106,8 @@ namespace DailyReport.WebLayer.Pages.Person
             MiddleName = personDTO.MiddleName;
             LastName = personDTO.LastName;
             Workplace = (from wl in WorkplaceDTOs
-                            where wl.Id == personDTO.WorkplaceId
-                            select wl.Description).FirstOrDefault();
+                         where wl.Id == personDTO.WorkplaceId
+                         select wl.Description).FirstOrDefault();
             Position = (from ps in PositionDTOs
                         where ps.Id == personDTO.PositionId
                         select ps.Description).FirstOrDefault();
@@ -116,7 +116,6 @@ namespace DailyReport.WebLayer.Pages.Person
                           select pr.Description).FirstOrDefault();
             PhoneNumber = personDTO.PhoneNumber;
 
-            
         }
 
         public async Task<IActionResult> OnPost()
@@ -124,6 +123,7 @@ namespace DailyReport.WebLayer.Pages.Person
             if (ModelState.IsValid)
             {
                 PersonDTO personDTO = await _servicePersonDTO.GetByIdAsync(Id);
+                personDTO.Id = Id;
                 personDTO.Birthday = Birthday;
                 personDTO.FirstName = FirstName;
                 personDTO.MiddleName = MiddleName;
@@ -146,7 +146,7 @@ namespace DailyReport.WebLayer.Pages.Person
                 personNewDTO.PhoneNumber = PhoneNumber;
 
                 await _servicePersonDTO.CreateAsync(personNewDTO);
-                
+
             }
 
             return RedirectToPage("Index");

@@ -42,9 +42,6 @@ namespace DailyReport.WebLayer.Pages.Person
         public int WorkplaceId { get; set; }
 
         [BindProperty]
-        public int PositionId { get; set; }
-
-        [BindProperty]
         public string? Workplace { get; set; }
 
         [BindProperty]
@@ -85,23 +82,22 @@ namespace DailyReport.WebLayer.Pages.Person
             Birthday = personDTO.Birthday;
             FirstName = personDTO.FirstName;
             MiddleName = personDTO.MiddleName;
-            WorkplaceId = personDTO.WorkplaceId;
             LastName = personDTO.LastName;
             Workplace = (from wl in WorkplaceDTOs
-                            where wl.Id == personDTO.WorkplaceId
-                            select wl.Description).FirstOrDefault();
+                         where wl.Id == personDTO.WorkplaceId
+                         select wl.Description).FirstOrDefault();
             AdressCity = (from wl in WorkplaceDTOs
-                            where wl.Id == personDTO.WorkplaceId
-                            select wl.AdressCity).FirstOrDefault();
+                          where wl.Id == personDTO.WorkplaceId
+                          select wl.AdressCity).FirstOrDefault();
             AdressStreet = (from wl in WorkplaceDTOs
                             where wl.Id == personDTO.WorkplaceId
                             select wl.AdressStreet).FirstOrDefault();
             AdressHouse = (from wl in WorkplaceDTOs
-                            where wl.Id == personDTO.WorkplaceId
-                            select wl.AdressHouse).FirstOrDefault();
+                           where wl.Id == personDTO.WorkplaceId
+                           select wl.AdressHouse).FirstOrDefault();
             Description = (from ps in PositionDTOs
-                        where ps.Id == personDTO.PositionId
-                        select ps.Description).FirstOrDefault();
+                           where ps.Id == personDTO.PositionId
+                           select ps.Description).FirstOrDefault();
             DescriptionProfession = (from pr in ProfessionDTOs
                                      where pr.Id == personDTO.ProfessionId
                                      select pr.Description).FirstOrDefault();

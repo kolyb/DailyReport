@@ -9,6 +9,8 @@
             <th>*</th>
             <th>Time</th>
             <th>*</th>
+            <th>Delete</th>
+            <th>*</th>
         </tr>
     </thead>
     <tbody>
@@ -18,6 +20,12 @@
                 <td>@item.Lastname</td>
                 <td>*</td>
                 <td>@item.DateTime</td>
+                <td>*</td>
+                <td>
+                    <form method="post">
+                        <a asp-page="DeletePlan" asp-route-id="@item.Id">Delete</a>
+                    </form>
+                </td>
                 <td>*</td>
             </tr>
         }

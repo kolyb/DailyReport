@@ -14,7 +14,7 @@ namespace DailyReport.WebLayer.Pages.Workplace
             _serviceWorkplaceDTO = serviceWorkplaceDTO;
         }
 
-        [BindProperty(SupportsGet = true)]
+        [BindProperty]
         public int Id { get; set; }
 
         [BindProperty]
