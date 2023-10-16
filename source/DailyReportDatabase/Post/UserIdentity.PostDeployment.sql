@@ -117,7 +117,7 @@ CREATE TABLE [dbo].[AspNetUsers](
 	[PhoneNumberConfirmed] [bit] NOT NULL,
 	[SecurityStamp] [nvarchar](max) NULL,
 	[TwoFactorEnabled] [bit] NOT NULL,
-	[UserName] [nvarchar](256) NULL,
+	[UserName] [nvarchar](256) NOT NULL,
 	[FirstName] [nvarchar](256) NULL,
 	[Surname] [nvarchar](256) NULL,
  CONSTRAINT [PK_AspNetUsers] PRIMARY KEY CLUSTERED 
@@ -196,6 +196,10 @@ GO
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_AspNetUserTokens_AspNetUsers_UserId]') AND parent_object_id = OBJECT_ID(N'[dbo].[AspNetUserTokens]'))
 ALTER TABLE [dbo].[AspNetUserTokens] CHECK CONSTRAINT [FK_AspNetUserTokens_AspNetUsers_UserId]
 GO
+--ALTER TABLE [dbo].[Persons]WITH CHECK ADD CONSTRAINT [FK_AspNetUser_Person] FOREIGN KEY ([UserIdentityEmail])     
+--    REFERENCES [dbo].[AspNetUsers] ([Email])
+--ON UPDATE CASCADE
+--GO
 
 
 

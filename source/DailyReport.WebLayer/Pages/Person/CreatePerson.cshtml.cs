@@ -70,13 +70,29 @@ namespace DailyReport.WebLayer.Pages.Person
         public List<SelectListItem>? Professions { get; set; }
 
         public void OnGet()
-        {   
-            Options = _serviceWorkplaceDTO.GetAll().Select(a =>
+        {
+            WorkplaceDTOs = _serviceWorkplaceDTO.GetAll();
+            PersonDTOs = _servicePersonDTO.GetAll();
+
+            //Options = (from ps in PersonDTOs
+            //           join wp in WorkplaceDTOs
+            //           on ps.WorkplaceId equals wp.Id
+            //           where wp.UserIdentityEmail == User.Identity?.Name
+            //           select new SelectListItem
+            //           {
+            //               Value = wp.Id.ToString(),
+            //               Text = wp.Description
+            //           }).ToList();
+
+            Options = _serviceWorkplaceDTO.GetAll().Where(i =>i.UserIdentityEmail == User.Identity
+            ?.Name).
+            Select(a =>
                                   new SelectListItem
                                   {
                                       Value = a.Id.ToString(),
                                       Text = a.Description
                                   }).ToList();
+
             Positions = _servicePositionDTO.GetAll().Select(a =>
                                   new SelectListItem
                                   {
@@ -110,11 +126,11 @@ namespace DailyReport.WebLayer.Pages.Person
             if (ModelState.IsValid)
             {
                 PersonDTO personDTO = new PersonDTO();
-                personDTO.UserIdentityEmail = User.Identity?.Name;
                 personDTO.Birthday = Birthday;
                 personDTO.FirstName = FirstName;
                 personDTO.MiddleName = MiddleName;
                 personDTO.LastName = LastName;
+                personDTO.UserIdentityEmail = User.Identity?.Name;
                 personDTO.WorkplaceId = WorkplaceId;
                 personDTO.PositionId = PositionId;
                 personDTO.ProfessionId = ProfessionId;

@@ -14,10 +14,10 @@ namespace DailyReport.BusinessLogic.Mappers
                 FirstName = item.FirstName,
                 MiddleName = item.MiddleName,
                 LastName = item.LastName,
+                UserIdentityEmail = item.UserIdentityEmail,
                 WorkplaceId = item.WorkplaceId,
                 PositionId = item.PositionId,
                 ProfessionId = item.ProfessionId,
-                UserIdentityEmail = item.UserIdentityEmail,
                 PhoneNumber = item.PhoneNumber,
             };
             return person;
@@ -32,10 +32,10 @@ namespace DailyReport.BusinessLogic.Mappers
                 FirstName = item.FirstName,
                 MiddleName = item.MiddleName,
                 LastName = item.LastName,
+                UserIdentityEmail = item.UserIdentityEmail,
                 WorkplaceId = item.WorkplaceId,
                 PositionId = item.PositionId,
                 ProfessionId = item.ProfessionId,
-                UserIdentityEmail = item.UserIdentityEmail,
                 PhoneNumber = item.PhoneNumber,
             };
             return personDTO;
@@ -53,10 +53,10 @@ namespace DailyReport.BusinessLogic.Mappers
                     FirstName = item.FirstName,
                     MiddleName = item.MiddleName,
                     LastName = item.LastName,
+                    UserIdentityEmail = item.UserIdentityEmail,
                     WorkplaceId = item.WorkplaceId,
                     PositionId = item.PositionId,
                     ProfessionId = item.ProfessionId,
-                    UserIdentityEmail = item.UserIdentityEmail,
                     PhoneNumber = item.PhoneNumber,
                 });
             }

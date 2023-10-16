@@ -10,6 +10,7 @@ namespace DailyReport.BusinessLogic.Mappers
             Workplace workplace = new Workplace
             {
                 Id = item.Id,
+                UserIdentityEmail = item.UserIdentityEmail,
                 Description = item.Description,
                 AdressCity = item.AdressCity,
                 AdressStreet = item.AdressStreet,
@@ -23,6 +24,7 @@ namespace DailyReport.BusinessLogic.Mappers
             WorkplaceDTO workplaceDTO = new WorkplaceDTO
             {
                 Id = item.Id,
+                UserIdentityEmail = item.UserIdentityEmail,
                 Description = item.Description,
                 AdressCity = item.AdressCity,
                 AdressStreet = item.AdressStreet,
@@ -39,6 +41,7 @@ namespace DailyReport.BusinessLogic.Mappers
                 workplaceDTOs.Add(new WorkplaceDTO
                 {
                     Id = item.Id,
+                    UserIdentityEmail = item.UserIdentityEmail,
                     Description = item.Description,
                     AdressCity = item.AdressCity,
                     AdressStreet = item.AdressStreet,

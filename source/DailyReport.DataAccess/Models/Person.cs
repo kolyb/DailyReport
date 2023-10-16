@@ -12,13 +12,13 @@
 
         public string? LastName { get; set; }
 
+        public string? UserIdentityEmail { get; set; }
+
         public int WorkplaceId { get; set; }
 
         public int PositionId { get; set; }
 
         public int ProfessionId { get; set; }
-
-        public string? UserIdentityEmail { get; set; }
 
         public string? PhoneNumber { get; set;}
 

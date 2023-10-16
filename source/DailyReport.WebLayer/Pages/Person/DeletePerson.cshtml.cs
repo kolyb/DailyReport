@@ -15,7 +15,10 @@ namespace DailyReport.WebLayer.Pages.Person
         }
 
         [BindProperty]
-        public int Id { get; set; }
+        public int? Id { get; set; }
+
+        [BindProperty]
+        public int PageId { get; set; }
 
         [BindProperty]
         public string? Birthday { get; set; }
@@ -40,7 +43,10 @@ namespace DailyReport.WebLayer.Pages.Person
 
         public async Task OnGet(int id)
         {
+            PageId = id;
+
             PersonDTO personDTO = await _servicePersonDTO.GetByIdAsync(id);
+            Id = personDTO.Id;
             Birthday = personDTO.Birthday;
             FirstName = personDTO.FirstName;
             MiddleName = personDTO.MiddleName;
@@ -54,7 +60,7 @@ namespace DailyReport.WebLayer.Pages.Person
         {
             if (ModelState.IsValid)
             {
-                PersonDTO personDTO = await _servicePersonDTO.GetByIdAsync(Id);
+                PersonDTO personDTO = await _servicePersonDTO.GetByIdAsync(PageId);
                 if (personDTO != null)
                 {
                     personDTO.Id = Id;

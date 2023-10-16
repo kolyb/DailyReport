@@ -5,6 +5,13 @@
 <form method="post">
     <div asp-validation-summary="All"></div>
     <div>
+        <label>PageId</label>
+        <div>
+            <input asp-for="PageId" />
+            <span asp-validation-for="PageId"></span>
+        </div>
+    </div>
+    <div>
         <label>Birthday</label>
         <div>
             <input asp-for="Birthday" />

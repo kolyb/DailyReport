@@ -15,7 +15,7 @@
     <div>
         <label>Person</label>
         <div>
-            <select asp-for="PersonId" asp-items="Model.Persons.OrderBy(i => i.Text)">
+            <select asp-for="PersonId" asp-items="Model?.Persons?.OrderBy(i => i.Text)">
             </select>
             <span asp-validation-for="PersonId"></span>
         </div>

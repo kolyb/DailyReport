@@ -25,7 +25,10 @@ namespace DailyReport.WebLayer.Pages.Person
         }
 
         [BindProperty]
-        public int Id { get; set; }
+        public int? Id { get; set; }
+
+        [BindProperty]
+        public int PageId { get; set; }
 
         [BindProperty]
         public string? Birthday { get; set; }
@@ -38,6 +41,12 @@ namespace DailyReport.WebLayer.Pages.Person
 
         [BindProperty]
         public string? LastName { get; set; }
+
+        [BindProperty]
+        public string? Username { get; set; }
+
+        [BindProperty]
+        public string? UserName { get; set; }
 
         [BindProperty]
         public int WorkplaceId { get; set; }
@@ -74,9 +83,11 @@ namespace DailyReport.WebLayer.Pages.Person
 
         [BindProperty]
         public List<SelectListItem>? Professions { get; set; }
-
+         
         public async Task OnGet(int id)
         {
+            PageId = id;
+            UserName = User.Identity?.Name;
             WorkplaceDTOs = _serviceWorkplaceDTO.GetAll().ToList();
             PositionDTOs = _servicePositionDTO.GetAll().ToList();
             ProfessionDTOs = _serviceProfessionDTO.GetAll().ToList();
@@ -101,10 +112,12 @@ namespace DailyReport.WebLayer.Pages.Person
                                   }).ToList();
 
             PersonDTO personDTO = await _servicePersonDTO.GetByIdAsync(id);
+            Id = personDTO.Id;
             Birthday = personDTO.Birthday;
             FirstName = personDTO.FirstName;
             MiddleName = personDTO.MiddleName;
             LastName = personDTO.LastName;
+            Username = User.Identity?.Name;
             Workplace = (from wl in WorkplaceDTOs
                          where wl.Id == personDTO.WorkplaceId
                          select wl.Description).FirstOrDefault();
@@ -122,30 +135,36 @@ namespace DailyReport.WebLayer.Pages.Person
         {
             if (ModelState.IsValid)
             {
-                PersonDTO personDTO = await _servicePersonDTO.GetByIdAsync(Id);
-                personDTO.Id = Id;
-                personDTO.Birthday = Birthday;
-                personDTO.FirstName = FirstName;
-                personDTO.MiddleName = MiddleName;
-                personDTO.LastName = LastName;
-                //personDTO.WorkplaceId = WorkplaceId;
-                //personDTO.PositionId = PositionId;
-                //personDTO.ProfessionId = ProfessionId;
-                personDTO.PhoneNumber = PhoneNumber;
+                PersonDTO personDTO = await _servicePersonDTO.GetByIdAsync(PageId);
+                if (personDTO != null)
+                {
+                    personDTO.Id = Id;
+                    personDTO.Birthday = Birthday;
+                    personDTO.FirstName = FirstName;
+                    personDTO.MiddleName = MiddleName;
+                    personDTO.LastName = LastName;
+                    personDTO.UserIdentityEmail = Username;
+                    personDTO.WorkplaceId = WorkplaceId;
+                    personDTO.PositionId = PositionId;
+                    personDTO.ProfessionId = ProfessionId;
+                    personDTO.PhoneNumber = PhoneNumber;
 
-                await _servicePersonDTO.DeleteAsync(personDTO);
+                    await _servicePersonDTO.DeleteAsync(personDTO);
 
-                PersonDTO personNewDTO = new PersonDTO();
-                personNewDTO.Birthday = Birthday;
-                personNewDTO.FirstName = FirstName;
-                personNewDTO.MiddleName = MiddleName;
-                personNewDTO.LastName = LastName;
-                personNewDTO.WorkplaceId = WorkplaceId;
-                personNewDTO.PositionId = PositionId;
-                personNewDTO.ProfessionId = ProfessionId;
-                personNewDTO.PhoneNumber = PhoneNumber;
+                }
+                    PersonDTO personNewDTO = new PersonDTO();
+                    personNewDTO.Birthday = Birthday;
+                    personNewDTO.FirstName = FirstName;
+                    personNewDTO.MiddleName = MiddleName;
+                    personNewDTO.LastName = LastName;
+                    personNewDTO.UserIdentityEmail = UserName;
+                    personNewDTO.WorkplaceId = WorkplaceId;
+                    personNewDTO.PositionId = PositionId;
+                    personNewDTO.ProfessionId = ProfessionId;
+                    personNewDTO.PhoneNumber = PhoneNumber;
 
-                await _servicePersonDTO.CreateAsync(personNewDTO);
+                    await _servicePersonDTO.CreateAsync(personNewDTO);
+               
 
             }
 

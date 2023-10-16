@@ -5,6 +5,13 @@
 <form method="post">
     <div asp-validation-summary="All"></div>
     <div>
+        <label>PageId</label>
+        <div>
+            <input asp-for="PageId" />
+            <span asp-validation-for="PageId"></span>
+        </div>
+    </div>
+    <div>
         <label>Birthday</label>
         <div>
             <input asp-for="Birthday" />
@@ -30,6 +37,13 @@
         <div>
             <input asp-for="LastName" />
             <span asp-validation-for="LastName"></span>
+        </div>
+    </div>
+    <div>
+        <label>UserName</label>
+        <div>
+            <input asp-for="Username"/>
+            <span asp-validation-for="Username"></span>
         </div>
     </div>
     <div>

@@ -41,6 +41,7 @@ namespace DailyReport.WebLayer.Pages.Workplace
             if (ModelState.IsValid)
             {
                 WorkplaceDTO workplaceDTO = new WorkplaceDTO();
+                workplaceDTO.UserIdentityEmail = User.Identity?.Name;
                 workplaceDTO.Description = Description;
                 workplaceDTO.AdressCity = AdressCity;
                 workplaceDTO.AdressStreet = AdressStreet;

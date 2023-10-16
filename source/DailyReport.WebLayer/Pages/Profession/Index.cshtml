@@ -12,9 +12,9 @@
         <tr>
             <th>Description</th>
             <th>*</th>
-            <th>Edit</th>
-            <th>*</th>
-            <th>Delete</th>
+            @* <th>Edit</th>
+            <th>*</th> 
+            <th>Delete</th> *@
         </tr>
     </thead>
     <tbody>
@@ -23,7 +23,7 @@
             <tr>
                 <td>@item.Description</td>
                 <td>*</td>
-                <td>
+                @* <td>
                     <form method="post">
                         <a asp-page="EditProfession" asp-route-id="@item.Id">Edit</a>
                     </form>
@@ -33,7 +33,7 @@
                     <form method="post">
                         <a asp-page="DeleteProfession" asp-route-id="@item.Id">Delete</a>
                     </form>
-                </td>
+                </td> *@
             </tr>
         }
     </tbody>
