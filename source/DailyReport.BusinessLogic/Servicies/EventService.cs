@@ -44,7 +44,7 @@ namespace DailyReport.BusinessLogic.Servicies
             return list;
         }
 
-        public async Task<EventDTO> GetByIdAsync(int id)
+        public async Task<EventDTO> GetByIdAsync(int? id)
         {
             var @event = await _eventRepository.GetByIdAsync(id);
             EventDTO eventDTO = EventMapper.ToDTO(@event);

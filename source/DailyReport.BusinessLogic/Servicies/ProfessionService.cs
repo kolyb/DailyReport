@@ -44,7 +44,7 @@ namespace DailyReport.BusinessLogic.Servicies
             return list;
         }
 
-        public async Task<ProfessionDTO> GetByIdAsync(int id)
+        public async Task<ProfessionDTO> GetByIdAsync(int? id)
         {
             var profession = await _professionRepository.GetByIdAsync(id);
             ProfessionDTO professionDTO = ProfessionMapper.ToDTO(profession);

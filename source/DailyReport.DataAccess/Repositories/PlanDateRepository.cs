@@ -81,7 +81,7 @@ namespace DailyReport.DataAccess.Repositories
             return _db.PlanDates.AsQueryable();
         }
 
-        public async Task<PlanDate> GetByIdAsync(int id)
+        public async Task<PlanDate> GetByIdAsync(int? id)
         {
             var result = await _db.PlanDates.FindAsync(id);
             if (result == null)

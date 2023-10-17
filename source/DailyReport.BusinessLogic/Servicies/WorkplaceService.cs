@@ -44,7 +44,7 @@ namespace DailyReport.BusinessLogic.Servicies
             return list;
         }
 
-        public async Task<WorkplaceDTO> GetByIdAsync(int id)
+        public async Task<WorkplaceDTO> GetByIdAsync(int? id)
         {
             var workplace = await _workplaceRepository.GetByIdAsync(id);
             WorkplaceDTO workplaceDTO = WorkplaceMapper.ToDTO(workplace);

@@ -9,7 +9,7 @@
 
         Task UpdateAsync(T item);
 
-        Task<T> GetByIdAsync(int id);
+        Task<T> GetByIdAsync(int? id);
 
         IEnumerable<T> GetAll();
     }

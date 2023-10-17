@@ -81,7 +81,7 @@ namespace DailyReport.DataAccess.Repositories
             return _db.Professions.AsQueryable();
         }
 
-        public async Task<Profession> GetByIdAsync(int id)
+        public async Task<Profession> GetByIdAsync(int? id)
         {
             var result = await _db.Professions.FindAsync(id);
             if (result == null)

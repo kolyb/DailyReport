@@ -81,7 +81,7 @@ namespace DailyReport.DataAccess.Repositories
             return _db.Positions.AsQueryable();
         }
 
-        public async Task<Position> GetByIdAsync(int id)
+        public async Task<Position> GetByIdAsync(int? id)
         {
             var result = await _db.Positions.FindAsync(id);
             if (result == null)

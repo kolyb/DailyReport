@@ -5,6 +5,13 @@
 <form method="post">
     <div asp-validation-summary="All"></div>
     <div>
+        <label>ID</label>
+        <div>
+            <input asp-for="Id" />
+            <span asp-validation-for="Id"></span>
+        </div>
+    </div>
+    <div>
         <label>Description</label>
         <div>
             <input asp-for="Description" />
@@ -30,6 +37,63 @@
         <div>
             <input asp-for="AdressHouse" />
             <span asp-validation-for="AdressHouse"></span>
+        </div>
+    </div>
+    @*to create a new person*@
+    <div>
+        <label>PersonId</label>
+        <div>
+            <input asp-for="PersonId" />
+            <span asp-validation-for="PersonId"></span>
+        </div>
+    </div>
+    <div>
+        <label>Birthday</label>
+        <div>
+            <input asp-for="Birthday" />
+            <span asp-validation-for="Birthday"></span>
+        </div>
+    </div>
+    <div>
+        <label>First Name</label>
+        <div>
+            <input asp-for="FirstName" />
+            <span asp-validation-for="FirstName"></span>
+        </div>
+    </div>
+    <div>
+        <label>Middle Name</label>
+        <div>
+            <input asp-for="MiddleName" />
+            <span asp-validation-for="MiddleName"></span>
+        </div>
+    </div>
+    <div>
+        <label>Last Name</label>
+        <div>
+            <input asp-for="LastName" />
+            <span asp-validation-for="LastName"></span>
+        </div>
+    </div>
+    <div>
+        <label>PositionId</label>
+        <div>
+            <input asp-for="PositionId" />
+            <span asp-validation-for="PositionId"></span>
+        </div>
+    </div>
+    <div>
+        <label>ProfessionId</label>
+        <div>
+            <input asp-for="ProfessionId" />
+            <span asp-validation-for="ProfessionId"></span>
+        </div>
+    </div>
+    <div>
+        <label>Phone number</label>
+        <div>
+            <input asp-for="PhoneNumber" />
+            <span asp-validation-for="PhoneNumber"></span>
         </div>
     </div>
     <div>

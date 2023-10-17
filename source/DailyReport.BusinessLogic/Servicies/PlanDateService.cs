@@ -44,7 +44,7 @@ namespace DailyReport.BusinessLogic.Servicies
             return list;
         }
 
-        public async Task<PlanDateDTO> GetByIdAsync(int id)
+        public async Task<PlanDateDTO> GetByIdAsync(int? id)
         {
             var planDate = await _planDateRepository.GetByIdAsync(id);
             PlanDateDTO planDateDTO = PlanDateMapper.ToDTO(planDate);

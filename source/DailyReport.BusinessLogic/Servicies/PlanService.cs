@@ -44,7 +44,7 @@ namespace DailyReport.BusinessLogic.Servicies
             return list;
         }
 
-        public async Task<PlanDTO> GetByIdAsync(int id)
+        public async Task<PlanDTO> GetByIdAsync(int? id)
         {
             var plan = await _planRepository.GetByIdAsync(id);
             PlanDTO planDTO = PlanMapper.ToDTO(plan);

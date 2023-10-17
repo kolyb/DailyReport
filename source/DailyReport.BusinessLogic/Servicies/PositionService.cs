@@ -44,7 +44,7 @@ namespace DailyReport.BusinessLogic.Servicies
             return list;
         }
 
-        public async Task<PositionDTO> GetByIdAsync(int id)
+        public async Task<PositionDTO> GetByIdAsync(int? id)
         {
             var position = await _positionRepository.GetByIdAsync(id);
             PositionDTO positionDTO = PositionMapper.ToDTO(position);

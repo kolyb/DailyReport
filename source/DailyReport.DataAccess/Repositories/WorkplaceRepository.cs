@@ -81,7 +81,7 @@ namespace DailyReport.DataAccess.Repositories
             return _db.Workplaces.AsQueryable();
         }
 
-        public async Task<Workplace> GetByIdAsync(int id)
+        public async Task<Workplace> GetByIdAsync(int? id)
         {
             var result = await _db.Workplaces.FindAsync(id);
             if (result == null)

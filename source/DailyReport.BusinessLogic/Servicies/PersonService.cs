@@ -44,7 +44,7 @@ namespace DailyReport.BusinessLogic.Servicies
             return list;
         }
 
-        public async Task<PersonDTO> GetByIdAsync(int id)
+        public async Task<PersonDTO> GetByIdAsync(int? id)
         {   
             var person = await _personRepository.GetByIdAsync(id);
             PersonDTO personDTO = PersonMapper.ToDTO(person);
