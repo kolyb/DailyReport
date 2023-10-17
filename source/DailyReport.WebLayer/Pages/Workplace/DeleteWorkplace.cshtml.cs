@@ -30,6 +30,9 @@ namespace DailyReport.WebLayer.Pages.Workplace
         public string? Description { get; set; }
 
         [BindProperty]
+        public int? WithoutWorkplaceId { get; set; }
+
+        [BindProperty]
         public string? AdressCity { get; set; }
 
         [BindProperty]
@@ -66,9 +69,17 @@ namespace DailyReport.WebLayer.Pages.Workplace
         [BindProperty]
         public IEnumerable<PersonDTO>? PersonDTOs { get; set; }
 
+        [BindProperty]
+        public IEnumerable<WorkplaceDTO>? WorkplaceDTOs { get; set; }
+
         public async Task OnGet(int id)
         {
             PersonDTOs = _servicePersonDTO.GetAll();
+            WorkplaceDTOs = _serviceWorkplaceDTO.GetAll();
+
+            WithoutWorkplaceId = (from wp in WorkplaceDTOs
+                                  where wp.Description == "Without workplace"
+                                  select wp.Id).FirstOrDefault();
 
             WorkplaceDTO workplaceDTO = await _serviceWorkplaceDTO.GetByIdAsync(id);
             Id = workplaceDTO.Id;
@@ -120,7 +131,7 @@ namespace DailyReport.WebLayer.Pages.Workplace
                 personNewDTO.MiddleName = MiddleName;
                 personNewDTO.LastName = LastName;
                 personNewDTO.UserIdentityEmail = User.Identity?.Name;
-                personNewDTO.WorkplaceId = 1;
+                personNewDTO.WorkplaceId = (int)WithoutWorkplaceId;
                 personNewDTO.PositionId = PositionId;
                 personNewDTO.ProfessionId = ProfessionId;
                 personNewDTO.PhoneNumber = PhoneNumber;
