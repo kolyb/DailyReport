@@ -41,31 +41,6 @@ namespace DailyReport.WebLayer.Pages.Workplace
         [BindProperty]
         public string? AdressHouse { get; set; }
 
-        //to create a new person
-        [BindProperty]
-        public int? PersonId { get; set; }
-
-        [BindProperty]
-        public string? Birthday { get; set; }
-
-        [BindProperty]
-        public string? FirstName { get; set; }
-
-        [BindProperty]
-        public string? MiddleName { get; set; }
-
-        [BindProperty]
-        public string? LastName { get; set; }
-
-        [BindProperty]
-        public int PositionId { get; set; }
-
-        [BindProperty]
-        public int ProfessionId { get; set; }
-
-        [BindProperty]
-        public string? PhoneNumber { get; set; }
-
         [BindProperty]
         public IEnumerable<PersonDTO>? PersonDTOs { get; set; }
 
@@ -74,7 +49,6 @@ namespace DailyReport.WebLayer.Pages.Workplace
 
         public async Task OnGet(int id)
         {
-            PersonDTOs = _servicePersonDTO.GetAll();
             WorkplaceDTOs = _serviceWorkplaceDTO.GetAll();
 
             WithoutWorkplaceId = (from wp in WorkplaceDTOs
@@ -87,28 +61,11 @@ namespace DailyReport.WebLayer.Pages.Workplace
             AdressCity = workplaceDTO.AdressCity;
             AdressStreet = workplaceDTO.AdressStreet;
             AdressHouse = workplaceDTO.AdressHouse;
-
-            PersonId = (from ps in PersonDTOs
-                        where ps.WorkplaceId == id
-                             select ps.Id).FirstOrDefault();
-
-            PersonDTO personDTO = await _servicePersonDTO.GetByIdAsync(PersonId);
-            if (personDTO != null)
-            {
-                //Id = personDTO.Id;
-                Birthday = personDTO.Birthday;
-                FirstName = personDTO.FirstName;
-                MiddleName = personDTO.MiddleName;
-                LastName = personDTO.LastName;
-                PositionId = personDTO.PositionId;
-                ProfessionId = personDTO.ProfessionId;
-                PhoneNumber = personDTO.PhoneNumber;
-
-            }
         }
 
         public async Task<IActionResult> OnPost()
         {
+            PersonDTOs = _servicePersonDTO.GetAll().Where(i => i.WorkplaceId == Id);
             if (ModelState.IsValid)
             {
                 WorkplaceDTO workplaceDTO = await _serviceWorkplaceDTO.GetByIdAsync(Id);
@@ -119,33 +76,35 @@ namespace DailyReport.WebLayer.Pages.Workplace
                     workplaceDTO.AdressCity = AdressCity;
                     workplaceDTO.AdressStreet = AdressStreet;
                     workplaceDTO.AdressHouse = AdressHouse;
-                    
+
 
                     await _serviceWorkplaceDTO.DeleteAsync(workplaceDTO);
+
+                    foreach (var i in PersonDTOs)
+                    {
+                        PersonDTO personNewDTO = new PersonDTO();
+                        personNewDTO.Birthday = i.Birthday;
+                        personNewDTO.FirstName = i.FirstName;
+                        personNewDTO.MiddleName = i.MiddleName;
+                        personNewDTO.LastName = i.LastName;
+                        personNewDTO.UserIdentityEmail = User.Identity?.Name;
+                        personNewDTO.WorkplaceId = (int)WithoutWorkplaceId;
+                        personNewDTO.PositionId = i.PositionId;
+                        personNewDTO.ProfessionId = i.ProfessionId;
+                        personNewDTO.PhoneNumber = i.PhoneNumber;
+
+
+                        await _servicePersonDTO.CreateAsync(personNewDTO);
+                    }
                 }
-
-
-                PersonDTO personNewDTO = new PersonDTO();
-                personNewDTO.Birthday = Birthday;
-                personNewDTO.FirstName = FirstName;
-                personNewDTO.MiddleName = MiddleName;
-                personNewDTO.LastName = LastName;
-                personNewDTO.UserIdentityEmail = User.Identity?.Name;
-                personNewDTO.WorkplaceId = (int)WithoutWorkplaceId;
-                personNewDTO.PositionId = PositionId;
-                personNewDTO.ProfessionId = ProfessionId;
-                personNewDTO.PhoneNumber = PhoneNumber;
-
-
-                await _servicePersonDTO.CreateAsync(personNewDTO);
+                
             }
-
             return RedirectToPage("Index");
         }
 
         public ActionResult OnPostCancel()
         {
-            return RedirectToPage("Index");
+                return RedirectToPage("Index");
         }
     }
 }
