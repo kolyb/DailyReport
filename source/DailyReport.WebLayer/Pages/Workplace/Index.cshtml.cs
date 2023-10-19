@@ -1,6 +1,5 @@
 using DailyReport.BusinessLogic.Interfaces;
 using DailyReport.BusinessLogic.ModelsDTO;
-using DailyReport.WebLayer.Models;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace DailyReport.WebLayer.Pages.Workplace
@@ -23,9 +22,6 @@ namespace DailyReport.WebLayer.Pages.Workplace
 
         public void OnGet()
         {
-            //PersonDTOs = _servicePersonDTO.GetAll();
-
-            //WorkplaceDTOs = _serviceWorkplaceDTO.GetAll();
 
             WorkplaceDTOs = _serviceWorkplaceDTO.GetAll().OrderBy(i => i.AdressCity).
                 Where(i => i.UserIdentityEmail == User.Identity?.Name);

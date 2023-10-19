@@ -13,8 +13,6 @@
             <th>Description</th>
             <th>*</th>
             <th>Edit</th>
-            @* <th>*</th>
-            <th>Delete</th> *@
         </tr>
     </thead>
     <tbody>
@@ -28,12 +26,6 @@
                         <a asp-page="EditPosition" asp-route-id="@item.Id">Edit</a>
                     </form>
                 </td>
-                @* <td>*</td>
-                <td>
-                    <form method="post">
-                        <a asp-page="DeletePosition" asp-route-id="@item.Id">Delete</a>
-                    </form>
-                </td> *@
             </tr>
         }
     </tbody>

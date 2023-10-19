@@ -9,18 +9,12 @@ namespace DailyReport.WebLayer.Pages.Workplace
     {
         private readonly IService<PersonDTO> _servicePersonDTO;
         private readonly IService<WorkplaceDTO> _serviceWorkplaceDTO;
-        private readonly IService<PositionDTO> _servicePositionDTO;
-        private readonly IService<ProfessionDTO> _serviceProfessionDTO;
 
         public DeleteWorkplaceModel(IService<PersonDTO> servicePersonDTO,
-            IService<WorkplaceDTO> serviceWorkplaceDTO,
-            IService<PositionDTO> servicePositionDTO,
-            IService<ProfessionDTO> serviceProfessionDTO)
+            IService<WorkplaceDTO> serviceWorkplaceDTO)
         {
             _servicePersonDTO = servicePersonDTO;
             _serviceWorkplaceDTO = serviceWorkplaceDTO;
-            _servicePositionDTO = servicePositionDTO;
-            _serviceProfessionDTO = serviceProfessionDTO;
         }
 
         [BindProperty]
@@ -30,7 +24,7 @@ namespace DailyReport.WebLayer.Pages.Workplace
         public string? Description { get; set; }
 
         [BindProperty]
-        public int? WithoutWorkplaceId { get; set; }
+        public int WithoutWorkplaceId { get; set; }
 
         [BindProperty]
         public string? AdressCity { get; set; }
@@ -88,7 +82,7 @@ namespace DailyReport.WebLayer.Pages.Workplace
                         personNewDTO.MiddleName = i.MiddleName;
                         personNewDTO.LastName = i.LastName;
                         personNewDTO.UserIdentityEmail = User.Identity?.Name;
-                        personNewDTO.WorkplaceId = (int)WithoutWorkplaceId;
+                        personNewDTO.WorkplaceId = WithoutWorkplaceId;
                         personNewDTO.PositionId = i.PositionId;
                         personNewDTO.ProfessionId = i.ProfessionId;
                         personNewDTO.PhoneNumber = i.PhoneNumber;

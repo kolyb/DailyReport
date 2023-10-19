@@ -92,7 +92,9 @@ namespace DailyReport.WebLayer.Pages.Person
             PositionDTOs = _servicePositionDTO.GetAll().ToList();
             ProfessionDTOs = _serviceProfessionDTO.GetAll().ToList();
 
-            Options = _serviceWorkplaceDTO.GetAll().Select(a =>
+            Options = _serviceWorkplaceDTO.GetAll().Where(i => i.UserIdentityEmail == User.Identity
+            ?.Name).
+            Select(a =>
                                   new SelectListItem
                                   {
                                       Value = a.Id.ToString(),
