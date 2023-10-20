@@ -1,0 +1,5 @@
+﻿ALTER TABLE dbo.[Reports]
+ADD CONSTRAINT FK_ReportDay_Report FOREIGN KEY (ReportDayId)     
+    REFERENCES dbo.ReportDays (Id)
+ON UPDATE CASCADE
+ON DELETE CASCADE

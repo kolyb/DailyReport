@@ -10,15 +10,15 @@ namespace DailyReport.WebLayer.Pages.Report
     {
         private readonly IService<PersonDTO> _servicePersonDTO;
         private readonly IService<ReportDTO> _serviceReportDTO;
-        private readonly IService<PlanDayDTO> _servicePlanDateDTO;
+        private readonly IService<ReportDayDTO> _serviceReportDayDTO;
 
         public CreateReportModel(IService<PersonDTO> servicePersonDTO,
             IService<ReportDTO> serviceReportDTO,
-            IService<PlanDayDTO> servicePlanDateDTO)
+            IService<ReportDayDTO> serviceReportDayDTO)
         {
             _servicePersonDTO = servicePersonDTO;
             _serviceReportDTO = serviceReportDTO;
-            _servicePlanDateDTO = servicePlanDateDTO;
+            _serviceReportDayDTO = serviceReportDayDTO;
         }
 
         [BindProperty]
@@ -28,13 +28,13 @@ namespace DailyReport.WebLayer.Pages.Report
         public int PersonId { get; set; }
 
         [BindProperty]
-        public int PlanDateId { get; set; }
+        public int ReportDayId { get; set; }
 
         [BindProperty]
         public TimeSpan Time { get; set; }
 
         [BindProperty]
-        public DateTime PlanDay { get; set; }
+        public DateTime RecordDay { get; set; }
 
         [BindProperty]
         public IEnumerable<PersonDTO>? PersonDTOs { get; set; }
@@ -44,9 +44,9 @@ namespace DailyReport.WebLayer.Pages.Report
 
         public async Task OnGet(int id)
         {
-            PlanDayDTO planDateDTO = await _servicePlanDateDTO.GetByIdAsync(id);
-            Id = planDateDTO.Id;
-            PlanDay = planDateDTO.PlanDay;
+            ReportDayDTO reportDayDTO = await _serviceReportDayDTO.GetByIdAsync(id);
+            Id = reportDayDTO.Id;
+            RecordDay = reportDayDTO.RecordDay;
 
 
             Persons = _servicePersonDTO.GetAll().Select(a =>
@@ -64,7 +64,7 @@ namespace DailyReport.WebLayer.Pages.Report
                 ReportDTO reportDTO = new ReportDTO();
                 reportDTO.Time = Time;
                 reportDTO.PersonId = PersonId;
-                reportDTO.PlanDateId = Id;
+                reportDTO.ReportDayId = Id;
 
                 await _serviceReportDTO.CreateAsync(reportDTO);
 

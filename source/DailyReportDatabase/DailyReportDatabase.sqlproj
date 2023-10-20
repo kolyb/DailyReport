@@ -81,6 +81,8 @@
     <Build Include="Tables\Reports.sql" />
     <Build Include="ForeignKeys\FK_AspNetUser_Person.sql" />
     <Build Include="Tables\ReportDays.sql" />
+    <Build Include="ForeignKeys\FK_Person_Report.sql" />
+    <Build Include="ForeignKeys\FK_ReportDay_Report.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Post\UserIdentity.PostDeployment.sql" />

@@ -6,7 +6,7 @@
 
         public int PersonId { get; set; }
 
-        public int PlanDateId { get; set; }
+        public int ReportDayId { get; set; }
 
         public TimeSpan Time { get; set; }
     }

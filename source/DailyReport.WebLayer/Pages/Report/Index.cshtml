@@ -1,46 +1,46 @@
 ﻿@page
-@model DailyReport.WebLayer.Pages.Plan.IndexModel
+@model DailyReport.WebLayer.Pages.Report.IndexModel
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 <div>
-    <a asp-area="" asp-page="/PlanDay/CreatePlanDay">Create plan day</a>
+    <a asp-area="" asp-page="/ReportDay/CreateReportDay">Create report day</a>
 </div>
 
 
 <table class="table">
     <thead>
         <tr>
-            <th>Plan day</th>
+            <th>Report day</th>
             <th>*</th>
-            <th>Delete Plan day</th>
+            <th>Delete report day</th>
             <th>*</th>
-            <th>Create plan</th>
+            <th>Create report</th>
             <th>*</th>
-            <th>Details plan</th>
+            <th>Details report</th>
             <th>*</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.PlanDayDTOs)
+        @foreach (var item in Model.ReportDayDTOs)
         {
             <tr>
-                <td>@item.Day</td>
+                <td>@item.RecordDay</td>
                 <td>*</td>
                 <td>
                     <form method="post">
-                        <a asp-page="/PlanDay/DeletePlanDay" asp-route-id="@item.Id">Delete plan day</a>
+                        <a asp-page="/ReportDay/DeleteReportDay" asp-route-id="@item.Id">Delete report day</a>
                     </form>
                 </td>
                 <td>*</td>
                 <td>
                     <form method="post">
-                        <a asp-page="CreatePlan" asp-route-id="@item.Id">Create plan</a>
+                        <a asp-page="CreateReport" asp-route-id="@item.Id">Create report</a>
                     </form>
                 </td>
                 <td>*</td>
                 <td>
                     <form method="post">
-                        <a asp-page="DetailsPlan" asp-route-id="@item.Id">Details plan</a>
+                        <a asp-page="DetailsReport" asp-route-id="@item.Id">Details report</a>
                     </form>
                 </td>
                 <td>*</td>

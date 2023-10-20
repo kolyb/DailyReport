@@ -10,35 +10,35 @@ namespace DailyReport.WebLayer.Pages.Report
     {
         private readonly IService<PersonDTO> _servicePersonDTO;
         private readonly IService<ReportDTO> _serviceReportDTO;
-        private readonly IService<PlanDayDTO> _servicePlanDateDTO;
+        private readonly IService<ReportDayDTO> _serviceReportDayDTO;
 
         public DetailsReportModel(IService<PersonDTO> servicePersonDTO,
             IService<ReportDTO> serviceReportDTO,
-            IService<PlanDayDTO> servicePlanDateDTO)
+            IService<ReportDayDTO> serviceReportDayDTO)
         {
             _servicePersonDTO = servicePersonDTO;
             _serviceReportDTO = serviceReportDTO;
-            _servicePlanDateDTO = servicePlanDateDTO;
+            _serviceReportDayDTO = serviceReportDayDTO;
         }
 
         public List<PersonDTO>? PersonDTOs { get; set; }
 
         public List<ReportDTO>? ReportDTOs { get; set; }
 
-        public List<PlanDayDTO>? PlanDateDTOs { get; set; }
+        public List<ReportDayDTO>? ReportDayDTOs { get; set; }
 
         public List<PlanLastnameViewModel>? ReportLastnames { get; set; }
 
         public void OnGetAsync(int id)
         {
-            ReportDTOs = _serviceReportDTO.GetAll().ToList().Where(i => i.PlanDateId == id).ToList();
+            ReportDTOs = _serviceReportDTO.GetAll().ToList().Where(i => i.ReportDayId == id).ToList();
             PersonDTOs = _servicePersonDTO.GetAll().ToList();
             ReportLastnames = (from p in PersonDTOs
                              join rp in ReportDTOs
                              on p.Id equals rp.PersonId
                              orderby rp.Time
-                             where rp.PlanDateId == id
-                             select new PlanLastnameViewModel { DateTime = rp.Time, Lastname = p.LastName }).ToList();
+                             where rp.ReportDayId == id
+                             select new PlanLastnameViewModel {Id = rp.Id, DateTime = rp.Time, Lastname = p.LastName }).ToList();
         }
 
         public ActionResult OnPostCancel()

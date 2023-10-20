@@ -12,7 +12,7 @@ namespace DailyReport.BusinessLogic.Mappers
                 Id = item.Id,
                 //UserIdentityId = item.UserIdentityId,
                 PersonId = item.PersonId,
-                PlanDateId = item.PlanDateId,
+                ReportDayId = item.ReportDayId,
                 Time = item.Time,
             };
             return report;
@@ -25,7 +25,7 @@ namespace DailyReport.BusinessLogic.Mappers
                 Id = item.Id,
                 //UserIdentityId = item.UserIdentityId,
                 PersonId = item.PersonId,
-                PlanDateId = item.PlanDateId,
+                ReportDayId = item.ReportDayId,
                 Time = item.Time,
             };
             return reportDTO;
@@ -41,7 +41,7 @@ namespace DailyReport.BusinessLogic.Mappers
                     Id = item.Id,
                     //UserIdentityId = item.UserIdentityId,
                     PersonId = item.PersonId,
-                    PlanDateId = item.PlanDateId,
+                    ReportDayId = item.ReportDayId,
                     Time = item.Time,
                 });
             }

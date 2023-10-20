@@ -1,0 +1,22 @@
+﻿@page
+@model DailyReport.WebLayer.Pages.Report.DeleteReportModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<form method="post">
+    <div asp-validation-summary="All"></div>
+    <div>
+        <label>Report Time</label>
+        <div>
+            <input asp-for="Time" />
+            <span asp-validation-for="Time"></span>
+        </div>
+    </div>
+    <div>
+        <input type="submit" value="Delete" class="btn btn-info btn-md" />
+        &nbsp;
+        <input asp-page-handler="Cancel" type="submit" value="Refuse" class="btn btn-info btn-md" />
+    </div>
+</form>
+<div>
+    <a asp-controller="Home" asp-action="Index">Back</a>
+</div>
