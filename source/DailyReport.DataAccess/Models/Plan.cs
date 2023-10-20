@@ -8,7 +8,7 @@
 
         public int PersonId { get; set; }
 
-        public int PlanDateId { get; set; }
+        public int PlanDayId { get; set; }
 
         public TimeSpan PlanTime { get; set; }
     }

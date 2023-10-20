@@ -10,11 +10,11 @@ namespace DailyReport.WebLayer.Pages.Report
     {
         private readonly IService<PersonDTO> _servicePersonDTO;
         private readonly IService<ReportDTO> _serviceReportDTO;
-        private readonly IService<PlanDateDTO> _servicePlanDateDTO;
+        private readonly IService<PlanDayDTO> _servicePlanDateDTO;
 
         public CreateReportModel(IService<PersonDTO> servicePersonDTO,
             IService<ReportDTO> serviceReportDTO,
-            IService<PlanDateDTO> servicePlanDateDTO)
+            IService<PlanDayDTO> servicePlanDateDTO)
         {
             _servicePersonDTO = servicePersonDTO;
             _serviceReportDTO = serviceReportDTO;
@@ -44,7 +44,7 @@ namespace DailyReport.WebLayer.Pages.Report
 
         public async Task OnGet(int id)
         {
-            PlanDateDTO planDateDTO = await _servicePlanDateDTO.GetByIdAsync(id);
+            PlanDayDTO planDateDTO = await _servicePlanDateDTO.GetByIdAsync(id);
             Id = planDateDTO.Id;
             PlanDay = planDateDTO.PlanDay;
 

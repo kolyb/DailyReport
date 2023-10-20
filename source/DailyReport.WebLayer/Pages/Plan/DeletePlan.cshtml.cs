@@ -18,7 +18,7 @@ namespace DailyReport.WebLayer.Pages.Plan
         public int Id { get; set; }
 
         [BindProperty]
-        public int PlanDateId { get; set; }
+        public int PlanDayId { get; set; }
 
         [BindProperty]
         public int PersonId { get; set; }
@@ -31,7 +31,7 @@ namespace DailyReport.WebLayer.Pages.Plan
         {
             PlanDTO planDTO = await _servicePlanDTO.GetByIdAsync(id);           
             PersonId = planDTO.PersonId;
-            PlanDateId = planDTO.PlanDateId;
+            PlanDayId = planDTO.PlanDayId;
             PlanTime = planDTO.PlanTime;
         }
 
@@ -44,7 +44,7 @@ namespace DailyReport.WebLayer.Pages.Plan
                 {
                     planDTO.Id = Id;
                     planDTO.PersonId = PersonId;
-                    planDTO.PlanDateId = PlanDateId;
+                    planDTO.PlanDayId = PlanDayId;
                     planDTO.PlanTime = PlanTime;
 
                     await _servicePlanDTO.DeleteAsync(planDTO);

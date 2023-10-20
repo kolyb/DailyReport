@@ -1,5 +1,5 @@
 ﻿@page
-@model DailyReport.WebLayer.Pages.PlanDate.DeletePlanDateModel
+@model DailyReport.WebLayer.Pages.ReportDay.DeleteReportDayModel
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 <form method="post">
@@ -12,10 +12,10 @@
         </div>
     </div>
     <div>
-        <label>Plan Day</label>
+        <label>Report Day</label>
         <div>
-            <input asp-for="PlanDay" />
-            <span asp-validation-for="PlanDay"></span>
+            <input asp-for="RecordDay" />
+            <span asp-validation-for="RecordDay"></span>
         </div>
     </div>
     <div>

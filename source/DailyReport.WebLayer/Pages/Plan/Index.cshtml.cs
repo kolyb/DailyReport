@@ -7,22 +7,22 @@ namespace DailyReport.WebLayer.Pages.Plan
     public class IndexModel : PageModel
     {
         private readonly IService<PlanDTO> _servicePlanDTO;
-        private readonly IService<PlanDateDTO> _servicePlanDateDTO;
+        private readonly IService<PlanDayDTO> _servicePlanDayDTO;
 
         public IndexModel(IService<PlanDTO> servicePlanDTO,
-            IService<PlanDateDTO> servicePlanDateDTO)
+            IService<PlanDayDTO> servicePlanDayDTO)
         {
             _servicePlanDTO = servicePlanDTO;
-            _servicePlanDateDTO = servicePlanDateDTO;
+            _servicePlanDayDTO = servicePlanDayDTO;
         }
 
         public IEnumerable<PlanDTO>? PlanDTOs { get; set; }
 
-        public IEnumerable<PlanDateDTO>? PlanDateDTOs { get; set; }
+        public IEnumerable<PlanDayDTO>? PlanDayDTOs { get; set; }
 
         public void OnGet()
         {
-            PlanDateDTOs = _servicePlanDateDTO.GetAll();
+            PlanDayDTOs = _servicePlanDayDTO.GetAll();
         }
     }
 }

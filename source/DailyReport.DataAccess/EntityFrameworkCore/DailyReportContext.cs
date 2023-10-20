@@ -22,7 +22,9 @@ namespace DailyReport.DataAccess.EntityFrameworkCore
 
         public DbSet<Report> Reports { get; set; }
 
-        public DbSet<PlanDate> PlanDates { get; set; }
+        public DbSet<PlanDay> PlanDays { get; set; }
+
+        public DbSet<ReportDay> ReportDays { get; set; }
 
         public DbSet<Position> Positions { get; set; }
 

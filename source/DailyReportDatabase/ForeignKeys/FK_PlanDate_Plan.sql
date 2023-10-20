@@ -1,5 +1,0 @@
-﻿ALTER TABLE dbo.[Plans]
-ADD CONSTRAINT FK_PlanDate_Plan FOREIGN KEY (PlanDateId)     
-    REFERENCES dbo.PlanDates (Id)
-ON UPDATE CASCADE
-ON DELETE CASCADE

@@ -3,19 +3,19 @@ using DailyReport.BusinessLogic.ModelsDTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace DailyReport.WebLayer.Pages.PlanDate
+namespace DailyReport.WebLayer.Pages.ReportDay
 {
-    public class CreatePlanDateModel : PageModel
+    public class CreateReportDayModel : PageModel
     {
-        private readonly IService<PlanDateDTO> _servicePlanDateDTO;
+        private readonly IService<ReportDayDTO> _serviceReportDayDTO;
 
-        public CreatePlanDateModel(IService<PlanDateDTO> servicePlanDateDTO)
+        public CreateReportDayModel(IService<ReportDayDTO> serviceReportDayDTO)
         {
-            _servicePlanDateDTO = servicePlanDateDTO;
+            _serviceReportDayDTO = serviceReportDayDTO;
         }
 
         [BindProperty]
-        public DateTime PlanDay { get; set; }
+        public DateTime RecordDay { get; set; }
 
         public void OnGet()
         {
@@ -26,10 +26,10 @@ namespace DailyReport.WebLayer.Pages.PlanDate
         {
             if (ModelState.IsValid)
             {
-                PlanDateDTO planDateDTO = new PlanDateDTO();
-                planDateDTO.PlanDay = PlanDay;
+                ReportDayDTO reportDayDTO = new ReportDayDTO();
+                reportDayDTO.RecordDay = RecordDay;
 
-                await _servicePlanDateDTO.CreateAsync(planDateDTO);
+                await _serviceReportDayDTO.CreateAsync(reportDayDTO);
 
             }
             return RedirectToPage("Index");

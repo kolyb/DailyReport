@@ -5,28 +5,28 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DailyReport.DataAccess.Repositories
 {
-    public class PlanDateRepository : IRepository<PlanDate>
+    public class ReportDayRepository : IRepository<ReportDay>
     {
         private readonly DailyReportContext _db;
 
         private IDisposable? _disposableResource = new MemoryStream();
         private IAsyncDisposable? _asyncDisposableResource = new MemoryStream();
 
-        public PlanDateRepository(DailyReportContext db)
+        public ReportDayRepository(DailyReportContext db)
         {
             _db = db;
             _db.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
         }
 
-        public async Task CreateAsync(PlanDate item)
+        public async Task CreateAsync(ReportDay item)
         {
-            _db.PlanDates.Add(item);
+            _db.ReportDays.Add(item);
             await _db.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(PlanDate item)
+        public async Task DeleteAsync(ReportDay item)
         {
-            _db.PlanDates.Remove(item);
+            _db.ReportDays.Remove(item);
             await _db.SaveChangesAsync();
         }
 
@@ -76,14 +76,14 @@ namespace DailyReport.DataAccess.Repositories
             _disposableResource = null;
         }
 
-        public IEnumerable<PlanDate> GetAll()
+        public IEnumerable<ReportDay> GetAll()
         {
-            return _db.PlanDates.AsQueryable();
+            return _db.ReportDays.AsQueryable();
         }
 
-        public async Task<PlanDate> GetByIdAsync(int? id)
+        public async Task<ReportDay> GetByIdAsync(int? id)
         {
-            var result = await _db.PlanDates.FindAsync(id);
+            var result = await _db.ReportDays.FindAsync(id);
             if (result == null)
             {
                 //
@@ -92,7 +92,7 @@ namespace DailyReport.DataAccess.Repositories
             return result;
         }
 
-        public async Task UpdateAsync(PlanDate item)
+        public async Task UpdateAsync(ReportDay item)
         {
             _db.Entry(item).State = EntityState.Modified;
             await _db.SaveChangesAsync();

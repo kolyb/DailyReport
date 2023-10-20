@@ -10,11 +10,11 @@ namespace DailyReport.WebLayer.Pages.Report
     {
         private readonly IService<PersonDTO> _servicePersonDTO;
         private readonly IService<ReportDTO> _serviceReportDTO;
-        private readonly IService<PlanDateDTO> _servicePlanDateDTO;
+        private readonly IService<PlanDayDTO> _servicePlanDateDTO;
 
         public DetailsReportModel(IService<PersonDTO> servicePersonDTO,
             IService<ReportDTO> serviceReportDTO,
-            IService<PlanDateDTO> servicePlanDateDTO)
+            IService<PlanDayDTO> servicePlanDateDTO)
         {
             _servicePersonDTO = servicePersonDTO;
             _serviceReportDTO = serviceReportDTO;
@@ -25,7 +25,7 @@ namespace DailyReport.WebLayer.Pages.Report
 
         public List<ReportDTO>? ReportDTOs { get; set; }
 
-        public List<PlanDateDTO>? PlanDateDTOs { get; set; }
+        public List<PlanDayDTO>? PlanDateDTOs { get; set; }
 
         public List<PlanLastnameViewModel>? ReportLastnames { get; set; }
 

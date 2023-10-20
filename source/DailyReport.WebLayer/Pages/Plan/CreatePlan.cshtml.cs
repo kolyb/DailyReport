@@ -10,15 +10,15 @@ namespace DailyReport.WebLayer.Pages.Plan
     {
         private readonly IService<PersonDTO> _servicePersonDTO;
         private readonly IService<PlanDTO> _servicePlanDTO;
-        private readonly IService<PlanDateDTO> _servicePlanDateDTO;
+        private readonly IService<PlanDayDTO> _servicePlanDayDTO;
 
         public CreatePlanModel(IService<PersonDTO> servicePersonDTO,
             IService<PlanDTO> servicePlanDTO,
-            IService<PlanDateDTO> servicePlanDateDTO)
+            IService<PlanDayDTO> servicePlanDayDTO)
         {
             _servicePersonDTO = servicePersonDTO;
             _servicePlanDTO = servicePlanDTO;
-            _servicePlanDateDTO = servicePlanDateDTO;
+            _servicePlanDayDTO = servicePlanDayDTO;
         }
 
         [BindProperty]
@@ -28,13 +28,13 @@ namespace DailyReport.WebLayer.Pages.Plan
         public int PersonId { get; set; }
 
         [BindProperty]
-        public int PlanDateId { get; set; }
+        public int PlanDayId { get; set; }
 
         [BindProperty]
         public TimeSpan PlanTime { get; set; }
 
         [BindProperty]
-        public DateTime PlanDay { get; set; }
+        public DateTime Day { get; set; }
 
         [BindProperty]
         public IEnumerable<PersonDTO>? PersonDTOs { get; set; }
@@ -44,9 +44,9 @@ namespace DailyReport.WebLayer.Pages.Plan
 
         public async Task OnGet(int id)
         {
-            PlanDateDTO planDateDTO = await _servicePlanDateDTO.GetByIdAsync(id);
-            Id = planDateDTO.Id;
-            PlanDay = planDateDTO.PlanDay;
+            PlanDayDTO planDayDTO = await _servicePlanDayDTO.GetByIdAsync(id);
+            Id = planDayDTO.Id;
+            Day = planDayDTO.Day;
 
 
             Persons = _servicePersonDTO.GetAll().Select(a =>
@@ -64,7 +64,7 @@ namespace DailyReport.WebLayer.Pages.Plan
                 PlanDTO planDTO = new PlanDTO();
                 planDTO.PlanTime = PlanTime;
                 planDTO.PersonId = PersonId;
-                planDTO.PlanDateId = Id;
+                planDTO.PlanDayId = Id;
 
                 await _servicePlanDTO.CreateAsync(planDTO);
 

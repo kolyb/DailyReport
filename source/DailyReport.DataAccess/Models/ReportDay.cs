@@ -1,9 +1,9 @@
 ﻿namespace DailyReport.DataAccess.Models
 {
-    public class PlanDate
+    public class ReportDay
     {
         public int Id { get; set; }
 
-        public DateTime PlanDay { get; set; }
+        public DateTime RecordDay { get; set; }
     }
 }
