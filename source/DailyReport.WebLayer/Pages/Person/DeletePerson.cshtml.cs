@@ -8,10 +8,13 @@ namespace DailyReport.WebLayer.Pages.Person
     public class DeletePersonModel : PageModel
     {
         private readonly IService<PersonDTO> _servicePersonDTO;
+        private readonly IService<PlanDTO> _servicePlanDTO;
 
-        public DeletePersonModel(IService<PersonDTO> servicePersonDTO)
+        public DeletePersonModel(IService<PersonDTO> servicePersonDTO, 
+            IService<PlanDTO> servicePlanDTO)
         {
             _servicePersonDTO = servicePersonDTO;
+            _servicePlanDTO = servicePlanDTO;
         }
 
         [BindProperty]
@@ -41,6 +44,9 @@ namespace DailyReport.WebLayer.Pages.Person
         [BindProperty]
         public string? PhoneNumber { get; set; }
 
+        [BindProperty]
+        public IEnumerable<PlanDTO>? PlanDTOS { get; set; }
+
         public async Task OnGet(int id)
         {
             PageId = id;
@@ -57,7 +63,8 @@ namespace DailyReport.WebLayer.Pages.Person
         }
 
         public async Task<IActionResult> OnPost()
-        {
+        {   
+            PlanDTOS = _servicePlanDTO.GetAll().Where(i =>i.PersonId == PageId);
             if (ModelState.IsValid)
             {
                 PersonDTO personDTO = await _servicePersonDTO.GetByIdAsync(PageId);

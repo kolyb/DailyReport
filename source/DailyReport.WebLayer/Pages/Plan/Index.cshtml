@@ -12,9 +12,9 @@
         <tr>
             <th>Day</th>
             <th>*</th>
-            <th>Create plan</th>
+            <th>Delete Day</th>
             <th>*</th>
-            <th>Delete</th>
+            <th>Create plan</th>
             <th>*</th>
             <th>Details plan</th>
             <th>*</th>
@@ -28,6 +28,12 @@
         {
             <tr>
                 <td>@item.PlanDay</td>
+                <td>*</td>
+                <td>
+                    <form method="post">
+                        <a asp-page="/PlanDate/DeletePlanDate" asp-route-id="@item.Id">Delete Day</a>
+                    </form>
+                </td>
                 <td>*</td>
                 <td>
                     <form method="post">
