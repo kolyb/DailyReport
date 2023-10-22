@@ -130,7 +130,7 @@ namespace DailyReport.WebLayer.Pages.Person
                 personDTO.FirstName = FirstName;
                 personDTO.MiddleName = MiddleName;
                 personDTO.LastName = LastName;
-                personDTO.UserIdentityEmail = User.Identity?.Name;
+                //personDTO.UserIdentityEmail = User.Identity?.Name;
                 personDTO.WorkplaceId = WorkplaceId;
                 personDTO.PositionId = PositionId;
                 personDTO.ProfessionId = ProfessionId;

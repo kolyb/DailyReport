@@ -81,7 +81,7 @@ namespace DailyReport.WebLayer.Pages.Workplace
                         personNewDTO.FirstName = i.FirstName;
                         personNewDTO.MiddleName = i.MiddleName;
                         personNewDTO.LastName = i.LastName;
-                        personNewDTO.UserIdentityEmail = User.Identity?.Name;
+                        //personNewDTO.UserIdentityEmail = User.Identity?.Name;
                         personNewDTO.WorkplaceId = WithoutWorkplaceId;
                         personNewDTO.PositionId = i.PositionId;
                         personNewDTO.ProfessionId = i.ProfessionId;

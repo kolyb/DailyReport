@@ -12,7 +12,7 @@
 
         public string? LastName { get; set; }
 
-        public string? UserIdentityEmail { get; set; }
+        //public string? UserIdentityEmail { get; set; }
 
         public int WorkplaceId { get; set; }
 

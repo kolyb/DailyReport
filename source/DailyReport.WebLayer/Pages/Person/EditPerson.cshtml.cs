@@ -145,7 +145,7 @@ namespace DailyReport.WebLayer.Pages.Person
                     personDTO.FirstName = FirstName;
                     personDTO.MiddleName = MiddleName;
                     personDTO.LastName = LastName;
-                    personDTO.UserIdentityEmail = Username;
+                    //personDTO.UserIdentityEmail = Username;
                     personDTO.WorkplaceId = WorkplaceId;
                     personDTO.PositionId = PositionId;
                     personDTO.ProfessionId = ProfessionId;
@@ -159,7 +159,7 @@ namespace DailyReport.WebLayer.Pages.Person
                     personNewDTO.FirstName = FirstName;
                     personNewDTO.MiddleName = MiddleName;
                     personNewDTO.LastName = LastName;
-                    personNewDTO.UserIdentityEmail = UserName;
+                    //personNewDTO.UserIdentityEmail = UserName;
                     personNewDTO.WorkplaceId = WorkplaceId;
                     personNewDTO.PositionId = PositionId;
                     personNewDTO.ProfessionId = ProfessionId;
