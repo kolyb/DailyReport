@@ -7,5 +7,7 @@
         public TimeSpan DateTime { get; set; }
 
         public string? Lastname{ get; set; }
+
+        public string? DescriptionWorkplace{ get; set; }
     }
 }

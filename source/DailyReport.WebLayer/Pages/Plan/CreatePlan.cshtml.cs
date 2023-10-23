@@ -11,14 +11,17 @@ namespace DailyReport.WebLayer.Pages.Plan
         private readonly IService<PersonDTO> _servicePersonDTO;
         private readonly IService<PlanDTO> _servicePlanDTO;
         private readonly IService<PlanDayDTO> _servicePlanDayDTO;
+        private readonly IService<WorkplaceDTO> _serviceWorkplaceDTO;
 
         public CreatePlanModel(IService<PersonDTO> servicePersonDTO,
             IService<PlanDTO> servicePlanDTO,
-            IService<PlanDayDTO> servicePlanDayDTO)
+            IService<PlanDayDTO> servicePlanDayDTO,
+            IService<WorkplaceDTO> serviceWorkplaceDTO)
         {
             _servicePersonDTO = servicePersonDTO;
             _servicePlanDTO = servicePlanDTO;
             _servicePlanDayDTO = servicePlanDayDTO;
+            _serviceWorkplaceDTO = serviceWorkplaceDTO;
         }
 
         [BindProperty]
@@ -38,6 +41,9 @@ namespace DailyReport.WebLayer.Pages.Plan
 
         [BindProperty]
         public IEnumerable<PersonDTO>? PersonDTOs { get; set; }
+        
+        [BindProperty]
+        public IEnumerable<WorkplaceDTO>? WorkplaceDTOs { get; set; }
 
         [BindProperty]
         public List<SelectListItem>? Persons { get; set; }
@@ -48,13 +54,17 @@ namespace DailyReport.WebLayer.Pages.Plan
             Id = planDayDTO.Id;
             Day = planDayDTO.Day;
 
-
-            Persons = _servicePersonDTO.GetAll().Select(a =>
-                                  new SelectListItem
-                                  {
-                                      Value = a.Id.ToString(),
-                                      Text = a.LastName
-                                  }).ToList();
+            PersonDTOs = _servicePersonDTO.GetAll();
+            WorkplaceDTOs = _serviceWorkplaceDTO.GetAll().Where(i => i.UserIdentityEmail
+            == User?.Identity?.Name);
+            Persons = (from ps in PersonDTOs
+                       join wp in WorkplaceDTOs
+                       on ps.WorkplaceId equals wp.Id
+                       select new SelectListItem
+                              {
+                                 Value = ps.Id.ToString(),
+                                 Text = ps.LastName
+                              }).ToList();
         }
 
         public async Task<IActionResult> OnPost()
