@@ -30,8 +30,6 @@ namespace DailyReport.DataAccess.EntityFrameworkCore
 
         public DbSet<Profession> Professions { get; set; }
 
-        public DbSet<Event> Events { get; set; }
-
         public DbSet<Workplace> Workplaces { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

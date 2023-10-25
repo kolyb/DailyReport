@@ -3,6 +3,7 @@ using DailyReport.BusinessLogic.Mappers;
 using DailyReport.BusinessLogic.ModelsDTO;
 using DailyReport.DataAccess.Interfaces;
 using DailyReport.DataAccess.Models;
+using static DailyReport.BusinessLogic.Exceptions.ExceptionValidator;
 
 namespace DailyReport.BusinessLogic.Servicies
 {
@@ -19,8 +20,7 @@ namespace DailyReport.BusinessLogic.Servicies
         {
             if (item == null)
             {
-                //
-                throw new ArgumentNullException("item");
+                throw new ValidationException("Can not create a person");
             }
             Person person = PersonMapper.FromDTO(item);
             await _personRepository.CreateAsync(person);
@@ -28,6 +28,15 @@ namespace DailyReport.BusinessLogic.Servicies
 
         public async Task DeleteAsync(PersonDTO item)
         {
+            if (item == null)
+            {
+                throw new ValidationException("Can not delete a person");
+            }
+            if (item.Id <= 0)
+            {
+                throw new ValidationException("Id should be greater than 0");
+            }
+
             Person person = PersonMapper.FromDTO(item);
             await _personRepository.DeleteAsync(person);
         }

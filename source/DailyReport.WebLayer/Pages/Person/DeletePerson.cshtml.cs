@@ -2,6 +2,7 @@ using DailyReport.BusinessLogic.Interfaces;
 using DailyReport.BusinessLogic.ModelsDTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using static DailyReport.BusinessLogic.Exceptions.ExceptionValidator;
 
 namespace DailyReport.WebLayer.Pages.Person
 {
@@ -63,27 +64,33 @@ namespace DailyReport.WebLayer.Pages.Person
         }
 
         public async Task<IActionResult> OnPost()
-        {   
-            PlanDTOS = _servicePlanDTO.GetAll().Where(i =>i.PersonId == PageId);
-            if (ModelState.IsValid)
+        {
+            try
             {
-                PersonDTO personDTO = await _servicePersonDTO.GetByIdAsync(PageId);
-                if (personDTO != null)
+                PlanDTOS = _servicePlanDTO.GetAll().Where(i => i.PersonId == PageId);
+                if (ModelState.IsValid)
                 {
-                    personDTO.Id = Id;
-                    personDTO.Birthday = Birthday;
-                    personDTO.FirstName = FirstName;
-                    personDTO.MiddleName = MiddleName;
-                    personDTO.LastName = LastName;
-                    personDTO.PositionId = PositionId;
-                    personDTO.ProfessionId = ProfessionId;
-                    personDTO.PhoneNumber = PhoneNumber;
+                    PersonDTO personDTO = await _servicePersonDTO.GetByIdAsync(PageId);
+                    if (personDTO != null)
+                    {
+                        personDTO.Id = Id;
+                        personDTO.Birthday = Birthday;
+                        personDTO.FirstName = FirstName;
+                        personDTO.MiddleName = MiddleName;
+                        personDTO.LastName = LastName;
+                        personDTO.PositionId = PositionId;
+                        personDTO.ProfessionId = ProfessionId;
+                        personDTO.PhoneNumber = PhoneNumber;
 
 
-                    await _servicePersonDTO.DeleteAsync(personDTO);
+                        await _servicePersonDTO.DeleteAsync(personDTO);
+                    }
                 }
+            } 
+            catch (ValidationException ex) 
+            {
+                return Content(ex.Message);
             }
-
             return RedirectToPage("Index");
         }
 

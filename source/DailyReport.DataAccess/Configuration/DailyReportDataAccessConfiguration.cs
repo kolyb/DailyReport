@@ -17,7 +17,6 @@ namespace DailyReport.DataAccess.Configuration
                 .AddEntityFrameworkStores<DailyReportContext>();
             services.AddScoped<IRepository<Person>, PersonRepository>();         
             services.AddScoped<IRepository<Workplace>, WorkplaceRepository>();
-            services.AddScoped<IRepository<Event>, EventRepository>();
             services.AddScoped<IRepository<Position>, PositionRepository>();
             services.AddScoped<IRepository<Profession>, ProfessionRepository>();
             services.AddScoped<IRepository<Plan>, PlanRepository>();
