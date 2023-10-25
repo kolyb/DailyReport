@@ -3,6 +3,7 @@ using DailyReport.BusinessLogic.ModelsDTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using static DailyReport.BusinessLogic.Exceptions.ExceptionValidator;
 
 namespace DailyReport.WebLayer.Pages.Person
 {
@@ -135,25 +136,27 @@ namespace DailyReport.WebLayer.Pages.Person
 
         public async Task<IActionResult> OnPost()
         {
-            if (ModelState.IsValid)
+            try
             {
-                PersonDTO personDTO = await _servicePersonDTO.GetByIdAsync(PageId);
-                if (personDTO != null)
+                if (ModelState.IsValid)
                 {
-                    personDTO.Id = Id;
-                    personDTO.Birthday = Birthday;
-                    personDTO.FirstName = FirstName;
-                    personDTO.MiddleName = MiddleName;
-                    personDTO.LastName = LastName;
-                    //personDTO.UserIdentityEmail = Username;
-                    personDTO.WorkplaceId = WorkplaceId;
-                    personDTO.PositionId = PositionId;
-                    personDTO.ProfessionId = ProfessionId;
-                    personDTO.PhoneNumber = PhoneNumber;
+                    PersonDTO personDTO = await _servicePersonDTO.GetByIdAsync(PageId);
+                    if (personDTO != null)
+                    {
+                        personDTO.Id = Id;
+                        personDTO.Birthday = Birthday;
+                        personDTO.FirstName = FirstName;
+                        personDTO.MiddleName = MiddleName;
+                        personDTO.LastName = LastName;
+                        //personDTO.UserIdentityEmail = Username;
+                        personDTO.WorkplaceId = WorkplaceId;
+                        personDTO.PositionId = PositionId;
+                        personDTO.ProfessionId = ProfessionId;
+                        personDTO.PhoneNumber = PhoneNumber;
 
-                    await _servicePersonDTO.DeleteAsync(personDTO);
+                        await _servicePersonDTO.DeleteAsync(personDTO);
 
-                }
+                    }
                     PersonDTO personNewDTO = new PersonDTO();
                     personNewDTO.Birthday = Birthday;
                     personNewDTO.FirstName = FirstName;
@@ -166,8 +169,13 @@ namespace DailyReport.WebLayer.Pages.Person
                     personNewDTO.PhoneNumber = PhoneNumber;
 
                     await _servicePersonDTO.CreateAsync(personNewDTO);
-               
 
+
+                }
+            }
+            catch (ValidationException ex)
+            {
+                return Content(ex.Message);
             }
 
             return RedirectToPage("Index");

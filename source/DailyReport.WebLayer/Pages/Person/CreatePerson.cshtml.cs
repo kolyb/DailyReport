@@ -3,6 +3,7 @@ using DailyReport.BusinessLogic.ModelsDTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using static DailyReport.BusinessLogic.Exceptions.ExceptionValidator;
 
 namespace DailyReport.WebLayer.Pages.Person
 {
@@ -109,36 +110,34 @@ namespace DailyReport.WebLayer.Pages.Person
 
         public async Task<IActionResult> OnPost()
         {
-
-            //WorkplaceDTOs = _serviceWorkplaceDTO.GetAll().Where(i => i.Id == WorkplaceId);
-            //PositionDTOs = _servicePositionDTO.GetAll().Where(i => i.Id == PositionId);
-
-            //foreach (var item in WorkLocationDTOs)
-            //{
-            //    WorkLocation = item.Description;
-            //}
-
-            if (WorkplaceId == 0)
+            try
             {
-                return RedirectToPage("Index");
+                if (WorkplaceId == 0)
+                {
+                    return RedirectToPage("Index");
+                }
+
+                if (ModelState.IsValid)
+                {
+                    PersonDTO personDTO = new PersonDTO();
+                    personDTO.Birthday = Birthday;
+                    personDTO.FirstName = FirstName;
+                    personDTO.MiddleName = MiddleName;
+                    personDTO.LastName = LastName;
+                    //personDTO.UserIdentityEmail = User.Identity?.Name;
+                    personDTO.WorkplaceId = WorkplaceId;
+                    personDTO.PositionId = PositionId;
+                    personDTO.ProfessionId = ProfessionId;
+                    personDTO.PhoneNumber = PhoneNumber;
+
+
+                    await _servicePersonDTO.CreateAsync(personDTO);
+
+                }
             }
-
-            if (ModelState.IsValid)
+            catch (ValidationException ex)
             {
-                PersonDTO personDTO = new PersonDTO();
-                personDTO.Birthday = Birthday;
-                personDTO.FirstName = FirstName;
-                personDTO.MiddleName = MiddleName;
-                personDTO.LastName = LastName;
-                //personDTO.UserIdentityEmail = User.Identity?.Name;
-                personDTO.WorkplaceId = WorkplaceId;
-                personDTO.PositionId = PositionId;
-                personDTO.ProfessionId = ProfessionId;
-                personDTO.PhoneNumber = PhoneNumber;
-
-
-                await _servicePersonDTO.CreateAsync(personDTO);
-
+                return Content(ex.Message);
             }
             return RedirectToPage("Index");
         }

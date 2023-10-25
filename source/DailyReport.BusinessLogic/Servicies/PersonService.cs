@@ -22,6 +22,10 @@ namespace DailyReport.BusinessLogic.Servicies
             {
                 throw new ValidationException("Can not create a person");
             }
+            if (item.Id <= 0)
+            {
+                throw new ValidationException("It is impossible");
+            }
             Person person = PersonMapper.FromDTO(item);
             await _personRepository.CreateAsync(person);
         }
@@ -34,9 +38,8 @@ namespace DailyReport.BusinessLogic.Servicies
             }
             if (item.Id <= 0)
             {
-                throw new ValidationException("Id should be greater than 0");
+                throw new ValidationException("It is impossible");
             }
-
             Person person = PersonMapper.FromDTO(item);
             await _personRepository.DeleteAsync(person);
         }
@@ -54,7 +57,11 @@ namespace DailyReport.BusinessLogic.Servicies
         }
 
         public async Task<PersonDTO> GetByIdAsync(int? id)
-        {   
+        {
+            if (id <= 0)
+            {
+                throw new ValidationException("It is impossible");
+            }
             var person = await _personRepository.GetByIdAsync(id);
             PersonDTO personDTO = PersonMapper.ToDTO(person);
             return personDTO;
@@ -62,6 +69,14 @@ namespace DailyReport.BusinessLogic.Servicies
 
         public async Task UpdateAsync(PersonDTO item)
         {
+            if (item == null)
+            {
+                throw new ValidationException("Can not update a person");
+            }
+            if (item.Id <= 0)
+            {
+                throw new ValidationException("It is impossible");
+            }
             Person person = PersonMapper.FromDTO(item);
             await _personRepository.UpdateAsync(person);
         }

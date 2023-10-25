@@ -3,6 +3,7 @@ using DailyReport.BusinessLogic.Mappers;
 using DailyReport.BusinessLogic.ModelsDTO;
 using DailyReport.DataAccess.Interfaces;
 using DailyReport.DataAccess.Models;
+using static DailyReport.BusinessLogic.Exceptions.ExceptionValidator;
 
 namespace DailyReport.BusinessLogic.Servicies
 {
@@ -19,8 +20,11 @@ namespace DailyReport.BusinessLogic.Servicies
         {
             if (item == null)
             {
-                //
-                throw new ArgumentNullException("item");
+                throw new ValidationException("Can not create a position");
+            }
+            if (item.Id <= 0)
+            {
+                throw new ValidationException("It is impossible");
             }
             Position position = PositionMapper.FromDTO(item);
             await _positionRepository.CreateAsync(position);
@@ -28,6 +32,14 @@ namespace DailyReport.BusinessLogic.Servicies
 
         public async Task DeleteAsync(PositionDTO item)
         {
+            if (item == null)
+            {
+                throw new ValidationException("Can not delete a position");
+            }
+            if (item.Id <= 0)
+            {
+                throw new ValidationException("It is impossible");
+            }
             Position position = PositionMapper.FromDTO(item);
             await _positionRepository.DeleteAsync(position);
         }
@@ -46,6 +58,10 @@ namespace DailyReport.BusinessLogic.Servicies
 
         public async Task<PositionDTO> GetByIdAsync(int? id)
         {
+            if (id <= 0)
+            {
+                throw new ValidationException("It is impossible");
+            }
             var position = await _positionRepository.GetByIdAsync(id);
             PositionDTO positionDTO = PositionMapper.ToDTO(position);
             return positionDTO;
@@ -53,6 +69,14 @@ namespace DailyReport.BusinessLogic.Servicies
 
         public async Task UpdateAsync(PositionDTO item)
         {
+            if (item == null)
+            {
+                throw new ValidationException("Can not update a position");
+            }
+            if (item.Id <= 0)
+            {
+                throw new ValidationException("It is impossible");
+            }
             Position position = PositionMapper.FromDTO(item);
             await _positionRepository.UpdateAsync(position);
         }
