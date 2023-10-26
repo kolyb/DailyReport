@@ -1,8 +1,11 @@
-﻿using DailyReport.BusinessLogic.Interfaces;
+﻿using DailyReport.BusinessLogic.ExceptionValidators;
+using DailyReport.BusinessLogic.Interfaces;
 using DailyReport.BusinessLogic.Mappers;
 using DailyReport.BusinessLogic.ModelsDTO;
 using DailyReport.DataAccess.Interfaces;
 using DailyReport.DataAccess.Models;
+using DailyReport.DataAccess.Repositories;
+using static DailyReport.BusinessLogic.Exceptions.ExceptionValidator;
 
 namespace DailyReport.BusinessLogic.Servicies
 {
@@ -19,8 +22,11 @@ namespace DailyReport.BusinessLogic.Servicies
         {
             if (item == null)
             {
-                //
-                throw new ArgumentNullException("item");
+                throw new ValidationException("Can not create a workplace");
+            }
+            if (WorkplaceValidator.WorkplaceExists(item.Description, _workplaceRepository))
+            {
+                throw new ValidationException($"Workplcace '{item.Description}' already exists");
             }
             Workplace workplace = WorkplaceMapper.FromDTO(item);
             await _workplaceRepository.CreateAsync(workplace);

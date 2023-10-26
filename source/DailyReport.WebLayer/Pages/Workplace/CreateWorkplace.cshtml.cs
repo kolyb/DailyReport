@@ -2,6 +2,7 @@ using DailyReport.BusinessLogic.Interfaces;
 using DailyReport.BusinessLogic.ModelsDTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using static DailyReport.BusinessLogic.Exceptions.ExceptionValidator;
 
 namespace DailyReport.WebLayer.Pages.Workplace
 {
@@ -33,18 +34,24 @@ namespace DailyReport.WebLayer.Pages.Workplace
 
         public async Task<IActionResult> OnPost() 
         {
-
-            if (ModelState.IsValid)
+            try
             {
-                WorkplaceDTO workplaceDTO = new WorkplaceDTO();
-                workplaceDTO.UserIdentityEmail = User.Identity?.Name;
-                workplaceDTO.Description = Description;
-                workplaceDTO.AdressCity = AdressCity;
-                workplaceDTO.AdressStreet = AdressStreet;
-                workplaceDTO.AdressHouse = AdressHouse;
+                if (ModelState.IsValid)
+                {
+                    WorkplaceDTO workplaceDTO = new WorkplaceDTO();
+                    workplaceDTO.UserIdentityEmail = User.Identity?.Name;
+                    workplaceDTO.Description = Description;
+                    workplaceDTO.AdressCity = AdressCity;
+                    workplaceDTO.AdressStreet = AdressStreet;
+                    workplaceDTO.AdressHouse = AdressHouse;
 
-                await _serviceWorkplaceDTO.CreateAsync(workplaceDTO);
+                    await _serviceWorkplaceDTO.CreateAsync(workplaceDTO);
 
+                }
+            }
+            catch (ValidationException ex) 
+            {
+                return Content(ex.Message);
             }
             return RedirectToPage("Index");
         }
