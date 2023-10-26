@@ -1,8 +1,10 @@
-﻿using DailyReport.BusinessLogic.Interfaces;
+﻿using DailyReport.BusinessLogic.ExceptionValidators;
+using DailyReport.BusinessLogic.Interfaces;
 using DailyReport.BusinessLogic.Mappers;
 using DailyReport.BusinessLogic.ModelsDTO;
 using DailyReport.DataAccess.Interfaces;
 using DailyReport.DataAccess.Models;
+using DailyReport.DataAccess.Repositories;
 using static DailyReport.BusinessLogic.Exceptions.ExceptionValidator;
 
 namespace DailyReport.BusinessLogic.Servicies
@@ -22,9 +24,9 @@ namespace DailyReport.BusinessLogic.Servicies
             {
                 throw new ValidationException("Can not create a position");
             }
-            if (item.Id <= 0)
+            if (PositionValidator.PositionExists(item.Description, _positionRepository))
             {
-                throw new ValidationException("It is impossible");
+                throw new ValidationException($"Position '{item.Description}' already exists");
             }
             Position position = PositionMapper.FromDTO(item);
             await _positionRepository.CreateAsync(position);

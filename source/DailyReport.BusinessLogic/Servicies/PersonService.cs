@@ -1,4 +1,5 @@
-﻿using DailyReport.BusinessLogic.Interfaces;
+﻿using DailyReport.BusinessLogic.ExceptionValidators;
+using DailyReport.BusinessLogic.Interfaces;
 using DailyReport.BusinessLogic.Mappers;
 using DailyReport.BusinessLogic.ModelsDTO;
 using DailyReport.DataAccess.Interfaces;
@@ -22,9 +23,9 @@ namespace DailyReport.BusinessLogic.Servicies
             {
                 throw new ValidationException("Can not create a person");
             }
-            if (item.Id <= 0)
+            if (PersonValidator.PersonExists(item.FirstName, item.MiddleName, item.LastName, _personRepository))
             {
-                throw new ValidationException("It is impossible");
+                throw new ValidationException($"Person '{item.LastName} {item.MiddleName} {item.FirstName}' already exists");
             }
             Person person = PersonMapper.FromDTO(item);
             await _personRepository.CreateAsync(person);

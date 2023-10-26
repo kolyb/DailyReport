@@ -2,6 +2,7 @@ using DailyReport.BusinessLogic.Interfaces;
 using DailyReport.BusinessLogic.ModelsDTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using static DailyReport.BusinessLogic.Exceptions.ExceptionValidator;
 
 namespace DailyReport.WebLayer.Pages.Position
 {
@@ -24,14 +25,20 @@ namespace DailyReport.WebLayer.Pages.Position
 
         public async Task<IActionResult> OnPost()
         {
-
-            if (ModelState.IsValid)
+            try
             {
-                PositionDTO positionDTO = new PositionDTO();
-                positionDTO.Description = Description;
+                if (ModelState.IsValid)
+                {
+                    PositionDTO positionDTO = new PositionDTO();
+                    positionDTO.Description = Description;
 
-                await _servicePositionDTO.CreateAsync(positionDTO);
+                    await _servicePositionDTO.CreateAsync(positionDTO);
 
+                }
+            }
+            catch (ValidationException ex) 
+            {
+                return Content (ex.Message);
             }
             return RedirectToPage("Index");
         }

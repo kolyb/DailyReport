@@ -1,8 +1,10 @@
-﻿using DailyReport.BusinessLogic.Interfaces;
+﻿using DailyReport.BusinessLogic.ExceptionValidators;
+using DailyReport.BusinessLogic.Interfaces;
 using DailyReport.BusinessLogic.Mappers;
 using DailyReport.BusinessLogic.ModelsDTO;
 using DailyReport.DataAccess.Interfaces;
 using DailyReport.DataAccess.Models;
+using static DailyReport.BusinessLogic.Exceptions.ExceptionValidator;
 
 namespace DailyReport.BusinessLogic.Servicies
 {
@@ -19,8 +21,11 @@ namespace DailyReport.BusinessLogic.Servicies
         {
             if (item == null)
             {
-                //
-                throw new ArgumentNullException("item");
+                throw new ValidationException("Can not create a profession");
+            }
+            if (ProfessionValidator.ProfessionExists(item.Description, _professionRepository))
+            {
+                throw new ValidationException($"Profession '{item.Description}' already exists");
             }
             Profession profession = ProfessionMapper.FromDTO(item);
             await _professionRepository.CreateAsync(profession);
@@ -28,6 +33,14 @@ namespace DailyReport.BusinessLogic.Servicies
 
         public async Task DeleteAsync(ProfessionDTO item)
         {
+            if (item == null)
+            {
+                throw new ValidationException("Can not delete a profession");
+            }
+            if (item.Id <= 0)
+            {
+                throw new ValidationException("It is impossible");
+            }
             Profession profession = ProfessionMapper.FromDTO(item);
             await _professionRepository.DeleteAsync(profession);
         }
@@ -46,6 +59,10 @@ namespace DailyReport.BusinessLogic.Servicies
 
         public async Task<ProfessionDTO> GetByIdAsync(int? id)
         {
+            if (id <= 0)
+            {
+                throw new ValidationException("It is impossible");
+            }
             var profession = await _professionRepository.GetByIdAsync(id);
             ProfessionDTO professionDTO = ProfessionMapper.ToDTO(profession);
             return professionDTO;
@@ -53,6 +70,14 @@ namespace DailyReport.BusinessLogic.Servicies
 
         public async Task UpdateAsync(ProfessionDTO item)
         {
+            if (item == null)
+            {
+                throw new ValidationException("Can not update a profession");
+            }
+            if (item.Id <= 0)
+            {
+                throw new ValidationException("It is impossible");
+            }
             Profession profession = ProfessionMapper.FromDTO(item);
             await _professionRepository.UpdateAsync(profession);
         }

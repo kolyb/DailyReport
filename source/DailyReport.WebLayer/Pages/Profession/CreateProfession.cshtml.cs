@@ -2,6 +2,7 @@ using DailyReport.BusinessLogic.Interfaces;
 using DailyReport.BusinessLogic.ModelsDTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using static DailyReport.BusinessLogic.Exceptions.ExceptionValidator;
 
 namespace DailyReport.WebLayer.Pages.Profession
 {
@@ -24,14 +25,20 @@ namespace DailyReport.WebLayer.Pages.Profession
 
         public async Task<IActionResult> OnPost()
         {
-
-            if (ModelState.IsValid)
+            try
             {
-                ProfessionDTO professionDTO = new ProfessionDTO();
-                professionDTO.Description = Description;
+                if (ModelState.IsValid)
+                {
+                    ProfessionDTO professionDTO = new ProfessionDTO();
+                    professionDTO.Description = Description;
 
-                await _serviceProfessionDTO.CreateAsync(professionDTO);
+                    await _serviceProfessionDTO.CreateAsync(professionDTO);
 
+                }
+            }
+            catch (ValidationException ex)
+            {
+                return Content(ex.Message);
             }
             return RedirectToPage("Index");
         }
