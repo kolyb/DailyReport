@@ -1,17 +1,19 @@
-﻿using DailyReport.BusinessLogic.ModelsDTO.IdentityDTO;
-using DailyReport.DataAccess.Interfaces;
+﻿using DailyReport.DataAccess.Interfaces;
 using DailyReport.DataAccess.Models;
-using DailyReport.DataAccess.Models.Identity;
-using Microsoft.AspNetCore.Identity;
 
 namespace DailyReport.BusinessLogic.ExceptionValidators
 {
     public static class WorkplaceValidator
     {
-        public static bool WorkplaceExists(string? description, 
-            IRepository<Workplace> repositoryWorkplace, UserManager<UserIdentity> user)
+        public static bool WorkplaceExists(string? description,
+            string? adresscity,
+            string? adressstreet,
+            string? adresshouse,
+            IRepository<Workplace> repositoryWorkplace)
         {
-            return repositoryWorkplace.GetAll().Any(x => x.Description == description);
+            return repositoryWorkplace.GetAll().Any(x => x.Description == description 
+            && x.AdressCity == adresscity && x.AdressStreet == adressstreet 
+            && x.AdressHouse == adresshouse);
         }
     }
 }

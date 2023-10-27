@@ -24,9 +24,12 @@ namespace DailyReport.BusinessLogic.Servicies
             {
                 throw new ValidationException("Can not create a workplace");
             }
-            if (WorkplaceValidator.WorkplaceExists(item.Description, _workplaceRepository))
+            if (WorkplaceValidator.WorkplaceExists(item.Description,
+                item.AdressCity, item.AdressStreet,
+                item.AdressHouse,_workplaceRepository))
             {
-                throw new ValidationException($"Workplcace '{item.Description}' already exists");
+                throw new ValidationException($"Workplcace '{item.Description} {item.AdressCity}, {item.AdressStreet}, " +
+                    $"{item.AdressHouse}' already exists");
             }
             Workplace workplace = WorkplaceMapper.FromDTO(item);
             await _workplaceRepository.CreateAsync(workplace);
