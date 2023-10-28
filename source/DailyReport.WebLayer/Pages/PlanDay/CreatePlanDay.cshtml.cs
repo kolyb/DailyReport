@@ -2,7 +2,7 @@ using DailyReport.BusinessLogic.Interfaces;
 using DailyReport.BusinessLogic.ModelsDTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.ComponentModel.DataAnnotations;
+using static DailyReport.BusinessLogic.Exceptions.ExceptionValidator;
 
 namespace DailyReport.WebLayer.Pages.PlanDay
 {
@@ -15,7 +15,7 @@ namespace DailyReport.WebLayer.Pages.PlanDay
             _servicePlanDayDTO = servicePlanDayDTO;
         }
 
-        [BindProperty, DisplayFormat(DataFormatString ="{0:dd MMM yyyy}")]
+        [BindProperty]
         public DateTime Day { get; set; }
 
         public void OnGet()
@@ -25,14 +25,21 @@ namespace DailyReport.WebLayer.Pages.PlanDay
 
         public async Task<IActionResult> OnPost()
         {
-            if (ModelState.IsValid)
+            try
             {
-                PlanDayDTO planDayDTO = new PlanDayDTO();
-                planDayDTO.Day = Day;
-                planDayDTO.UserName = User?.Identity?.Name;
+                if (ModelState.IsValid)
+                {
+                    PlanDayDTO planDayDTO = new PlanDayDTO();
+                    planDayDTO.Day = Day;
+                    planDayDTO.UserName = User?.Identity?.Name;
 
-                await _servicePlanDayDTO.CreateAsync(planDayDTO);
+                    await _servicePlanDayDTO.CreateAsync(planDayDTO);
 
+                }
+            }
+            catch (ValidationException ex)
+            {
+                return Content(ex.Message);
             }
             return RedirectToPage("Index");
         }

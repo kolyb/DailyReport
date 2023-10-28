@@ -1,8 +1,11 @@
-﻿using DailyReport.BusinessLogic.Interfaces;
+﻿using DailyReport.BusinessLogic.ExceptionValidators;
+using DailyReport.BusinessLogic.Interfaces;
 using DailyReport.BusinessLogic.Mappers;
 using DailyReport.BusinessLogic.ModelsDTO;
 using DailyReport.DataAccess.Interfaces;
 using DailyReport.DataAccess.Models;
+using DailyReport.DataAccess.Repositories;
+using static DailyReport.BusinessLogic.Exceptions.ExceptionValidator;
 
 namespace DailyReport.BusinessLogic.Servicies
 {
@@ -19,8 +22,11 @@ namespace DailyReport.BusinessLogic.Servicies
         {
             if (item == null)
             {
-                //
-                throw new ArgumentNullException("item");
+                throw new ValidationException("Can not create a person");
+            }
+            if (PlanDayValidator.PlanDayExists(item.Day, item.UserName, _planDayRepository))
+            {
+                throw new ValidationException($"Day '{item.Day}' already exists");
             }
             PlanDay planDay = PlanDayMapper.FromDTO(item);
             await _planDayRepository.CreateAsync(planDay);
@@ -28,6 +34,14 @@ namespace DailyReport.BusinessLogic.Servicies
 
         public async Task DeleteAsync(PlanDayDTO item)
         {
+            if (item == null)
+            {
+                throw new ValidationException("Can not delete a day");
+            }
+            if (item.Id <= 0)
+            {
+                throw new ValidationException("It is impossible");
+            }
             PlanDay planDay = PlanDayMapper.FromDTO(item);
             await _planDayRepository.DeleteAsync(planDay);
         }
@@ -46,6 +60,10 @@ namespace DailyReport.BusinessLogic.Servicies
 
         public async Task<PlanDayDTO> GetByIdAsync(int? id)
         {
+            if (id <= 0)
+            {
+                throw new ValidationException("It is impossible");
+            }
             var planDay = await _planDayRepository.GetByIdAsync(id);
             PlanDayDTO planDayDTO = PlanDayMapper.ToDTO(planDay);
             return planDayDTO;
@@ -53,6 +71,14 @@ namespace DailyReport.BusinessLogic.Servicies
 
         public async Task UpdateAsync(PlanDayDTO item)
         {
+            if (item == null)
+            {
+                throw new ValidationException("Can not update a day");
+            }
+            if (item.Id <= 0)
+            {
+                throw new ValidationException("It is impossible");
+            }
             PlanDay planDay = PlanDayMapper.FromDTO(item);
             await _planDayRepository.UpdateAsync(planDay);
         }
