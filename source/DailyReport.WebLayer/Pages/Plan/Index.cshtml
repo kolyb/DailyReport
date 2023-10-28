@@ -24,7 +24,7 @@
         @foreach (var item in Model.PlanDayDTOs)
         {
             <tr>
-                <td>@item.Day</td>
+                <td>@item.Day.ToLongDateString()</td>
                 <td>*</td>
                 <td>
                     <form method="post">

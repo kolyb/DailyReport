@@ -20,12 +20,17 @@ namespace DailyReport.WebLayer.Pages.PlanDay
         [BindProperty]
         public DateTime Day { get; set; }
 
+        [BindProperty]
+        public string? UserName { get; set; }
+
 
         public async Task OnGet(int id)
         {
             PlanDayDTO planDayDTO = await _servicePlanDayDTO.GetByIdAsync(id);
             Id = planDayDTO.Id;
             Day = planDayDTO.Day;
+            UserName = planDayDTO.UserName;
+
         }
 
         public async Task<IActionResult> OnPost()
@@ -37,6 +42,7 @@ namespace DailyReport.WebLayer.Pages.PlanDay
                 {
                     planDayDTO.Id = Id;
                     planDayDTO.Day = Day;
+                    planDayDTO.UserName = UserName;
 
                     await _servicePlanDayDTO.DeleteAsync(planDayDTO);
                 }

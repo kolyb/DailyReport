@@ -30,6 +30,7 @@ namespace DailyReport.WebLayer.Pages.Plan
 
         public IEnumerable<PlanDayDTO>? PlanDayNewDTOs { get; set; }
 
+        //[BindProperty, DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
         public IEnumerable<PlanDayDTO>? PlanDayDTOs { get; set; }
 
         public void OnGet()
@@ -47,7 +48,8 @@ namespace DailyReport.WebLayer.Pages.Plan
             //                  join pld in PlanDayDTOs
             //                  on pl.PlanDayId equals pld.Id
             //                  select pld).ToList();
-            PlanDayDTOs = _servicePlanDayDTO.GetAll();
+            PlanDayDTOs = _servicePlanDayDTO.GetAll().Where(i =>i.UserName 
+            == User.Identity?.Name);
         }
     }
 }
