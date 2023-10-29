@@ -4,5 +4,7 @@
 	--[UserIdentityId] int NOT NULL,
 	[PersonId] int NULL,
 	[PlanDayId] int NOT NULL, 
-	[PlanTime] time NULL,	
+	[StartTime] datetime NULL,
+	[FinishTime] datetime NULL,
+	[IntervalTime] time NULL,
 )

@@ -49,7 +49,7 @@ namespace DailyReport.WebLayer.Pages.Report
                                orderby rp.Time
                                where rp.ReportDayId == id
                                select new PlanLastnameViewModel {Id = rp.Id, 
-                                 DateTime = rp.Time, 
+                                 //StartTime = rp.Time, 
                                  Lastname = p.LastName,
                                  DescriptionWorkplace = wp.Description}).ToList();
         }

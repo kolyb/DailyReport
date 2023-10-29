@@ -7,7 +7,11 @@
         <tr>
             <th>Lastname</th>
             <th>*</th>
-            <th>Time</th>
+            <th>Start Time</th>
+            <th>*</th>
+            <th>Finish Time</th>
+            <th>*</th>
+            <th>Interval Time</th>
             <th>*</th>
             <th>Workplace</th>
             <th>*</th>
@@ -21,7 +25,11 @@
             <tr>
                 <td>@item.Lastname</td>
                 <td>*</td>
-                <td>@item.DateTime</td>
+                <td>@item.StartTime.ToLongTimeString()</td>
+                <td>*</td>
+                <td>@item.FinishTime.ToLongTimeString()</td>
+                <td>*</td>
+                <td>@item.IntervalTime</td>
                 <td>*</td>
                 <td>@item.DescriptionWorkplace</td>
                 <td>*</td>

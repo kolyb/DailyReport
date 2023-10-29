@@ -34,7 +34,13 @@ namespace DailyReport.WebLayer.Pages.Plan
         public int PlanDayId { get; set; }
 
         [BindProperty]
-        public TimeSpan PlanTime { get; set; }
+        public DateTime StartTime { get; set; }
+
+        [BindProperty]
+        public DateTime FinishTime { get; set; }
+
+        [BindProperty]
+        public TimeSpan IntervalTime { get; set; }
 
         [BindProperty]
         public DateTime Day { get; set; }
@@ -72,7 +78,9 @@ namespace DailyReport.WebLayer.Pages.Plan
             if (ModelState.IsValid)
             {
                 PlanDTO planDTO = new PlanDTO();
-                planDTO.PlanTime = PlanTime;
+                planDTO.StartTime = StartTime;
+                planDTO.FinishTime = FinishTime;
+                planDTO.IntervalTime = FinishTime - StartTime;
                 planDTO.PersonId = PersonId;
                 planDTO.PlanDayId = Id;
 

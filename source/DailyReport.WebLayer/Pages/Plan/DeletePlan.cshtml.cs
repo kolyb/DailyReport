@@ -24,7 +24,13 @@ namespace DailyReport.WebLayer.Pages.Plan
         public int PersonId { get; set; }
 
         [BindProperty]
-        public TimeSpan PlanTime { get; set; }
+        public DateTime StartTime { get; set; }
+
+        [BindProperty]
+        public DateTime FinishTime { get; set; }
+
+        [BindProperty]
+        public TimeSpan IntervalTime { get; set; }
 
 
         public async Task OnGet(int id)
@@ -32,7 +38,9 @@ namespace DailyReport.WebLayer.Pages.Plan
             PlanDTO planDTO = await _servicePlanDTO.GetByIdAsync(id);           
             PersonId = planDTO.PersonId;
             PlanDayId = planDTO.PlanDayId;
-            PlanTime = planDTO.PlanTime;
+            StartTime = planDTO.StartTime;
+            FinishTime = planDTO.FinishTime;
+            IntervalTime = planDTO.IntervalTime;
         }
 
         public async Task<IActionResult> OnPost()
@@ -45,7 +53,9 @@ namespace DailyReport.WebLayer.Pages.Plan
                     planDTO.Id = Id;
                     planDTO.PersonId = PersonId;
                     planDTO.PlanDayId = PlanDayId;
-                    planDTO.PlanTime = PlanTime;
+                    planDTO.StartTime = StartTime;
+                    planDTO.FinishTime = FinishTime;
+                    IntervalTime = planDTO.IntervalTime;
 
                     await _servicePlanDTO.DeleteAsync(planDTO);
                 }

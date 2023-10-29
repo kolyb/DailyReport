@@ -45,10 +45,12 @@ namespace DailyReport.WebLayer.Pages.Plan
                              on p.Id equals pl.PersonId
                              join wp in WorkplaceDTOs
                              on p.WorkplaceId equals wp.Id
-                             orderby pl.PlanTime
+                             orderby pl.StartTime
                              where pl.PlanDayId == id
                              select new PlanLastnameViewModel{ Id = pl.Id, 
-                                 DateTime = pl.PlanTime,
+                                 StartTime = pl.StartTime,
+                                 FinishTime = pl.FinishTime,
+                                 IntervalTime = pl.IntervalTime,
                                  Lastname = p.LastName, 
                                  DescriptionWorkplace = wp.Description,
                              }).ToList();

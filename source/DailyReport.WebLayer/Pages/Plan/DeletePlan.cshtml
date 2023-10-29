@@ -5,10 +5,24 @@
 <form method="post">
     <div asp-validation-summary="All"></div>
     <div>
-        <label>PlanTime</label>
+        <label>Start Time</label>
         <div>
-            <input asp-for="PlanTime" />
-            <span asp-validation-for="PlanTime"></span>
+            <input asp-for="StartTime" />
+            <span asp-validation-for="StartTime"></span>
+        </div>
+    </div>
+    <div>
+        <label>Finish Time</label>
+        <div>
+            <input asp-for="FinishTime" />
+            <span asp-validation-for="FinishTime"></span>
+        </div>
+    </div>
+    <div>
+        <label>Interval Time</label>
+        <div>
+            <input asp-for="IntervalTime" />
+            <span asp-validation-for="IntervalTime"></span>
         </div>
     </div>
     <div>

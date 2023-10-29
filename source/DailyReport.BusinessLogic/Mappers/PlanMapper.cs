@@ -13,7 +13,9 @@ namespace DailyReport.BusinessLogic.Mappers
                 //UserIdentityId = item.UserIdentityId,
                 PersonId = item.PersonId,
                 PlanDayId = item.PlanDayId,
-                PlanTime = item.PlanTime,
+                StartTime = item.StartTime,
+                FinishTime = item.FinishTime,
+                IntervalTime = item.IntervalTime,
             };
             return plan;
         }
@@ -26,7 +28,9 @@ namespace DailyReport.BusinessLogic.Mappers
                 //UserIdentityId = item.UserIdentityId,
                 PersonId = item.PersonId,
                 PlanDayId = item.PlanDayId,
-                PlanTime = item.PlanTime,
+                StartTime = item.StartTime,
+                FinishTime = item.FinishTime,
+                IntervalTime = item.IntervalTime,
             };
             return planDTO;
         }
@@ -42,7 +46,9 @@ namespace DailyReport.BusinessLogic.Mappers
                     //UserIdentityId = item.UserIdentityId,
                     PersonId = item.PersonId,
                     PlanDayId = item.PlanDayId,
-                    PlanTime = item.PlanTime,
+                    StartTime = item.StartTime,
+                    FinishTime = item.FinishTime,
+                    IntervalTime = item.IntervalTime,
                 });
             }
             return planDTOs;
