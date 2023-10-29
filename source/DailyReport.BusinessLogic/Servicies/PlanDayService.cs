@@ -4,7 +4,6 @@ using DailyReport.BusinessLogic.Mappers;
 using DailyReport.BusinessLogic.ModelsDTO;
 using DailyReport.DataAccess.Interfaces;
 using DailyReport.DataAccess.Models;
-using DailyReport.DataAccess.Repositories;
 using static DailyReport.BusinessLogic.Exceptions.ExceptionValidator;
 
 namespace DailyReport.BusinessLogic.Servicies
@@ -22,7 +21,7 @@ namespace DailyReport.BusinessLogic.Servicies
         {
             if (item == null)
             {
-                throw new ValidationException("Can not create a person");
+                throw new ValidationException("Can not create a plan day");
             }
             if (PlanDayValidator.PlanDayExists(item.Day, item.UserName, _planDayRepository))
             {

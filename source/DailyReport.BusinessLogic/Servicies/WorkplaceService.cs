@@ -25,8 +25,11 @@ namespace DailyReport.BusinessLogic.Servicies
                 throw new ValidationException("Can not create a workplace");
             }
             if (WorkplaceValidator.WorkplaceExists(item.Description,
-                item.AdressCity, item.AdressStreet,
-                item.AdressHouse,_workplaceRepository))
+                item.AdressCity, 
+                item.AdressStreet,
+                item.AdressHouse,
+                item.UserIdentityEmail,
+                _workplaceRepository))
             {
                 throw new ValidationException($"Workplcace '{item.Description} {item.AdressCity}, {item.AdressStreet}, " +
                     $"{item.AdressHouse}' already exists");

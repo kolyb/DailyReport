@@ -9,11 +9,13 @@ namespace DailyReport.BusinessLogic.ExceptionValidators
             string? adresscity,
             string? adressstreet,
             string? adresshouse,
+            string? useridentityemail,
             IRepository<Workplace> repositoryWorkplace)
         {
             return repositoryWorkplace.GetAll().Any(x => x.Description == description 
             && x.AdressCity == adresscity && x.AdressStreet == adressstreet 
-            && x.AdressHouse == adresshouse);
+            && x.AdressHouse == adresshouse && x.UserIdentityEmail == useridentityemail);
         }
     }
 }
+ 

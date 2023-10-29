@@ -5,9 +5,8 @@
 <form method="post">
     <div asp-validation-summary="All"></div>
     <div>
-        <label>ID</label>
         <div>
-            <input asp-for="Id" />
+            <input asp-for="Id" hidden/>
             <span asp-validation-for="Id"></span>
         </div>
     </div>
@@ -16,6 +15,12 @@
         <div>
             <input asp-for="RecordDay" />
             <span asp-validation-for="RecordDay"></span>
+        </div>
+    </div>
+    <div>
+        <div>
+            <input asp-for="UserName" hidden/>
+            <span asp-validation-for="UserName"></span>
         </div>
     </div>
     <div>

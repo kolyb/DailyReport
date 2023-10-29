@@ -11,6 +11,7 @@ namespace DailyReport.BusinessLogic.Mappers
             {
                 Id = item.Id,
                 RecordDay = item.RecordDay,
+                UserName = item.UserName,
 
             };
             return reportDay;
@@ -22,6 +23,7 @@ namespace DailyReport.BusinessLogic.Mappers
             {
                 Id = item.Id,
                 RecordDay = item.RecordDay,
+                UserName = item.UserName,
 
             };
             return reportDayDTO;
@@ -36,6 +38,7 @@ namespace DailyReport.BusinessLogic.Mappers
                 {
                     Id = item.Id,
                     RecordDay = item.RecordDay,
+                    UserName = item.UserName,
                 });
             }
             return reportDayDTOs;

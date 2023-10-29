@@ -41,6 +41,7 @@ namespace DailyReport.WebLayer.Pages.PlanDay
             {
                 return Content(ex.Message);
             }
+
             return RedirectToPage("Index");
         }
 

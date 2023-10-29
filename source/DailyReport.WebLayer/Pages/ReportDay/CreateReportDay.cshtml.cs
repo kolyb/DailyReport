@@ -2,6 +2,7 @@ using DailyReport.BusinessLogic.Interfaces;
 using DailyReport.BusinessLogic.ModelsDTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using static DailyReport.BusinessLogic.Exceptions.ExceptionValidator;
 
 namespace DailyReport.WebLayer.Pages.ReportDay
 {
@@ -24,14 +25,24 @@ namespace DailyReport.WebLayer.Pages.ReportDay
 
         public async Task<IActionResult> OnPost()
         {
-            if (ModelState.IsValid)
+            try
             {
-                ReportDayDTO reportDayDTO = new ReportDayDTO();
-                reportDayDTO.RecordDay = RecordDay;
+                if (ModelState.IsValid)
+                {
+                    ReportDayDTO reportDayDTO = new ReportDayDTO();
+                    reportDayDTO.RecordDay = RecordDay;
+                    reportDayDTO.UserName = User?.Identity?.Name;
 
-                await _serviceReportDayDTO.CreateAsync(reportDayDTO);
 
+                    await _serviceReportDayDTO.CreateAsync(reportDayDTO);
+
+                }
             }
+            catch (ValidationException ex)
+            {
+                return Content(ex.Message);
+            }
+
             return RedirectToPage("Index");
         }
 
