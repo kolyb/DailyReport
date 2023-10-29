@@ -66,13 +66,22 @@ namespace DailyReport.WebLayer.Pages.Workplace
                 if (workplaceDTO != null)
                 {
                     workplaceDTO.Id = Id;
+                    workplaceDTO.UserIdentityEmail = User?.Identity?.Name;
                     workplaceDTO.Description = Description;
                     workplaceDTO.AdressCity = AdressCity;
                     workplaceDTO.AdressStreet = AdressStreet;
                     workplaceDTO.AdressHouse = AdressHouse;
 
-
                     await _serviceWorkplaceDTO.DeleteAsync(workplaceDTO);
+
+                    WorkplaceDTO workplaceNewDTO = await _serviceWorkplaceDTO.GetByIdAsync(WithoutWorkplaceId);
+                    if (workplaceNewDTO != null)
+                    {
+                        workplaceNewDTO.UserIdentityEmail = User?.Identity?.Name;
+
+                        await _serviceWorkplaceDTO.UpdateAsync(workplaceNewDTO);
+                    }
+
 
                     foreach (var i in PersonDTOs)
                     {

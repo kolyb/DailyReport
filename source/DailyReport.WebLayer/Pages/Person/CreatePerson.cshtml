@@ -36,7 +36,7 @@
     <div>
         <label>Workplace</label>
         <div>
-            <select asp-for="WorkplaceId" asp-items="Model.Options">
+            <select asp-for="WorkplaceId" asp-items="Model.Options" required>
             </select>
             <span asp-validation-for="WorkplaceId"></span>
         </div>
@@ -44,7 +44,7 @@
     <div>
         <label>Position</label>
         <div>
-            <select asp-for="PositionId" asp-items="Model.Positions">
+            <select asp-for="PositionId" asp-items="Model.Positions" required>
             </select>
             <span asp-validation-for="PositionId"></span>
         </div>
@@ -52,7 +52,7 @@
     <div>
         <label>Profession</label>
         <div>
-            <select asp-for="ProfessionId" asp-items="Model.Professions">
+            <select asp-for="ProfessionId" asp-items="Model.Professions" required>
             </select>
             <span asp-validation-for="ProfessionId"></span>
         </div>
