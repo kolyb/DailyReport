@@ -1,18 +1,23 @@
-﻿using DailyReport.BusinessLogic.Interfaces.IdentityInterface;
+﻿using DailyReport.BusinessLogic.Interfaces;
+using DailyReport.BusinessLogic.Interfaces.IdentityInterface;
+using DailyReport.BusinessLogic.ModelsDTO;
 using DailyReport.BusinessLogic.ModelsDTO.IdentityDTO;
 using DailyReport.WebLayer.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel.DataAnnotations;
+using static DailyReport.BusinessLogic.Exceptions.ExceptionValidator;
 
 namespace DailyReport.WebLayer.Controllers
 {
     public class AccountController : Controller
     {
         private readonly IUserIdentity _userIdentity;
+        private readonly IService<WorkplaceDTO> _serviceWorkplaceDTO;
 
-        public AccountController(IUserIdentity userIdentity)
+        public AccountController(IUserIdentity userIdentity,
+            IService<WorkplaceDTO> serviceWorkplaceDTO)
         {
             _userIdentity = userIdentity;
+            _serviceWorkplaceDTO = serviceWorkplaceDTO;
         }
 
         public IActionResult Index()
@@ -41,7 +46,7 @@ namespace DailyReport.WebLayer.Controllers
                         RememberMe = model.RememberMe,
                     };
 
-                    var result = await _userIdentity.Authenticate(userDto);
+                    var result = await _userIdentity.Authenticate(userDto);                
 
                     if (result.Succeeded)
                     {
@@ -55,7 +60,6 @@ namespace DailyReport.WebLayer.Controllers
 
                 return View(model);
             }
-            //it will be from BLL
             catch (ValidationException ex)
             {
                 return Content(ex.Message);
@@ -83,6 +87,15 @@ namespace DailyReport.WebLayer.Controllers
                     };
 
                     await _userIdentity.CreateAsync(userDto);
+
+                    WorkplaceDTO workplaceDTO = new WorkplaceDTO();
+                    workplaceDTO.UserIdentityEmail = model.Email;
+                    workplaceDTO.Description = "Without workplace";
+                    workplaceDTO.AdressCity = "Without workplace";
+                    workplaceDTO.AdressStreet = "Without workplace";
+                    workplaceDTO.AdressHouse = "Without workplace";
+
+                    await _serviceWorkplaceDTO.CreateAsync(workplaceDTO);
 
                     return RedirectToAction("Index", "Home");
                 }

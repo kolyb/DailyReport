@@ -47,6 +47,7 @@ namespace DailyReport.WebLayer.Pages.Workplace
 
             WithoutWorkplaceId = (from wp in WorkplaceDTOs
                                   where wp.Description == "Without workplace"
+                                  && wp.UserIdentityEmail == User?.Identity?.Name
                                   select wp.Id).FirstOrDefault();
 
             WorkplaceDTO workplaceDTO = await _serviceWorkplaceDTO.GetByIdAsync(id);
@@ -74,13 +75,13 @@ namespace DailyReport.WebLayer.Pages.Workplace
 
                     await _serviceWorkplaceDTO.DeleteAsync(workplaceDTO);
 
-                    WorkplaceDTO workplaceNewDTO = await _serviceWorkplaceDTO.GetByIdAsync(WithoutWorkplaceId);
-                    if (workplaceNewDTO != null)
-                    {
-                        workplaceNewDTO.UserIdentityEmail = User?.Identity?.Name;
+                    //WorkplaceDTO workplaceNewDTO = await _serviceWorkplaceDTO.GetByIdAsync(WithoutWorkplaceId);
+                    //if (workplaceNewDTO != null)
+                    //{
+                    //    workplaceNewDTO.UserIdentityEmail = User?.Identity?.Name;
 
-                        await _serviceWorkplaceDTO.UpdateAsync(workplaceNewDTO);
-                    }
+                    //    await _serviceWorkplaceDTO.UpdateAsync(workplaceNewDTO);
+                    //}
 
 
                     foreach (var i in PersonDTOs)
@@ -90,7 +91,6 @@ namespace DailyReport.WebLayer.Pages.Workplace
                         personNewDTO.FirstName = i.FirstName;
                         personNewDTO.MiddleName = i.MiddleName;
                         personNewDTO.LastName = i.LastName;
-                        //personNewDTO.UserIdentityEmail = User.Identity?.Name;
                         personNewDTO.WorkplaceId = WithoutWorkplaceId;
                         personNewDTO.PositionId = i.PositionId;
                         personNewDTO.ProfessionId = i.ProfessionId;
