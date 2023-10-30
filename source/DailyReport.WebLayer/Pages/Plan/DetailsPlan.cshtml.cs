@@ -48,8 +48,8 @@ namespace DailyReport.WebLayer.Pages.Plan
                              orderby pl.StartTime
                              where pl.PlanDayId == id
                              select new PlanLastnameViewModel{ Id = pl.Id, 
-                                 StartTime = pl.StartTime,
-                                 FinishTime = pl.FinishTime,
+                                 //StartTime = pl.StartTime,
+                                 //FinishTime = pl.FinishTime,
                                  IntervalTime = pl.IntervalTime,
                                  Lastname = p.LastName, 
                                  DescriptionWorkplace = wp.Description,

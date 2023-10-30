@@ -1,6 +1,5 @@
 using DailyReport.BusinessLogic.Interfaces;
 using DailyReport.BusinessLogic.ModelsDTO;
-using DailyReport.DataAccess.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -25,10 +24,10 @@ namespace DailyReport.WebLayer.Pages.Report
         public int PersonId { get; set; }
 
         [BindProperty]
-        public DateTime StartTime { get; set; }
+        public TimeSpan StartTime { get; set; }
 
         [BindProperty]
-        public DateTime FinishTime { get; set; }
+        public TimeSpan FinishTime { get; set; }
 
         [BindProperty]
         public TimeSpan IntervalTime { get; set; }

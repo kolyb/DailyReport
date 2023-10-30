@@ -1,9 +1,9 @@
 using DailyReport.BusinessLogic.Interfaces;
 using DailyReport.BusinessLogic.ModelsDTO;
-using DailyReport.DataAccess.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using static DailyReport.BusinessLogic.Exceptions.ExceptionValidator;
 
 namespace DailyReport.WebLayer.Pages.Report
 {
@@ -35,10 +35,10 @@ namespace DailyReport.WebLayer.Pages.Report
         public int ReportDayId { get; set; }
 
         [BindProperty]
-        public DateTime StartTime { get; set; }
+        public TimeSpan StartTime { get; set; }
 
         [BindProperty]
-        public DateTime FinishTime { get; set; }
+        public TimeSpan FinishTime { get; set; }
 
         [BindProperty]
         public TimeSpan IntervalTime { get; set; }
@@ -77,17 +77,24 @@ namespace DailyReport.WebLayer.Pages.Report
 
         public async Task<IActionResult> OnPost()
         {
-            if (ModelState.IsValid)
+            try
             {
-                ReportDTO reportDTO = new ReportDTO();
-                reportDTO.StartTime = StartTime;
-                reportDTO.FinishTime = FinishTime;
-                reportDTO.IntervalTime = FinishTime - StartTime;
-                reportDTO.PersonId = PersonId;
-                reportDTO.ReportDayId = Id;
+                if (ModelState.IsValid)
+                {
+                    ReportDTO reportDTO = new ReportDTO();
+                    reportDTO.StartTime = StartTime;
+                    reportDTO.FinishTime = FinishTime;
+                    reportDTO.IntervalTime = FinishTime - StartTime;
+                    reportDTO.PersonId = PersonId;
+                    reportDTO.ReportDayId = Id;
 
-                await _serviceReportDTO.CreateAsync(reportDTO);
+                    await _serviceReportDTO.CreateAsync(reportDTO);
 
+                }
+            }
+            catch (ValidationException ex) 
+            { 
+                return Content(ex.Message);
             }
             return RedirectToPage("Index");
         }
