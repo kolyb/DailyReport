@@ -1,5 +1,6 @@
 using DailyReport.BusinessLogic.Interfaces;
 using DailyReport.BusinessLogic.ModelsDTO;
+using DailyReport.DataAccess.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -24,7 +25,13 @@ namespace DailyReport.WebLayer.Pages.Report
         public int PersonId { get; set; }
 
         [BindProperty]
-        public TimeSpan Time { get; set; }
+        public DateTime StartTime { get; set; }
+
+        [BindProperty]
+        public DateTime FinishTime { get; set; }
+
+        [BindProperty]
+        public TimeSpan IntervalTime { get; set; }
 
 
         public async Task OnGet(int id)
@@ -32,7 +39,9 @@ namespace DailyReport.WebLayer.Pages.Report
             ReportDTO reportDTO = await _serviceReportDTO.GetByIdAsync(id);
             PersonId = reportDTO.PersonId;
             ReportDayId = reportDTO.ReportDayId;
-            Time = reportDTO.Time;
+            StartTime = reportDTO.StartTime;
+            FinishTime = reportDTO.FinishTime;
+            IntervalTime = reportDTO.IntervalTime;
         }
 
         public async Task<IActionResult> OnPost()
@@ -45,7 +54,9 @@ namespace DailyReport.WebLayer.Pages.Report
                     reportDTO.Id = Id;
                     reportDTO.PersonId = PersonId;
                     reportDTO.ReportDayId = ReportDayId;
-                    reportDTO.Time = Time;
+                    reportDTO.StartTime = StartTime;
+                    reportDTO.FinishTime = FinishTime;
+                    reportDTO.IntervalTime = IntervalTime;
 
                     await _serviceReportDTO.DeleteAsync(reportDTO);
                 }

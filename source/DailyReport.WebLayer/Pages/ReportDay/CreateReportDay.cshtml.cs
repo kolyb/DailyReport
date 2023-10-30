@@ -20,7 +20,7 @@ namespace DailyReport.WebLayer.Pages.ReportDay
 
         public void OnGet()
         {
-
+            RecordDay = DateTime.Now;
         }
 
         public async Task<IActionResult> OnPost()

@@ -8,6 +8,10 @@
 
         public int ReportDayId { get; set; }
 
-        public TimeSpan Time { get; set; }
+        public DateTime StartTime { get; set; }
+
+        public DateTime FinishTime { get; set; }
+
+        public TimeSpan IntervalTime { get; set; }
     }
 }

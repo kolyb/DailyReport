@@ -55,7 +55,7 @@ namespace DailyReport.WebLayer.Pages.Plan
                     planDTO.PlanDayId = PlanDayId;
                     planDTO.StartTime = StartTime;
                     planDTO.FinishTime = FinishTime;
-                    IntervalTime = planDTO.IntervalTime;
+                    planDTO.IntervalTime = IntervalTime;
 
                     await _servicePlanDTO.DeleteAsync(planDTO);
                 }

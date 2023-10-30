@@ -10,10 +10,11 @@ namespace DailyReport.BusinessLogic.Mappers
             Report report = new Report
             {
                 Id = item.Id,
-                //UserIdentityId = item.UserIdentityId,
                 PersonId = item.PersonId,
                 ReportDayId = item.ReportDayId,
-                Time = item.Time,
+                StartTime = item.StartTime,
+                FinishTime = item.FinishTime,
+                IntervalTime = item.IntervalTime,
             };
             return report;
         }
@@ -23,10 +24,11 @@ namespace DailyReport.BusinessLogic.Mappers
             ReportDTO reportDTO = new ReportDTO
             {
                 Id = item.Id,
-                //UserIdentityId = item.UserIdentityId,
                 PersonId = item.PersonId,
                 ReportDayId = item.ReportDayId,
-                Time = item.Time,
+                StartTime = item.StartTime,
+                FinishTime = item.FinishTime,
+                IntervalTime = item.IntervalTime,
             };
             return reportDTO;
         }
@@ -39,10 +41,11 @@ namespace DailyReport.BusinessLogic.Mappers
                 reportDTOs.Add(new ReportDTO
                 {
                     Id = item.Id,
-                    //UserIdentityId = item.UserIdentityId,
                     PersonId = item.PersonId,
                     ReportDayId = item.ReportDayId,
-                    Time = item.Time,
+                    StartTime = item.StartTime,
+                    FinishTime = item.FinishTime,
+                    IntervalTime = item.IntervalTime,
                 });
             }
             return reportDTOs;

@@ -10,7 +10,6 @@ namespace DailyReport.BusinessLogic.Mappers
             Plan plan = new Plan
             {
                 Id = item.Id,
-                //UserIdentityId = item.UserIdentityId,
                 PersonId = item.PersonId,
                 PlanDayId = item.PlanDayId,
                 StartTime = item.StartTime,
@@ -25,7 +24,6 @@ namespace DailyReport.BusinessLogic.Mappers
             PlanDTO planDTO = new PlanDTO
             {
                 Id = item.Id,
-                //UserIdentityId = item.UserIdentityId,
                 PersonId = item.PersonId,
                 PlanDayId = item.PlanDayId,
                 StartTime = item.StartTime,
@@ -43,7 +41,6 @@ namespace DailyReport.BusinessLogic.Mappers
                 planDTOs.Add(new PlanDTO
                 {
                     Id = item.Id,
-                    //UserIdentityId = item.UserIdentityId,
                     PersonId = item.PersonId,
                     PlanDayId = item.PlanDayId,
                     StartTime = item.StartTime,

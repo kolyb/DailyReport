@@ -1,5 +1,6 @@
 using DailyReport.BusinessLogic.Interfaces;
 using DailyReport.BusinessLogic.ModelsDTO;
+using DailyReport.DataAccess.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -34,7 +35,13 @@ namespace DailyReport.WebLayer.Pages.Report
         public int ReportDayId { get; set; }
 
         [BindProperty]
-        public TimeSpan Time { get; set; }
+        public DateTime StartTime { get; set; }
+
+        [BindProperty]
+        public DateTime FinishTime { get; set; }
+
+        [BindProperty]
+        public TimeSpan IntervalTime { get; set; }
 
         [BindProperty]
         public DateTime RecordDay { get; set; }
@@ -73,7 +80,9 @@ namespace DailyReport.WebLayer.Pages.Report
             if (ModelState.IsValid)
             {
                 ReportDTO reportDTO = new ReportDTO();
-                reportDTO.Time = Time;
+                reportDTO.StartTime = StartTime;
+                reportDTO.FinishTime = FinishTime;
+                reportDTO.IntervalTime = FinishTime - StartTime;
                 reportDTO.PersonId = PersonId;
                 reportDTO.ReportDayId = Id;
 
