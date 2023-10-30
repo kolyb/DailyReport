@@ -16,5 +16,18 @@ namespace DailyReport.BusinessLogic.ExceptionValidators
         {
             return repositoryReport.GetAll().Any(x => x.StartTime == starttime);
         }
+
+        public static bool StartTimeCorrect(TimeSpan? starttime,
+            IRepository<Report> repositoryReport)
+        {
+            return repositoryReport.GetAll().Any(x => x.FinishTime >= starttime);
+        }
+
+        public static bool FinishTimeCorrect(TimeSpan? finishtime, TimeSpan? starttime,
+                    IRepository<Report> repositoryReport)
+        {
+            return repositoryReport.GetAll().Any(x => x.StartTime >= finishtime
+            || finishtime <= starttime);
+        }
     }
 }

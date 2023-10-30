@@ -31,6 +31,14 @@ namespace DailyReport.BusinessLogic.Servicies
             {
                 throw new ValidationException($"Start Time'{item.StartTime}' already exists in the report");
             }
+            if (ReportValidator.StartTimeCorrect(item.StartTime, _reportRepository))
+            {
+                throw new ValidationException($"Start Time'{item.StartTime}' is not correct");
+            }
+            if (ReportValidator.FinishTimeCorrect(item.FinishTime, item.StartTime, _reportRepository))
+            {
+                throw new ValidationException($"Finish Time'{item.FinishTime}' is not correct");
+            }
             Report report = ReportMapper.FromDTO(item);
             await _reportRepository.CreateAsync(report);
         }

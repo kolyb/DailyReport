@@ -61,6 +61,8 @@ namespace DailyReport.WebLayer.Pages.Report
             Id = reportDayDTO.Id;
             RecordDay = reportDayDTO.RecordDay;
 
+            StartTime = TimeSpan.FromHours(8);
+            FinishTime = TimeSpan.FromHours(8);
 
             PersonDTOs = _servicePersonDTO.GetAll();
             WorkplaceDTOs = _serviceWorkplaceDTO.GetAll().Where(i => i.UserIdentityEmail
