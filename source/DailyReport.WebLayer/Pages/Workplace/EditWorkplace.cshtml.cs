@@ -2,6 +2,7 @@ using DailyReport.BusinessLogic.Interfaces;
 using DailyReport.BusinessLogic.ModelsDTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using static DailyReport.BusinessLogic.Exceptions.ExceptionValidator;
 
 namespace DailyReport.WebLayer.Pages.Workplace
 {
@@ -31,32 +32,44 @@ namespace DailyReport.WebLayer.Pages.Workplace
 
         public async Task OnGet(int id)
         {
-            WorkplaceDTO workplaceDTO = await _serviceWorkplaceDTO.GetByIdAsync(id);
-            Id = workplaceDTO.Id;
-            Description = workplaceDTO.Description;
-            AdressCity = workplaceDTO.AdressCity;
-            AdressStreet = workplaceDTO.AdressStreet;
-            AdressHouse = workplaceDTO.AdressHouse;
+            try
+            {
+                WorkplaceDTO workplaceDTO = await _serviceWorkplaceDTO.GetByIdAsync(id);
+                Id = workplaceDTO.Id;
+                Description = workplaceDTO.Description;
+                AdressCity = workplaceDTO.AdressCity;
+                AdressStreet = workplaceDTO.AdressStreet;
+                AdressHouse = workplaceDTO.AdressHouse;
+            }
+            catch (ValidationException ex)
+            {
+                Content (ex.Message);
+            }
         }
 
         public async Task<IActionResult> OnPost()
         {
-            if (ModelState.IsValid)
+            try
             {
-                WorkplaceDTO workplaceDTO =  await _serviceWorkplaceDTO.GetByIdAsync(Id);
-                if (workplaceDTO != null)
+                if (ModelState.IsValid)
                 {
-                    workplaceDTO.Id = Id;
-                    workplaceDTO.Description = Description;
-                    workplaceDTO.AdressCity = AdressCity;
-                    workplaceDTO.AdressStreet = AdressStreet;
-                    workplaceDTO.AdressHouse = AdressHouse;
+                    WorkplaceDTO workplaceDTO = await _serviceWorkplaceDTO.GetByIdAsync(Id);
+                    if (workplaceDTO != null)
+                    {
+                        workplaceDTO.Id = Id;
+                        workplaceDTO.Description = Description;
+                        workplaceDTO.AdressCity = AdressCity;
+                        workplaceDTO.AdressStreet = AdressStreet;
+                        workplaceDTO.AdressHouse = AdressHouse;
 
-
-                    await _serviceWorkplaceDTO.UpdateAsync(workplaceDTO);
+                        await _serviceWorkplaceDTO.UpdateAsync(workplaceDTO);
+                    }
                 }
             }
-
+            catch (ValidationException ex)
+            {
+                return Content(ex.Message);
+            }
             return RedirectToPage("Index");
         }
 

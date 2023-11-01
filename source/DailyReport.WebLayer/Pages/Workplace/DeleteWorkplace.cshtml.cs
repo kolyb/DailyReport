@@ -2,6 +2,7 @@ using DailyReport.BusinessLogic.Interfaces;
 using DailyReport.BusinessLogic.ModelsDTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using static DailyReport.BusinessLogic.Exceptions.ExceptionValidator;
 
 namespace DailyReport.WebLayer.Pages.Workplace
 {
@@ -43,54 +44,68 @@ namespace DailyReport.WebLayer.Pages.Workplace
 
         public async Task OnGet(int id)
         {
-            WorkplaceDTOs = _serviceWorkplaceDTO.GetAll();
+            try
+            {
+                WorkplaceDTOs = _serviceWorkplaceDTO.GetAll();
 
-            WithoutWorkplaceId = (from wp in WorkplaceDTOs
-                                  where wp.Description == "Without workplace"
-                                  && wp.UserIdentityEmail == User?.Identity?.Name
-                                  select wp.Id).FirstOrDefault();
+                WithoutWorkplaceId = (from wp in WorkplaceDTOs
+                                      where wp.Description == "Without workplace"
+                                      && wp.UserIdentityEmail == User?.Identity?.Name
+                                      select wp.Id).FirstOrDefault();
 
-            WorkplaceDTO workplaceDTO = await _serviceWorkplaceDTO.GetByIdAsync(id);
-            Id = workplaceDTO.Id;
-            Description = workplaceDTO.Description;
-            AdressCity = workplaceDTO.AdressCity;
-            AdressStreet = workplaceDTO.AdressStreet;
-            AdressHouse = workplaceDTO.AdressHouse;
+                WorkplaceDTO workplaceDTO = await _serviceWorkplaceDTO.GetByIdAsync(id);
+                Id = workplaceDTO.Id;
+                Description = workplaceDTO.Description;
+                AdressCity = workplaceDTO.AdressCity;
+                AdressStreet = workplaceDTO.AdressStreet;
+                AdressHouse = workplaceDTO.AdressHouse;
+            }
+            catch (ValidationException ex) 
+            {
+                Content(ex.Message);
+            }
         }
 
         public async Task<IActionResult> OnPost()
         {
-            PersonDTOs = _servicePersonDTO.GetAll().Where(i => i.WorkplaceId == Id);
-
-            if (ModelState.IsValid)
+            try
             {
-                WorkplaceDTO workplaceDTO = await _serviceWorkplaceDTO.GetByIdAsync(Id);
-                if (workplaceDTO != null)
+                PersonDTOs = _servicePersonDTO.GetAll().Where(i => i.WorkplaceId == Id);
+
+                if (ModelState.IsValid)
                 {
-                    workplaceDTO.Id = Id;
-                    workplaceDTO.UserIdentityEmail = User?.Identity?.Name;
-                    workplaceDTO.Description = Description;
-                    workplaceDTO.AdressCity = AdressCity;
-                    workplaceDTO.AdressStreet = AdressStreet;
-                    workplaceDTO.AdressHouse = AdressHouse;
-
-                    await _serviceWorkplaceDTO.DeleteAsync(workplaceDTO);
-
-                    foreach (var i in PersonDTOs)
+                    WorkplaceDTO workplaceDTO = await _serviceWorkplaceDTO.GetByIdAsync(Id);
+                    if (workplaceDTO != null)
                     {
-                        PersonDTO personNewDTO = new PersonDTO();
-                        personNewDTO.Birthday = i.Birthday;
-                        personNewDTO.FirstName = i.FirstName;
-                        personNewDTO.MiddleName = i.MiddleName;
-                        personNewDTO.LastName = i.LastName;
-                        personNewDTO.WorkplaceId = WithoutWorkplaceId;
-                        personNewDTO.PositionId = i.PositionId;
-                        personNewDTO.ProfessionId = i.ProfessionId;
-                        personNewDTO.PhoneNumber = i.PhoneNumber;
+                        workplaceDTO.Id = Id;
+                        workplaceDTO.UserIdentityEmail = User?.Identity?.Name;
+                        workplaceDTO.Description = Description;
+                        workplaceDTO.AdressCity = AdressCity;
+                        workplaceDTO.AdressStreet = AdressStreet;
+                        workplaceDTO.AdressHouse = AdressHouse;
 
-                        await _servicePersonDTO.CreateAsync(personNewDTO);
+                        await _serviceWorkplaceDTO.DeleteAsync(workplaceDTO);
+
+                        foreach (var i in PersonDTOs)
+                        {
+                            PersonDTO personNewDTO = new PersonDTO();
+                            personNewDTO.Birthday = i.Birthday;
+                            personNewDTO.FirstName = i.FirstName;
+                            personNewDTO.MiddleName = i.MiddleName;
+                            personNewDTO.LastName = i.LastName;
+                            personNewDTO.WorkplaceId = WithoutWorkplaceId;
+                            personNewDTO.PositionId = i.PositionId;
+                            personNewDTO.ProfessionId = i.ProfessionId;
+                            personNewDTO.PhoneNumber = i.PhoneNumber;
+
+                            await _servicePersonDTO.CreateAsync(personNewDTO);
+                        }
                     }
-                }                
+                }
+            }
+            catch (ValidationException ex) 
+            {
+                return Content(ex.Message);
             }
             return RedirectToPage("Index");
         }

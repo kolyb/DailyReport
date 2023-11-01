@@ -4,7 +4,6 @@ using DailyReport.BusinessLogic.Mappers;
 using DailyReport.BusinessLogic.ModelsDTO;
 using DailyReport.DataAccess.Interfaces;
 using DailyReport.DataAccess.Models;
-using DailyReport.DataAccess.Repositories;
 using static DailyReport.BusinessLogic.Exceptions.ExceptionValidator;
 
 namespace DailyReport.BusinessLogic.Servicies
@@ -24,7 +23,8 @@ namespace DailyReport.BusinessLogic.Servicies
             {
                 throw new ValidationException("Can not create a workplace");
             }
-            if (WorkplaceValidator.WorkplaceExists(item.Description,
+            if (WorkplaceValidator.WorkplaceExists(
+                item.Description,
                 item.AdressCity, 
                 item.AdressStreet,
                 item.AdressHouse,
@@ -40,6 +40,12 @@ namespace DailyReport.BusinessLogic.Servicies
 
         public async Task DeleteAsync(WorkplaceDTO item)
         {
+            if (WorkplaceValidator.WithoutWorkplaceCanNotDelete(
+                item.Id,
+                _workplaceRepository))
+            {
+                throw new ValidationException("Can not delete and edit Without workplace");
+            }
             Workplace workplace = WorkplaceMapper.FromDTO(item);
             await _workplaceRepository.DeleteAsync(workplace);
         }
@@ -58,13 +64,20 @@ namespace DailyReport.BusinessLogic.Servicies
 
         public async Task<WorkplaceDTO> GetByIdAsync(int? id)
         {
+            if (WorkplaceValidator.WithoutWorkplaceCanNotDelete(
+                id,
+                _workplaceRepository))
+            {
+                throw new ValidationException("Can not delete and edit Without workplace");
+            }
             var workplace = await _workplaceRepository.GetByIdAsync(id);
             WorkplaceDTO workplaceDTO = WorkplaceMapper.ToDTO(workplace);
             return workplaceDTO;
         }
 
         public async Task UpdateAsync(WorkplaceDTO item)
-        {
+        {   
+            
             Workplace workplace = WorkplaceMapper.FromDTO(item);
             await _workplaceRepository.UpdateAsync(workplace);
         }

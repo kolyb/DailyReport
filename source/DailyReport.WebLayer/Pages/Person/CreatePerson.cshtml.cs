@@ -129,9 +129,7 @@ namespace DailyReport.WebLayer.Pages.Person
                     personDTO.ProfessionId = ProfessionId;
                     personDTO.PhoneNumber = PhoneNumber;
 
-
                     await _servicePersonDTO.CreateAsync(personDTO);
-
                 }
             }
             catch (ValidationException ex)

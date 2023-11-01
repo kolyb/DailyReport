@@ -16,6 +16,14 @@ namespace DailyReport.BusinessLogic.ExceptionValidators
             && x.AdressCity == adresscity && x.AdressStreet == adressstreet 
             && x.AdressHouse == adresshouse && x.UserIdentityEmail == useridentityemail);
         }
+
+        public static bool WithoutWorkplaceCanNotDeleteAndEdit(int? id,
+            IRepository<Workplace> repositoryWorkplace)
+        {
+            return id == (from wp in repositoryWorkplace.GetAll()
+                          where wp.Description == "Without workplace"
+                          select wp.Id).FirstOrDefault();
+        }
     }
 }
  
