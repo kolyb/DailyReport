@@ -33,17 +33,14 @@ namespace DailyReport.WebLayer.Pages.ReportDay
                     reportDayDTO.RecordDay = RecordDay;
                     reportDayDTO.UserName = User?.Identity?.Name;
 
-
                     await _serviceReportDayDTO.CreateAsync(reportDayDTO);
-
                 }
             }
             catch (ValidationException ex)
             {
                 return Content(ex.Message);
             }
-
-            return RedirectToPage("Index");
+            return RedirectToPage("/Report/Index");
         }
 
         public ActionResult OnPostCancel()

@@ -57,7 +57,6 @@ namespace DailyReport.WebLayer.Controllers
                         ModelState.AddModelError("", "Incorrect login and (or) password");
                     }
                 }
-
                 return View(model);
             }
             catch (ValidationException ex)
@@ -104,9 +103,7 @@ namespace DailyReport.WebLayer.Controllers
             catch (ValidationException ex)
             {
                 return Content(ex.Message);
-
             }
-
         }
 
         [HttpPost]

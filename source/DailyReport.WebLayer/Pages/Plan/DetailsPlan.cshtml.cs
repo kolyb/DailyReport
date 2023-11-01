@@ -32,7 +32,7 @@ namespace DailyReport.WebLayer.Pages.Plan
 
         public List<PlanDayDTO>? PlanDayDTOs { get; set; }
 
-        public List<PlanLastnameViewModel>? PlanLastnames { get; set; }
+        public List<PlanAndReportViewModel>? PlanLastnames { get; set; }
 
         public void OnGetAsync(int id)
         {
@@ -47,9 +47,9 @@ namespace DailyReport.WebLayer.Pages.Plan
                              on p.WorkplaceId equals wp.Id
                              orderby pl.StartTime
                              where pl.PlanDayId == id
-                             select new PlanLastnameViewModel{ Id = pl.Id, 
-                                 //StartTime = pl.StartTime,
-                                 //FinishTime = pl.FinishTime,
+                             select new PlanAndReportViewModel{ Id = pl.Id,
+                                 StartTime = pl.StartTime,
+                                 FinishTime = pl.FinishTime,
                                  IntervalTime = pl.IntervalTime,
                                  Lastname = p.LastName, 
                                  DescriptionWorkplace = wp.Description,

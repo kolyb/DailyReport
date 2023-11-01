@@ -91,7 +91,6 @@ namespace DailyReport.WebLayer.Pages.Report
                     reportDTO.ReportDayId = Id;
 
                     await _serviceReportDTO.CreateAsync(reportDTO);
-
                 }
             }
             catch (ValidationException ex) 

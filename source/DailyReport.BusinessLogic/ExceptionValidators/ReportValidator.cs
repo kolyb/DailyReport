@@ -27,7 +27,7 @@ namespace DailyReport.BusinessLogic.ExceptionValidators
                     IRepository<Report> repositoryReport)
         {
             return repositoryReport.GetAll().Any(x => x.StartTime >= finishtime
-            || finishtime <= starttime);
+            || starttime >= finishtime);
         }
     }
 }

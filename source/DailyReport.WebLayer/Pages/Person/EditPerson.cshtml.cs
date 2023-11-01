@@ -13,16 +13,22 @@ namespace DailyReport.WebLayer.Pages.Person
         private readonly IService<WorkplaceDTO> _serviceWorkplaceDTO;
         private readonly IService<PositionDTO> _servicePositionDTO;
         private readonly IService<ProfessionDTO> _serviceProfessionDTO;
+        private readonly IService<PlanDTO> _servicePlanDTO;
+        private readonly IService<ReportDTO> _serviceReportDTO;
 
-        public EditPersonModel(IService<PersonDTO> servicePersonDTO, 
+        public EditPersonModel(IService<PersonDTO> servicePersonDTO,
             IService<WorkplaceDTO> serviceWorkplaceDTO,
             IService<PositionDTO> servicePositionDTO,
-            IService<ProfessionDTO> serviceProfessionDTO)
+            IService<ProfessionDTO> serviceProfessionDTO,
+            IService<PlanDTO> servicePlanDTO,
+            IService<ReportDTO> serviceReportDTO)
         {
             _servicePersonDTO = servicePersonDTO;
             _serviceWorkplaceDTO = serviceWorkplaceDTO;
             _servicePositionDTO = servicePositionDTO;
             _serviceProfessionDTO = serviceProfessionDTO;
+            _servicePlanDTO = servicePlanDTO;
+            _serviceReportDTO = serviceReportDTO;
         }
 
         [BindProperty]
@@ -42,9 +48,6 @@ namespace DailyReport.WebLayer.Pages.Person
 
         [BindProperty]
         public string? LastName { get; set; }
-
-        [BindProperty]
-        public string? Username { get; set; }
 
         [BindProperty]
         public string? UserName { get; set; }
@@ -70,11 +73,29 @@ namespace DailyReport.WebLayer.Pages.Person
         [BindProperty]
         public string? PhoneNumber { get; set; }
 
+        [BindProperty]
         public List<WorkplaceDTO>? WorkplaceDTOs { get; set; }
 
+        [BindProperty]
+        public List<WorkplaceDTO>? WorkplaceDTOsPost { get; set; }
+
+        [BindProperty]
         public List<PositionDTO>? PositionDTOs { get; set; }
 
+        [BindProperty]
         public List<ProfessionDTO>? ProfessionDTOs { get; set; }
+
+        [BindProperty]
+        public IEnumerable<PersonDTO>? PersonDTOs { get; set; }
+
+        [BindProperty]
+        public IEnumerable<PersonDTO>? PersonNewDTOs { get; set; }
+
+        [BindProperty]
+        public IEnumerable<PlanDTO>? PlanDTOs { get; set; }
+
+        [BindProperty]
+        public IEnumerable<ReportDTO>? ReportDTOs { get; set; }
 
         [BindProperty]
         public List<SelectListItem>? Options { get; set; }
@@ -84,11 +105,10 @@ namespace DailyReport.WebLayer.Pages.Person
 
         [BindProperty]
         public List<SelectListItem>? Professions { get; set; }
-         
+
         public async Task OnGet(int id)
         {
             PageId = id;
-            UserName = User.Identity?.Name;
             WorkplaceDTOs = _serviceWorkplaceDTO.GetAll().ToList();
             PositionDTOs = _servicePositionDTO.GetAll().ToList();
             ProfessionDTOs = _serviceProfessionDTO.GetAll().ToList();
@@ -120,7 +140,7 @@ namespace DailyReport.WebLayer.Pages.Person
             FirstName = personDTO.FirstName;
             MiddleName = personDTO.MiddleName;
             LastName = personDTO.LastName;
-            Username = User.Identity?.Name;
+            UserName = User.Identity?.Name;
             Workplace = (from wl in WorkplaceDTOs
                          where wl.Id == personDTO.WorkplaceId
                          select wl.Description).FirstOrDefault();
@@ -131,16 +151,29 @@ namespace DailyReport.WebLayer.Pages.Person
                           where pr.Id == personDTO.ProfessionId
                           select pr.Description).FirstOrDefault();
             PhoneNumber = personDTO.PhoneNumber;
-
         }
 
         public async Task<IActionResult> OnPost()
         {
             try
             {
+                PlanDTOs = _servicePlanDTO.GetAll().Where(i => i.PersonId == PageId);
+
+                ReportDTOs = _serviceReportDTO.GetAll().Where(i => i.PersonId == PageId);
+
+                PersonDTOs = _servicePersonDTO.GetAll().Where(i => i.Id == PageId);
+
+                //WorkplaceDTOsPost = _serviceWorkplaceDTO.GetAll().ToList();
+
+                //var saveWorkplaceId = (from wl in WorkplaceDTOsPost
+                //                       join ps in PersonDTOs
+                //                       on wl.Id equals ps.WorkplaceId
+                //                       select wl.Id).FirstOrDefault();
+
+
                 if (ModelState.IsValid)
                 {
-                    PersonDTO personDTO = await _servicePersonDTO.GetByIdAsync(PageId);
+                    PersonDTO personDTO = await _servicePersonDTO.GetByIdAsync(PageId);                   
                     if (personDTO != null)
                     {
                         personDTO.Id = Id;
@@ -148,14 +181,15 @@ namespace DailyReport.WebLayer.Pages.Person
                         personDTO.FirstName = FirstName;
                         personDTO.MiddleName = MiddleName;
                         personDTO.LastName = LastName;
-                        personDTO.WorkplaceId = WorkplaceId;
+                        //personDTO.WorkplaceId = WorkplaceId;
                         personDTO.PositionId = PositionId;
                         personDTO.ProfessionId = ProfessionId;
                         personDTO.PhoneNumber = PhoneNumber;
 
-                        await _servicePersonDTO.DeleteAsync(personDTO);
 
+                        await _servicePersonDTO.DeleteAsync(personDTO);
                     }
+
                     PersonDTO personNewDTO = new PersonDTO();
                     personNewDTO.Birthday = Birthday;
                     personNewDTO.FirstName = FirstName;
@@ -168,14 +202,41 @@ namespace DailyReport.WebLayer.Pages.Person
 
                     await _servicePersonDTO.CreateAsync(personNewDTO);
 
+                    PersonNewDTOs = _servicePersonDTO.GetAll();
 
+                    int? getId = (from ps in PersonNewDTOs
+                                  where ps.WorkplaceId == WorkplaceId
+                                  select ps.Id).FirstOrDefault();
+
+                    foreach (var i in PlanDTOs)
+                    {
+                        PlanDTO planDTO = new PlanDTO();
+                        planDTO.StartTime = i.StartTime;
+                        planDTO.FinishTime = i.FinishTime;
+                        planDTO.IntervalTime = i.FinishTime - i.StartTime;
+                        planDTO.PersonId = getId;
+                        planDTO.PlanDayId = i.PlanDayId;
+
+                        await _servicePlanDTO.CreateAsync(planDTO);
+                    }
+
+                    foreach (var i in ReportDTOs)
+                    {
+                        ReportDTO reportDTO = new ReportDTO();
+                        reportDTO.StartTime = i.StartTime;
+                        reportDTO.FinishTime = i.FinishTime;
+                        reportDTO.IntervalTime = i.FinishTime - i.StartTime;
+                        reportDTO.PersonId = getId;
+                        reportDTO.ReportDayId = i.ReportDayId;
+
+                        await _serviceReportDTO.CreateAsync(reportDTO);
+                    }
                 }
             }
             catch (ValidationException ex)
             {
                 return Content(ex.Message);
             }
-
             return RedirectToPage("Index");
         }
 

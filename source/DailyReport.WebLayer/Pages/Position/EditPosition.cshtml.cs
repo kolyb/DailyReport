@@ -40,7 +40,6 @@ namespace DailyReport.WebLayer.Pages.Position
                     await _servicePositionDTO.UpdateAsync(positionDTO);
                 }
             }
-
             return RedirectToPage("Index");
         }
 

@@ -34,15 +34,13 @@ namespace DailyReport.WebLayer.Pages.PlanDay
                     planDayDTO.UserName = User?.Identity?.Name;
 
                     await _servicePlanDayDTO.CreateAsync(planDayDTO);
-
                 }
             }
             catch (ValidationException ex)
             {
                 return Content(ex.Message);
             }
-
-            return RedirectToPage("Index");
+            return RedirectToPage("/Plan/Index");
         }
 
         public ActionResult OnPostCancel()

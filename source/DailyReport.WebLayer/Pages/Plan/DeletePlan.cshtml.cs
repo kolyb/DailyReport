@@ -18,19 +18,19 @@ namespace DailyReport.WebLayer.Pages.Plan
         public int Id { get; set; }
 
         [BindProperty]
-        public int PlanDayId { get; set; }
+        public int? PlanDayId { get; set; }
 
         [BindProperty]
-        public int PersonId { get; set; }
+        public int? PersonId { get; set; }
 
         [BindProperty]
-        public DateTime StartTime { get; set; }
+        public TimeSpan? StartTime { get; set; }
 
         [BindProperty]
-        public DateTime FinishTime { get; set; }
+        public TimeSpan? FinishTime { get; set; }
 
         [BindProperty]
-        public TimeSpan IntervalTime { get; set; }
+        public TimeSpan? IntervalTime { get; set; }
 
 
         public async Task OnGet(int id)

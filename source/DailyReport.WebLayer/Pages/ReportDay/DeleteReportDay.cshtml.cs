@@ -46,8 +46,7 @@ namespace DailyReport.WebLayer.Pages.ReportDay
                     await _serviceReportDayDTO.DeleteAsync(reportDayDTO);
                 }
             }
-
-            return RedirectToPage("Index");
+            return RedirectToPage("/Report/Index");
         }
 
         public ActionResult OnPostCancel()

@@ -61,6 +61,7 @@ namespace DailyReport.WebLayer.Pages.Workplace
         public async Task<IActionResult> OnPost()
         {
             PersonDTOs = _servicePersonDTO.GetAll().Where(i => i.WorkplaceId == Id);
+
             if (ModelState.IsValid)
             {
                 WorkplaceDTO workplaceDTO = await _serviceWorkplaceDTO.GetByIdAsync(Id);
@@ -75,15 +76,6 @@ namespace DailyReport.WebLayer.Pages.Workplace
 
                     await _serviceWorkplaceDTO.DeleteAsync(workplaceDTO);
 
-                    //WorkplaceDTO workplaceNewDTO = await _serviceWorkplaceDTO.GetByIdAsync(WithoutWorkplaceId);
-                    //if (workplaceNewDTO != null)
-                    //{
-                    //    workplaceNewDTO.UserIdentityEmail = User?.Identity?.Name;
-
-                    //    await _serviceWorkplaceDTO.UpdateAsync(workplaceNewDTO);
-                    //}
-
-
                     foreach (var i in PersonDTOs)
                     {
                         PersonDTO personNewDTO = new PersonDTO();
@@ -96,18 +88,16 @@ namespace DailyReport.WebLayer.Pages.Workplace
                         personNewDTO.ProfessionId = i.ProfessionId;
                         personNewDTO.PhoneNumber = i.PhoneNumber;
 
-
                         await _servicePersonDTO.CreateAsync(personNewDTO);
                     }
-                }
-                
+                }                
             }
             return RedirectToPage("Index");
         }
 
         public ActionResult OnPostCancel()
         {
-                return RedirectToPage("Index");
+            return RedirectToPage("Index");
         }
     }
 }

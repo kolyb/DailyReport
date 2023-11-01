@@ -27,6 +27,10 @@ namespace DailyReport.BusinessLogic.Servicies
             {
                 throw new ValidationException($"Day '{item.Day}' already exists");
             }
+            if (PlanDayValidator.PlanDayIsToday(item.Day))
+            {
+                throw new ValidationException($"Can not create '{item.Day}'");
+            }
             PlanDay planDay = PlanDayMapper.FromDTO(item);
             await _planDayRepository.CreateAsync(planDay);
         }

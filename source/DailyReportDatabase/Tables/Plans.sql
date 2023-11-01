@@ -3,7 +3,7 @@
 	[Id] int primary key identity,
 	[PersonId] int NULL,
 	[PlanDayId] int NOT NULL, 
-	[StartTime] datetime NULL,
-	[FinishTime] datetime NULL,
+	[StartTime] time NULL,
+	[FinishTime] time NULL,
 	[IntervalTime] time NULL,
 )

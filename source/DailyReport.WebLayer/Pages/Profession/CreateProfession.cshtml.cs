@@ -20,7 +20,6 @@ namespace DailyReport.WebLayer.Pages.Profession
 
         public void OnGet()
         {
-
         }
 
         public async Task<IActionResult> OnPost()
@@ -33,7 +32,6 @@ namespace DailyReport.WebLayer.Pages.Profession
                     professionDTO.Description = Description;
 
                     await _serviceProfessionDTO.CreateAsync(professionDTO);
-
                 }
             }
             catch (ValidationException ex)

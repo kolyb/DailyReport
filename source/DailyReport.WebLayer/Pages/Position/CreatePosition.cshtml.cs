@@ -20,7 +20,6 @@ namespace DailyReport.WebLayer.Pages.Position
 
         public void OnGet()
         {
-
         }
 
         public async Task<IActionResult> OnPost()
@@ -33,7 +32,6 @@ namespace DailyReport.WebLayer.Pages.Position
                     positionDTO.Description = Description;
 
                     await _servicePositionDTO.CreateAsync(positionDTO);
-
                 }
             }
             catch (ValidationException ex) 

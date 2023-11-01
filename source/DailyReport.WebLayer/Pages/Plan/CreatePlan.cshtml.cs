@@ -3,6 +3,7 @@ using DailyReport.BusinessLogic.ModelsDTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using static DailyReport.BusinessLogic.Exceptions.ExceptionValidator;
 
 namespace DailyReport.WebLayer.Pages.Plan
 {
@@ -34,10 +35,10 @@ namespace DailyReport.WebLayer.Pages.Plan
         public int PlanDayId { get; set; }
 
         [BindProperty]
-        public DateTime StartTime { get; set; }
+        public TimeSpan StartTime { get; set; }
 
         [BindProperty]
-        public DateTime FinishTime { get; set; }
+        public TimeSpan FinishTime { get; set; }
 
         [BindProperty]
         public TimeSpan IntervalTime { get; set; }
@@ -60,6 +61,9 @@ namespace DailyReport.WebLayer.Pages.Plan
             Id = planDayDTO.Id;
             Day = planDayDTO.Day;
 
+            StartTime = TimeSpan.FromHours(8);
+            FinishTime = TimeSpan.FromHours(8);
+
             PersonDTOs = _servicePersonDTO.GetAll();
             WorkplaceDTOs = _serviceWorkplaceDTO.GetAll().Where(i => i.UserIdentityEmail
             == User?.Identity?.Name);
@@ -75,17 +79,23 @@ namespace DailyReport.WebLayer.Pages.Plan
 
         public async Task<IActionResult> OnPost()
         {
-            if (ModelState.IsValid)
+            try
             {
-                PlanDTO planDTO = new PlanDTO();
-                planDTO.StartTime = StartTime;
-                planDTO.FinishTime = FinishTime;
-                planDTO.IntervalTime = FinishTime - StartTime;
-                planDTO.PersonId = PersonId;
-                planDTO.PlanDayId = Id;
+                if (ModelState.IsValid)
+                {
+                    PlanDTO planDTO = new PlanDTO();
+                    planDTO.StartTime = StartTime;
+                    planDTO.FinishTime = FinishTime;
+                    planDTO.IntervalTime = FinishTime - StartTime;
+                    planDTO.PersonId = PersonId;
+                    planDTO.PlanDayId = Id;
 
-                await _servicePlanDTO.CreateAsync(planDTO);
-
+                    await _servicePlanDTO.CreateAsync(planDTO);
+                }
+            }
+            catch (ValidationException ex) 
+            { 
+                return Content(ex.Message);
             }
             return RedirectToPage("Index");
         }

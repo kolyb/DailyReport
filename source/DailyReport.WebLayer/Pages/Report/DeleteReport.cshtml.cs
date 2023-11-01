@@ -18,19 +18,19 @@ namespace DailyReport.WebLayer.Pages.Report
         public int Id { get; set; }
 
         [BindProperty]
-        public int ReportDayId { get; set; }
+        public int? ReportDayId { get; set; }
 
         [BindProperty]
-        public int PersonId { get; set; }
+        public int? PersonId { get; set; }
 
         [BindProperty]
-        public TimeSpan StartTime { get; set; }
+        public TimeSpan? StartTime { get; set; }
 
         [BindProperty]
-        public TimeSpan FinishTime { get; set; }
+        public TimeSpan? FinishTime { get; set; }
 
         [BindProperty]
-        public TimeSpan IntervalTime { get; set; }
+        public TimeSpan? IntervalTime { get; set; }
 
 
         public async Task OnGet(int id)
@@ -60,7 +60,6 @@ namespace DailyReport.WebLayer.Pages.Report
                     await _serviceReportDTO.DeleteAsync(reportDTO);
                 }
             }
-
             return RedirectToPage("Index");
         }
 
