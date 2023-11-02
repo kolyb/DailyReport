@@ -17,10 +17,16 @@ namespace DailyReport.BusinessLogic.ExceptionValidators
             return repositoryPlan.GetAll().Any(x => x.StartTime == starttime && x.PlanDayId == plandayid);
         }
 
+        public static bool FinishTimeExistsInPlan(TimeSpan? finishtime, int? plandayid,
+            IRepository<Plan> repositoryPlan)
+        {
+            return repositoryPlan.GetAll().Any(x => x.FinishTime == finishtime && x.PlanDayId == plandayid);
+        }
+
         public static bool StartTimeCorrect(TimeSpan? starttime, int? plandayid,
             IRepository<Plan> repositoryPlan)
         {
-            return repositoryPlan.GetAll().Any(x => x.FinishTime > starttime && x.PlanDayId == plandayid);
+            return repositoryPlan.GetAll().Any(x => x.FinishTime > starttime && x.StartTime <starttime && x.PlanDayId == plandayid);
         }
 
         public static bool FinishTimeEqualStartTime(TimeSpan? starttime,
@@ -34,11 +40,5 @@ namespace DailyReport.BusinessLogic.ExceptionValidators
         {
             return starttime > finishtime;
         }
-        //public static bool FinishTimeCorrect(TimeSpan? finishtime, TimeSpan? starttime,
-        //            IRepository<Plan> repositoryPlan)
-        //{
-        //    return repositoryPlan.GetAll().Any(x => x.StartTime >= finishtime
-        //    || starttime >= finishtime);
-        //}
     }
 }

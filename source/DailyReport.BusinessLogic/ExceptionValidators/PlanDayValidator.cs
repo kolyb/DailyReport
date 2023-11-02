@@ -11,9 +11,15 @@ namespace DailyReport.BusinessLogic.ExceptionValidators
             return repositoryPlanDay.GetAll().Any(x => x.Day == day 
             && x.UserName == username);
         }
+
         public static bool PlanDayIsToday(DateTime? day)
         {
             return DateTime.Today == day;
+        }
+
+        public static bool PlanDayLessThanToday(DateTime? day)
+        {
+            return DateTime.Today > day;
         }
     } 
 }

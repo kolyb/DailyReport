@@ -31,6 +31,10 @@ namespace DailyReport.BusinessLogic.Servicies
             {
                 throw new ValidationException($"Start Time'{item.StartTime}' already exists in the plan");
             }
+            if (PlanValidator.FinishTimeExistsInPlan(item.FinishTime, item.PlanDayId, _planRepository))
+            {
+                throw new ValidationException($"Finish Time'{item.FinishTime}' already exists in the plan");
+            }
             if (PlanValidator.StartTimeCorrect(item.StartTime, item.PlanDayId, _planRepository))
             {
                 throw new ValidationException($"Start Time'{item.StartTime}' is not correct");
@@ -43,10 +47,6 @@ namespace DailyReport.BusinessLogic.Servicies
             {
                 throw new ValidationException($"Finish Time'{item.FinishTime}' is not correct");
             }
-            //if (PlanValidator.FinishTimeCorrect(item.FinishTime, item.StartTime, _planRepository))
-            //{
-            //    throw new ValidationException($"Finish Time'{item.FinishTime}' is not correct");
-            //}
             Plan plan = PlanMapper.FromDTO(item);
             await _planRepository.CreateAsync(plan);
         }

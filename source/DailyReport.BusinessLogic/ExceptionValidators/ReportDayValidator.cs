@@ -11,5 +11,9 @@ namespace DailyReport.BusinessLogic.ExceptionValidators
             return repositoryReportDay.GetAll().Any(x => x.RecordDay == recordday
             && x.UserName == username);
         }
+        public static bool ReportDayMoreThanToday(DateTime? day)
+        {
+            return DateTime.Today < day;
+        }
     }
 }

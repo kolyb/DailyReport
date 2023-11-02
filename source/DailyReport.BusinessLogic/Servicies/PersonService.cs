@@ -60,14 +60,14 @@ namespace DailyReport.BusinessLogic.Servicies
 
         public async Task<PersonDTO> GetByIdAsync(int? id)
         {
-            if (id == null)
-            {
-                throw new ValidationException("Can not get a person");
-            }
-            if (id <= 0)
-            {
-                throw new ValidationException("It is impossible");
-            }
+            //if (id == null)
+            //{
+            //    throw new ValidationException("Can not get a person");
+            //}
+            //if (id <= 0)
+            //{
+            //    throw new ValidationException("It is impossible");
+            //}
             var person = await _personRepository.GetByIdAsync(id);
             PersonDTO personDTO = PersonMapper.ToDTO(person);
             return personDTO;

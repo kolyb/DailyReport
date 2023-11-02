@@ -84,11 +84,11 @@ namespace DailyReport.DataAccess.Repositories
         public async Task<Person> GetByIdAsync(int? id)
         {
             var result = await _db.Persons.FindAsync(id);
-            if (result == null)
-            {
-                //
-                throw new Exception();
-            }
+            //if (result == null)
+            //{
+            //    //
+            //    throw new Exception();
+            //}
             return result;
         }
 

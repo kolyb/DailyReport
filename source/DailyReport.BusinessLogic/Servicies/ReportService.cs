@@ -23,19 +23,27 @@ namespace DailyReport.BusinessLogic.Servicies
             {
                 throw new ValidationException("Can not create a report");
             }
-            if (ReportValidator.PersonExistsInReport(item.PersonId, _reportRepository))
+            if (ReportValidator.PersonExistsInReport(item.PersonId, item.ReportDayId, _reportRepository))
             {
                 throw new ValidationException($"This Person already exists in the report");
             }
-            if (ReportValidator.StartTimeExistsInReport(item.StartTime, _reportRepository))
+            if (ReportValidator.StartTimeExistsInReport(item.StartTime,item.ReportDayId, _reportRepository))
             {
                 throw new ValidationException($"Start Time'{item.StartTime}' already exists in the report");
             }
-            if (ReportValidator.StartTimeCorrect(item.StartTime, _reportRepository))
+            if (ReportValidator.FinishTimeExistsInReport(item.FinishTime, item.ReportDayId, _reportRepository))
+            {
+                throw new ValidationException($"Finish Time'{item.FinishTime}' already exists in the report");
+            }
+            if (ReportValidator.StartTimeCorrect(item.StartTime, item.ReportDayId, _reportRepository))
             {
                 throw new ValidationException($"Start Time'{item.StartTime}' is not correct");
             }
-            if (ReportValidator.FinishTimeCorrect(item.FinishTime, item.StartTime, _reportRepository))
+            if (ReportValidator.FinishTimeEqualStartTime(item.StartTime, item.FinishTime))
+            {
+                throw new ValidationException($"Finish Time'{item.FinishTime}' is not correct");
+            }
+            if (ReportValidator.FinishTimeLessThanlStartTime(item.StartTime, item.FinishTime))
             {
                 throw new ValidationException($"Finish Time'{item.FinishTime}' is not correct");
             }
