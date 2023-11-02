@@ -40,12 +40,12 @@ namespace DailyReport.BusinessLogic.Servicies
 
         public async Task DeleteAsync(WorkplaceDTO item)
         {
-            if (WorkplaceValidator.WithoutWorkplaceCanNotDelete(
-                item.Id,
-                _workplaceRepository))
-            {
-                throw new ValidationException("Can not delete and edit Without workplace");
-            }
+            //if (WorkplaceValidator.WithoutWorkplaceCanNotDeleteAndEdit(
+            //    item.Id,
+            //    _workplaceRepository))
+            //{
+            //    throw new ValidationException("Can not delete and edit Without workplace");
+            //}
             Workplace workplace = WorkplaceMapper.FromDTO(item);
             await _workplaceRepository.DeleteAsync(workplace);
         }
@@ -63,8 +63,12 @@ namespace DailyReport.BusinessLogic.Servicies
         }
 
         public async Task<WorkplaceDTO> GetByIdAsync(int? id)
-        {
-            if (WorkplaceValidator.WithoutWorkplaceCanNotDelete(
+        {   
+            if(id == null)
+            {
+                throw new ValidationException("Can not use");
+            }
+            if (WorkplaceValidator.WithoutWorkplaceCanNotDeleteAndEdit(
                 id,
                 _workplaceRepository))
             {

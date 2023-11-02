@@ -11,18 +11,29 @@ namespace DailyReport.BusinessLogic.ExceptionValidators
             return repositoryPlan.GetAll().Any(x => x.PersonId == personid && x.PlanDayId == plandayid);
         }
 
-        public static bool StartTimeExistsInPlan(TimeSpan? starttime,
+        public static bool StartTimeExistsInPlan(TimeSpan? starttime, int? plandayid,
             IRepository<Plan> repositoryPlan)
         {
-            return repositoryPlan.GetAll().Any(x => x.StartTime == starttime);
+            return repositoryPlan.GetAll().Any(x => x.StartTime == starttime && x.PlanDayId == plandayid);
         }
 
-        public static bool StartTimeCorrect(TimeSpan? starttime,
+        public static bool StartTimeCorrect(TimeSpan? starttime, int? plandayid,
             IRepository<Plan> repositoryPlan)
         {
-            return repositoryPlan.GetAll().Any(x => x.FinishTime > starttime);
+            return repositoryPlan.GetAll().Any(x => x.FinishTime > starttime && x.PlanDayId == plandayid);
         }
 
+        public static bool FinishTimeEqualStartTime(TimeSpan? starttime,
+            TimeSpan? finishtime)
+        {
+            return starttime == finishtime;
+        }
+
+        public static bool FinishTimeLessThanlStartTime(TimeSpan? starttime,
+            TimeSpan? finishtime)
+        {
+            return starttime > finishtime;
+        }
         //public static bool FinishTimeCorrect(TimeSpan? finishtime, TimeSpan? starttime,
         //            IRepository<Plan> repositoryPlan)
         //{

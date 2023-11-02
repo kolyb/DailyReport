@@ -27,13 +27,21 @@ namespace DailyReport.BusinessLogic.Servicies
             {
                 throw new ValidationException($"This Person already exists in the plan");
             }
-            if (PlanValidator.StartTimeExistsInPlan(item.StartTime, _planRepository))
+            if (PlanValidator.StartTimeExistsInPlan(item.StartTime, item.PlanDayId, _planRepository))
             {
                 throw new ValidationException($"Start Time'{item.StartTime}' already exists in the plan");
             }
-            if (PlanValidator.StartTimeCorrect(item.StartTime, _planRepository))
+            if (PlanValidator.StartTimeCorrect(item.StartTime, item.PlanDayId, _planRepository))
             {
                 throw new ValidationException($"Start Time'{item.StartTime}' is not correct");
+            }
+            if (PlanValidator.FinishTimeEqualStartTime(item.StartTime, item.FinishTime))
+            {
+                throw new ValidationException($"Finish Time'{item.FinishTime}' is not correct");
+            }
+            if (PlanValidator.FinishTimeLessThanlStartTime(item.StartTime, item.FinishTime))
+            {
+                throw new ValidationException($"Finish Time'{item.FinishTime}' is not correct");
             }
             //if (PlanValidator.FinishTimeCorrect(item.FinishTime, item.StartTime, _planRepository))
             //{

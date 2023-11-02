@@ -62,7 +62,7 @@ namespace DailyReport.WebLayer.Pages.Workplace
             }
             catch (ValidationException ex) 
             {
-                Content(ex.Message);
+                Content (ex.Message);
             }
         }
 

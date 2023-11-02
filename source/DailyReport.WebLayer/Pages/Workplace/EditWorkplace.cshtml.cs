@@ -41,8 +41,8 @@ namespace DailyReport.WebLayer.Pages.Workplace
                 AdressStreet = workplaceDTO.AdressStreet;
                 AdressHouse = workplaceDTO.AdressHouse;
             }
-            catch (ValidationException ex)
-            {
+            catch (ValidationException ex) 
+            { 
                 Content (ex.Message);
             }
         }
