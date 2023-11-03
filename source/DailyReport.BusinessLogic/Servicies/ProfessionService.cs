@@ -17,7 +17,7 @@ namespace DailyReport.BusinessLogic.Servicies
             _professionRepository = professionRepository;
         }
 
-        public async Task CreateAsync(ProfessionDTO item)
+        public async Task CreateAsync(ProfessionDTO? item)
         {
             if (item == null)
             {
@@ -33,7 +33,7 @@ namespace DailyReport.BusinessLogic.Servicies
             await _professionRepository.CreateAsync(profession);
         }
 
-        public async Task DeleteAsync(ProfessionDTO item)
+        public async Task DeleteAsync(ProfessionDTO? item)
         {
             if (item == null)
             {
