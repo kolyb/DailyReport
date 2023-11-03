@@ -23,6 +23,7 @@ namespace DailyReport.BusinessLogic.Servicies
             {
                 throw new ValidationException("Can not create a workplace");
             }
+
             if (WorkplaceValidator.WorkplaceExists(
                 item.Description,
                 item.AdressCity, 
@@ -34,6 +35,7 @@ namespace DailyReport.BusinessLogic.Servicies
                 throw new ValidationException($"Workplcace '{item.Description} {item.AdressCity}, {item.AdressStreet}, " +
                     $"{item.AdressHouse}' already exists");
             }
+
             Workplace workplace = WorkplaceMapper.FromDTO(item);
             await _workplaceRepository.CreateAsync(workplace);
         }
@@ -68,12 +70,14 @@ namespace DailyReport.BusinessLogic.Servicies
             {
                 throw new ValidationException("Can not use");
             }
+
             if (WorkplaceValidator.WithoutWorkplaceCanNotDeleteAndEdit(
                 id,
                 _workplaceRepository))
             {
                 throw new ValidationException("Can not delete and edit Without workplace");
             }
+
             var workplace = await _workplaceRepository.GetByIdAsync(id);
             WorkplaceDTO workplaceDTO = WorkplaceMapper.ToDTO(workplace);
             return workplaceDTO;

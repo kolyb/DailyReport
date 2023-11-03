@@ -17,30 +17,34 @@ namespace DailyReport.BusinessLogic.Servicies
             _positionRepository = positionRepository;
         }
 
-        public async Task CreateAsync(PositionDTO item)
+        public async Task CreateAsync(PositionDTO? item)
         {
             if (item == null)
             {
                 throw new ValidationException("Can not create a position");
             }
+
             if (PositionValidator.PositionExists(item.Description, _positionRepository))
             {
                 throw new ValidationException($"Position '{item.Description}' already exists");
             }
+
             Position position = PositionMapper.FromDTO(item);
             await _positionRepository.CreateAsync(position);
         }
 
-        public async Task DeleteAsync(PositionDTO item)
+        public async Task DeleteAsync(PositionDTO? item)
         {
             if (item == null)
             {
                 throw new ValidationException("Can not delete a position");
             }
+
             if (item.Id <= 0)
             {
                 throw new ValidationException("It is impossible");
             }
+
             Position position = PositionMapper.FromDTO(item);
             await _positionRepository.DeleteAsync(position);
         }
@@ -63,21 +67,24 @@ namespace DailyReport.BusinessLogic.Servicies
             {
                 throw new ValidationException("It is impossible");
             }
+
             var position = await _positionRepository.GetByIdAsync(id);
             PositionDTO positionDTO = PositionMapper.ToDTO(position);
             return positionDTO;
         }
 
-        public async Task UpdateAsync(PositionDTO item)
+        public async Task UpdateAsync(PositionDTO? item)
         {
             if (item == null)
             {
                 throw new ValidationException("Can not update a position");
             }
+
             if (item.Id <= 0)
             {
                 throw new ValidationException("It is impossible");
             }
+
             Position position = PositionMapper.FromDTO(item);
             await _positionRepository.UpdateAsync(position);
         }

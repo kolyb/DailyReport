@@ -23,18 +23,22 @@ namespace DailyReport.BusinessLogic.Servicies
             {
                 throw new ValidationException("Can not create a plan day");
             }
+
             if (PlanDayValidator.PlanDayExists(item.Day, item.UserName, _planDayRepository))
             {
                 throw new ValidationException($"Day '{item.Day}' already exists");
             }
+
             if (PlanDayValidator.PlanDayIsToday(item.Day))
             {
                 throw new ValidationException($"Can not create '{item.Day}'");
             }
+
             if (PlanDayValidator.PlanDayLessThanToday(item.Day))
             {
                 throw new ValidationException($"Can not create '{item.Day}'");
             }
+
             PlanDay planDay = PlanDayMapper.FromDTO(item);
             await _planDayRepository.CreateAsync(planDay);
         }
@@ -45,10 +49,12 @@ namespace DailyReport.BusinessLogic.Servicies
             {
                 throw new ValidationException("Can not delete a day");
             }
+
             if (item.Id <= 0)
             {
                 throw new ValidationException("It is impossible");
             }
+
             PlanDay planDay = PlanDayMapper.FromDTO(item);
             await _planDayRepository.DeleteAsync(planDay);
         }
@@ -71,6 +77,7 @@ namespace DailyReport.BusinessLogic.Servicies
             {
                 throw new ValidationException("It is impossible");
             }
+
             var planDay = await _planDayRepository.GetByIdAsync(id);
             PlanDayDTO planDayDTO = PlanDayMapper.ToDTO(planDay);
             return planDayDTO;
@@ -82,10 +89,12 @@ namespace DailyReport.BusinessLogic.Servicies
             {
                 throw new ValidationException("Can not update a day");
             }
+
             if (item.Id <= 0)
             {
                 throw new ValidationException("It is impossible");
             }
+
             PlanDay planDay = PlanDayMapper.FromDTO(item);
             await _planDayRepository.UpdateAsync(planDay);
         }

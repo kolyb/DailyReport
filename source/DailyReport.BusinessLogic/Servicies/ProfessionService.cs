@@ -23,10 +23,12 @@ namespace DailyReport.BusinessLogic.Servicies
             {
                 throw new ValidationException("Can not create a profession");
             }
+
             if (ProfessionValidator.ProfessionExists(item.Description, _professionRepository))
             {
                 throw new ValidationException($"Profession '{item.Description}' already exists");
             }
+
             Profession profession = ProfessionMapper.FromDTO(item);
             await _professionRepository.CreateAsync(profession);
         }
@@ -37,10 +39,12 @@ namespace DailyReport.BusinessLogic.Servicies
             {
                 throw new ValidationException("Can not delete a profession");
             }
+
             if (item.Id <= 0)
             {
                 throw new ValidationException("It is impossible");
             }
+
             Profession profession = ProfessionMapper.FromDTO(item);
             await _professionRepository.DeleteAsync(profession);
         }
@@ -63,6 +67,7 @@ namespace DailyReport.BusinessLogic.Servicies
             {
                 throw new ValidationException("It is impossible");
             }
+
             var profession = await _professionRepository.GetByIdAsync(id);
             ProfessionDTO professionDTO = ProfessionMapper.ToDTO(profession);
             return professionDTO;
@@ -74,10 +79,12 @@ namespace DailyReport.BusinessLogic.Servicies
             {
                 throw new ValidationException("Can not update a profession");
             }
+
             if (item.Id <= 0)
             {
                 throw new ValidationException("It is impossible");
             }
+
             Profession profession = ProfessionMapper.FromDTO(item);
             await _professionRepository.UpdateAsync(profession);
         }

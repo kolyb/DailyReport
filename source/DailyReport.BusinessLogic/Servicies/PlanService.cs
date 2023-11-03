@@ -23,30 +23,37 @@ namespace DailyReport.BusinessLogic.Servicies
             {
                 throw new ValidationException("Can not create a plan");
             }
+
             if (PlanValidator.PersonExistsInPlan(item.PersonId, item.PlanDayId, _planRepository))
             {
                 throw new ValidationException($"This Person already exists in the plan");
             }
+
             if (PlanValidator.StartTimeExistsInPlan(item.StartTime, item.PlanDayId, _planRepository))
             {
                 throw new ValidationException($"Start Time'{item.StartTime}' already exists in the plan");
             }
+
             if (PlanValidator.FinishTimeExistsInPlan(item.FinishTime, item.PlanDayId, _planRepository))
             {
                 throw new ValidationException($"Finish Time'{item.FinishTime}' already exists in the plan");
             }
+
             if (PlanValidator.StartTimeCorrect(item.StartTime, item.PlanDayId, _planRepository))
             {
                 throw new ValidationException($"Start Time'{item.StartTime}' is not correct");
             }
+
             if (PlanValidator.FinishTimeEqualStartTime(item.StartTime, item.FinishTime))
             {
                 throw new ValidationException($"Finish Time'{item.FinishTime}' is not correct");
             }
+
             if (PlanValidator.FinishTimeLessThanlStartTime(item.StartTime, item.FinishTime))
             {
                 throw new ValidationException($"Finish Time'{item.FinishTime}' is not correct");
             }
+
             Plan plan = PlanMapper.FromDTO(item);
             await _planRepository.CreateAsync(plan);
         }
@@ -57,10 +64,12 @@ namespace DailyReport.BusinessLogic.Servicies
             {
                 throw new ValidationException("Can not delete a plan");
             }
+
             if (item.Id <= 0)
             {
                 throw new ValidationException("It is impossible");
             }
+
             Plan plan = PlanMapper.FromDTO(item);
             await _planRepository.DeleteAsync(plan);
         }
@@ -83,10 +92,12 @@ namespace DailyReport.BusinessLogic.Servicies
             {
                 throw new ValidationException("Can not get a plan");
             }
+
             if (id <= 0)
             {
                 throw new ValidationException("It is impossible");
             }
+
             var plan = await _planRepository.GetByIdAsync(id);
             PlanDTO planDTO = PlanMapper.ToDTO(plan);
             return planDTO;
@@ -98,10 +109,12 @@ namespace DailyReport.BusinessLogic.Servicies
             {
                 throw new ValidationException("Can not update a plan");
             }
+
             if (item.Id <= 0)
             {
                 throw new ValidationException("It is impossible");
             }
+
             Plan plan = PlanMapper.FromDTO(item);
             await _planRepository.UpdateAsync(plan);
         }

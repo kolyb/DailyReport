@@ -23,14 +23,17 @@ namespace DailyReport.BusinessLogic.Servicies
             {
                 throw new ValidationException("Can not create a report day");
             }
+
             if (ReportDayValidator.ReportDayExists(item.RecordDay, item.UserName, _reportDayRepository))
             {
                 throw new ValidationException($"Day '{item.RecordDay}' already exists");
             }
+
             if (ReportDayValidator.ReportDayMoreThanToday(item.RecordDay))
             {
                 throw new ValidationException($"Day '{item.RecordDay}' can not create");
             }
+
             ReportDay reportDay = ReportDayMapper.FromDTO(item);
             await _reportDayRepository.CreateAsync(reportDay);
         }
@@ -41,10 +44,12 @@ namespace DailyReport.BusinessLogic.Servicies
             {
                 throw new ValidationException("Can not delete a day");
             }
+
             if (item.Id <= 0)
             {
                 throw new ValidationException("It is impossible");
             }
+
             ReportDay reportDay = ReportDayMapper.FromDTO(item);
             await _reportDayRepository.DeleteAsync(reportDay);
         }
@@ -67,6 +72,7 @@ namespace DailyReport.BusinessLogic.Servicies
             {
                 throw new ValidationException("It is impossible");
             }
+
             var reportDay = await _reportDayRepository.GetByIdAsync(id);
             ReportDayDTO reportDayDTO = ReportDayMapper.ToDTO(reportDay);
             return reportDayDTO;
@@ -78,10 +84,12 @@ namespace DailyReport.BusinessLogic.Servicies
             {
                 throw new ValidationException("Can not update a day");
             }
+
             if (item.Id <= 0)
             {
                 throw new ValidationException("It is impossible");
             }
+
             ReportDay reportDay = ReportDayMapper.FromDTO(item);
             await _reportDayRepository.UpdateAsync(reportDay);
         }

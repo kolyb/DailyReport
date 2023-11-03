@@ -13,6 +13,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DailyReport.BusinessLogic",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DailyReport.WebLayer", "source\DailyReport.WebLayer\DailyReport.WebLayer.csproj", "{B3E17244-6EC1-45F1-BCB7-FF726449EFB5}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{2748AFCA-69EE-48EF-93A7-A4EF6AA1D2ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DailyReport.UnitTests", "test\DailyReport.UnitTests\DailyReport.UnitTests.csproj", "{36142AFF-A405-41FD-90D9-2BCE24817B3A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +41,10 @@ Global
 		{B3E17244-6EC1-45F1-BCB7-FF726449EFB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B3E17244-6EC1-45F1-BCB7-FF726449EFB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B3E17244-6EC1-45F1-BCB7-FF726449EFB5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36142AFF-A405-41FD-90D9-2BCE24817B3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36142AFF-A405-41FD-90D9-2BCE24817B3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36142AFF-A405-41FD-90D9-2BCE24817B3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36142AFF-A405-41FD-90D9-2BCE24817B3A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -46,6 +54,7 @@ Global
 		{3A7545EA-F6A2-4531-B35B-7949A9E23A8A} = {843EE270-2BBD-430F-A011-AE4C9288CF59}
 		{366A7329-5DB6-47F8-BF0C-D7E5F8ED7A38} = {843EE270-2BBD-430F-A011-AE4C9288CF59}
 		{B3E17244-6EC1-45F1-BCB7-FF726449EFB5} = {843EE270-2BBD-430F-A011-AE4C9288CF59}
+		{36142AFF-A405-41FD-90D9-2BCE24817B3A} = {2748AFCA-69EE-48EF-93A7-A4EF6AA1D2ED}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E736667C-30C3-458E-9055-2AE6DF243F85}

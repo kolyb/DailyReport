@@ -26,7 +26,7 @@ namespace DailyReport.BusinessLogic.ExceptionValidators
         public static bool StartTimeCorrect(TimeSpan? starttime, int? reportdayid,
             IRepository<Report> repositoryReport)
         {
-            return repositoryReport.GetAll().Any(x => x.FinishTime > starttime && x.ReportDayId == reportdayid);
+            return repositoryReport.GetAll().Any(x => x.FinishTime > starttime && x.StartTime < starttime && x.ReportDayId == reportdayid);
         }
 
         public static bool FinishTimeEqualStartTime(TimeSpan? starttime,

@@ -38,6 +38,7 @@ namespace DailyReport.BusinessLogic.Servicies
             {
                 throw new ValidationException("Can not delete a person");
             }
+
             if (item.Id <= 0)
             {
                 throw new ValidationException("It is impossible");
@@ -79,6 +80,7 @@ namespace DailyReport.BusinessLogic.Servicies
             {
                 throw new ValidationException("Can not update a person");
             }
+
             if (item.Id <= 0)
             {
                 throw new ValidationException("It is impossible");
