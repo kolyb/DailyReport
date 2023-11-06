@@ -17,22 +17,24 @@ namespace DailyReport.BusinessLogic.Servicies
             _personRepository = personRepository;
         }
 
-        public async Task CreateAsync(PersonDTO item)
+        public async Task CreateAsync(PersonDTO? item)
         {
             if (item == null)
             {
                 throw new ValidationException("Can not create a person");
             }
-            //if (PersonValidator.PersonExists(item.FirstName, item.MiddleName, 
-            //    item.LastName, item.WorkplaceId, _personRepository))
-            //{
-            //    throw new ValidationException($"Person '{item.LastName} {item.MiddleName} {item.FirstName}' already exists");
-            //}
+
+            if (PersonValidator.PersonExists(item.FirstName, item.MiddleName,
+                item.LastName, item.WorkplaceId, _personRepository))
+            {
+                throw new ValidationException($"Person '{item.LastName} {item.MiddleName} {item.FirstName}' already exists");
+            }
+
             Person person = PersonMapper.FromDTO(item);
             await _personRepository.CreateAsync(person);
         }
 
-        public async Task DeleteAsync(PersonDTO item)
+        public async Task DeleteAsync(PersonDTO? item)
         {
             if (item == null)
             {

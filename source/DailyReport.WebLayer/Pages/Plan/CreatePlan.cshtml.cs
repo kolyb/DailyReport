@@ -97,7 +97,7 @@ namespace DailyReport.WebLayer.Pages.Plan
             { 
                 return Content(ex.Message);
             }
-            return RedirectToPage("Index");
+            return RedirectToPage("DetailsPlan", new {Id});
         }
 
         public ActionResult OnPostCancel()

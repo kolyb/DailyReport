@@ -60,8 +60,7 @@ namespace DailyReport.WebLayer.Pages.Plan
                     await _servicePlanDTO.DeleteAsync(planDTO);
                 }
             }
-
-            return RedirectToPage("Index");
+            return RedirectToPage("DetailsPlan", new { id = PlanDayId });
         }
 
         public ActionResult OnPostCancel()

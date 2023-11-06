@@ -14,8 +14,8 @@
             <th>*</th>
             <th>Delete Plan day</th>
             <th>*</th>
-            <th>Create plan</th>
-            <th>*</th>
+            @* <th>Create plan</th>
+            <th>*</th> *@
             <th>Details plan</th>
             <th>*</th>
         </tr>
@@ -32,12 +32,19 @@
                     </form>
                 </td>
                 <td>*</td>
-                <td>
-                    <form method="post">
-                        <a asp-page="CreatePlan" asp-route-id="@item.Id">Create plan</a>
-                    </form>
+                @* <td>
+                    <form method="post"> 
+                        <a asp-page="CreatePlan" asp-route-id="@item.Id"
+                           class="btn btn-info btn-md"
+                           data-ajax="true"
+                           data-ajax-update="#reg"
+                           data-ajax-mode="replace"
+                           data-ajax-method="get">
+                        Create plan
+                       </a>
+                     </form>  
                 </td>
-                <td>*</td>
+                <td>*</td> *@
                 <td>
                     <form method="post">
                         <a asp-page="DetailsPlan" asp-route-id="@item.Id">Details plan</a>

@@ -34,8 +34,12 @@ namespace DailyReport.WebLayer.Pages.Plan
 
         public List<PlanAndReportViewModel>? PlanLastnames { get; set; }
 
+        [BindProperty]
+        public int GetId { get; set; }
+
         public void OnGetAsync(int id)
         {
+            GetId = id;
             PlanDTOs = _servicePlanDTO.GetAll().ToList().Where(i => i.PlanDayId == id);
             PersonDTOs = _servicePersonDTO.GetAll();
             WorkplaceDTOs = _serviceWorkplaceDTO.GetAll().Where(i => i.UserIdentityEmail ==
@@ -47,7 +51,8 @@ namespace DailyReport.WebLayer.Pages.Plan
                              on p.WorkplaceId equals wp.Id
                              orderby pl.StartTime
                              where pl.PlanDayId == id
-                             select new PlanAndReportViewModel{ Id = pl.Id,
+                             select new PlanAndReportViewModel{
+                                 Id = pl.Id,
                                  StartTime = pl.StartTime,
                                  FinishTime = pl.FinishTime,
                                  IntervalTime = pl.IntervalTime,

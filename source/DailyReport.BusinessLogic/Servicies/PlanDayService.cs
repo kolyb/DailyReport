@@ -17,7 +17,7 @@ namespace DailyReport.BusinessLogic.Servicies
             _planDayRepository = planDayRepository;
         }
 
-        public async Task CreateAsync(PlanDayDTO item)
+        public async Task CreateAsync(PlanDayDTO? item)
         {
             if (item == null)
             {
