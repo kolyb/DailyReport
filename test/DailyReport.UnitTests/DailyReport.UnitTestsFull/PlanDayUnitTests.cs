@@ -3,11 +3,6 @@ using DailyReport.BusinessLogic.Servicies;
 using DailyReport.DataAccess.Interfaces;
 using DailyReport.DataAccess.Models;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static DailyReport.BusinessLogic.Exceptions.ExceptionValidator;
 
 namespace DailyReport.UnitTests.DailyReport.UnitTestsFull
