@@ -17,7 +17,7 @@ namespace DailyReport.BusinessLogic.Servicies
             _reportRepository = reportRepository;
         }
 
-        public async Task CreateAsync(ReportDTO item)
+        public async Task CreateAsync(ReportDTO? item)
         {
             if (item == null)
             {
@@ -58,7 +58,7 @@ namespace DailyReport.BusinessLogic.Servicies
             await _reportRepository.CreateAsync(report);
         }
 
-        public async Task DeleteAsync(ReportDTO item)
+        public async Task DeleteAsync(ReportDTO? item)
         {
             if (item == null)
             {
@@ -103,7 +103,7 @@ namespace DailyReport.BusinessLogic.Servicies
             return reportDTO;
         }
 
-        public async Task UpdateAsync(ReportDTO item)
+        public async Task UpdateAsync(ReportDTO? item)
         {
             if (item == null)
             {

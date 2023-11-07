@@ -22,6 +22,9 @@ namespace DailyReport.BusinessLogic.ExceptionValidators
         {
             return id == (from wp in repositoryWorkplace.GetAll()
                           where wp.Description == "Without workplace"
+                          && wp.AdressCity == "Without workplace"
+                          && wp.AdressStreet == "Without workplace"
+                          && wp.AdressHouse == "Without workplace"
                           select wp.Id).FirstOrDefault();
         }
     }
