@@ -1,5 +1,7 @@
 using DailyReport.BusinessLogic.Interfaces;
 using DailyReport.BusinessLogic.ModelsDTO;
+using DailyReport.WebLayer.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace DailyReport.WebLayer.Pages.Person
@@ -22,15 +24,23 @@ namespace DailyReport.WebLayer.Pages.Person
 
         public IEnumerable<WorkplaceDTO>? WorkplaceDTOs { get; set; }
 
+        [BindProperty]
+        public List<PlanAndReportViewModel>? Persons { get; set; }
+
         public void OnGet()
         {   
             PersonDTOs = _servicePersonDTO.GetAll();
             WorkplaceDTOs = _serviceWorkplaceDTO.GetAll().Where(i => i.UserIdentityEmail
             == User?.Identity?.Name);
-            PersonNewDTOs = (from ps in PersonDTOs
+            Persons = (from ps in PersonDTOs
                              join wp in WorkplaceDTOs
                              on ps.WorkplaceId equals wp.Id
-                             select ps).ToList();
+                             select new PlanAndReportViewModel
+                             {   
+                                 Id = ps.Id,
+                                 Lastname = ps.LastName,
+                                 DescriptionWorkplace = wp.Description,
+                             }).ToList();
 
         }
     }

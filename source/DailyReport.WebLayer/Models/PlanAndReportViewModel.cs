@@ -2,7 +2,7 @@
 {
     public class PlanAndReportViewModel
     {   
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         public TimeSpan? StartTime { get; set; }
 

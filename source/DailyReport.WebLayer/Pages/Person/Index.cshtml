@@ -6,27 +6,29 @@
     <a asp-area="" asp-page="/Person/CreatePerson">Create person</a>
 </div>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Last Name</th>
-                <th>*</th>
-                <th>Phone number</th> 
-                <th>*</th>
-                <th>Edit</th>
-                <th>*</th>
-                <th>Delete</th>
-                <th>*</th>
-                <th>Details</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.PersonNewDTOs)
-            {  
+<table class="table">
+    <thead>
+        <tr>
+            <th>Last Name</th>
+            <th>*</th>
+            <th>Work place</th>
+            <th>*</th>
+            <th>Edit</th>
+            <th>*</th>
+            <th>Delete</th>
+            <th>*</th>
+            <th>Details</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Persons is not null)
+        {
+            @foreach (var item in Model.Persons)
+            {
                 <tr>
-                    <td>@item.LastName</td>
+                    <td>@item.Lastname</td>
                     <td>*</td>
-                    <td>@item.PhoneNumber</td>
+                    <td>@item.DescriptionWorkplace</td>
                     <td>*</td>
                     <td>
                         <form method="post">
@@ -47,11 +49,12 @@
                     </td>
                 </tr>
             }
-        </tbody>
-    </table>
+        }
+    </tbody>
+</table>
 
 
-    <div>
-        <a asp-controller="Home" asp-action="Index">Back</a>
-    </div>
+<div>
+    <a asp-controller="Home" asp-action="Index">Back</a>
+</div>
 

@@ -3,7 +3,8 @@ using DailyReport.BusinessLogic.ModelsDTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using static DailyReport.BusinessLogic.Exceptions.ExceptionValidator;
+using System.ComponentModel.DataAnnotations;
+using ValidationException = DailyReport.BusinessLogic.Exceptions.ExceptionValidator.ValidationException;
 
 namespace DailyReport.WebLayer.Pages.Person
 {
@@ -26,15 +27,19 @@ namespace DailyReport.WebLayer.Pages.Person
         }
 
         [BindProperty]
+        [DataType(DataType.Date)]
         public string? Birthday { get; set; }
 
         [BindProperty]
+        [DataType(DataType.Text)]
         public string? FirstName { get; set; }
 
         [BindProperty]
+        [DataType(DataType.Text)]
         public string? MiddleName { get; set; }
 
         [BindProperty]
+        [DataType(DataType.Text)]
         public string? LastName { get; set; }
 
         [BindProperty]
@@ -50,6 +55,7 @@ namespace DailyReport.WebLayer.Pages.Person
         public string? Description { get; set; }
 
         [BindProperty]
+        [DataType(DataType.PhoneNumber)]
         public string? PhoneNumber { get; set; }
 
         [BindProperty]
@@ -74,16 +80,6 @@ namespace DailyReport.WebLayer.Pages.Person
         {
             WorkplaceDTOs = _serviceWorkplaceDTO.GetAll();
             PersonDTOs = _servicePersonDTO.GetAll();
-
-            //Options = (from ps in PersonDTOs
-            //           join wp in WorkplaceDTOs
-            //           on ps.WorkplaceId equals wp.Id
-            //           where wp.UserIdentityEmail == User.Identity?.Name
-            //           select new SelectListItem
-            //           {
-            //               Value = wp.Id.ToString(),
-            //               Text = wp.Description
-            //           }).ToList();
 
             Options = _serviceWorkplaceDTO.GetAll().Where(i =>i.UserIdentityEmail == User.Identity
             ?.Name).

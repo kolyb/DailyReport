@@ -16,17 +16,20 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.PositionDTOs)
+        @if (Model.PositionDTOs is not null)
         {
-            <tr>
-                <td>@item.Description</td>
-                <td>*</td>
-                <td>
-                    <form method="post">
-                        <a asp-page="EditPosition" asp-route-id="@item.Id">Edit</a>
-                    </form>
-                </td>
-            </tr>
+            @foreach (var item in Model.PositionDTOs)
+            {
+                <tr>
+                    <td>@item.Description</td>
+                    <td>*</td>
+                    <td>
+                        <form method="post">
+                            <a asp-page="EditPosition" asp-route-id="@item.Id">Edit</a>
+                        </form>
+                    </td>
+                </tr>
+            }
         }
     </tbody>
 </table>

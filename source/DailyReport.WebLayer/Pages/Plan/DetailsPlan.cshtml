@@ -2,13 +2,9 @@
 @model DailyReport.WebLayer.Pages.Plan.DetailsPlanModel
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
-<h1>Hello</h1>
-
-@* <div class="container">
-    <div class="row">
-        <table class="table">
-        <thead>
-           <tr>
+<table class="table">
+    <thead>
+        <tr>
             <th>Lastname</th>
             <th>*</th>
             <th>Start Time</th>
@@ -21,75 +17,61 @@
             <th>*</th>
             <th>Delete</th>
             <th>*</th>
-            <th>Create plan</th>
-             <th>*</th>
-          </tr>
-        </thead>
-        <tbody>
-        @foreach (var item in Model.PlanLastnames)
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Persons is not null)
         {
-            <tr>
-                <td>@item.Lastname</td>
-                <td>*</td>
-                <td>@item.StartTime</td>
-                <td>*</td>
-                <td>@item.FinishTime</td>
-                <td>*</td>
-                <td>@item.IntervalTime</td>
-                <td>*</td>
-                <td>@item.DescriptionWorkplace</td>
-                <td>*</td>
-                <td>
-                    <form method="post">
-                        <a asp-page="DeletePlan" asp-route-id="@item.Id">Delete</a>
-                    </form>
-                </td>
-                <td>*</td>
-                <td>
-                            <div class="col-md-2">
-                                <div>
-                                    <a asp-page="CreatePlan" asp-route-id="@item.GetId"
-                                       class="btn btn-info btn-md"
-                                       data-ajax="true"
-                                       data-ajax-update="#reg"
-                                       data-ajax-mode="replace"
-                                       data-ajax-method="get">
-                                        Create plan
-                                    </a>
-                                </div>
-                             </div>
-                </td>
-            </tr>
+            @foreach (var item in Model.Persons)
+            {
+                <tr>
+                    <td>@item.Lastname</td>
+                    <td>*</td>
+                    <td>@item.StartTime</td>
+                    <td>*</td>
+                    <td>@item.FinishTime</td>
+                    <td>*</td>
+                    <td>@item.IntervalTime</td>
+                    <td>*</td>
+                    <td>@item.DescriptionWorkplace</td>
+                    <td>*</td>
+                    <td>
+                        <a asp-page="DeletePlan" asp-route-id="@item.Id"
+                        class="btn btn-info btn-md"
+                        data-ajax="true"
+                        data-ajax-update="#reg"
+                        data-ajax-mode="replace"
+                        data-ajax-method="get">
+                            Delete plan
+                        </a>
+                    </td>
+                    <td>*</td>
+                </tr>
+            }
         }
-        </tbody>
-     </table>
-     </div>
-  </div> *@
+    </tbody>
+</table>
+
+        
+<div>
     <div>
         <a asp-page="CreatePlan" asp-route-id="@Model.GetId"
+           class="btn btn-info btn-md"
            data-ajax="true"
            data-ajax-update="#reg"
            data-ajax-mode="replace"
            data-ajax-method="get">
-
-           <input type="submit" value="Create plan"
-           class="btn btn-primary" style="width:200px" />
-
-        @section scripts {
-            <script src="~/lib/jquery/dist/jquery.js"></script>
-            <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-            <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js">
-            </script>
-        }
+            Create plan
         </a>
     </div>
-
-
-
-<div id="reg">
-
 </div>
 
+<div id="reg">
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/lib/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.min.js"></script>
 
 
 <div>

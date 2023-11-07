@@ -20,30 +20,57 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.ReportLastnames)
+        @if (Model.Persons is not null)
         {
-            <tr>
-                <td>@item.Lastname</td>
-                <td>*</td>
-                <td>@item.StartTime</td>
-                <td>*</td>
-                <td>@item.FinishTime</td>
-                <td>*</td>
-                <td>@item.IntervalTime</td>
-                <td>*</td>
-                <td>@item.DescriptionWorkplace</td>
-                <td>*</td>
-                <td>
-                    <form method="post">
-                        <a asp-page="DeleteReport" asp-route-id="@item.Id">Delete</a>
-                    </form>
-                </td>
-                <td>*</td>
-            </tr>
+            @foreach (var item in Model.Persons)
+            {
+                <tr>
+                    <td>@item.Lastname</td>
+                    <td>*</td>
+                    <td>@item.StartTime</td>
+                    <td>*</td>
+                    <td>@item.FinishTime</td>
+                    <td>*</td>
+                    <td>@item.IntervalTime</td>
+                    <td>*</td>
+                    <td>@item.DescriptionWorkplace</td>
+                    <td>*</td>
+                    <td>
+                        <a asp-page="DeleteReport" asp-route-id="@item.Id"
+                        class="btn btn-info btn-md"
+                        data-ajax="true"
+                        data-ajax-update="#reg"
+                        data-ajax-mode="replace"
+                        data-ajax-method="get">
+                            Delete report
+                        </a>
+                    </td>
+                    <td>*</td>
+                </tr>
+            }
         }
     </tbody>
 </table>
 
+<div>
+    <div>
+        <a asp-page="CreateReport" asp-route-id="@Model.GetId"
+           class="btn btn-info btn-md"
+           data-ajax="true"
+           data-ajax-update="#reg"
+           data-ajax-mode="replace"
+           data-ajax-method="get">
+            Create report
+        </a>
+    </div>
+</div>
+
+<div id="reg">
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/lib/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.min.js"></script>
 
 <div>
     <a asp-page="Index">Back</a>

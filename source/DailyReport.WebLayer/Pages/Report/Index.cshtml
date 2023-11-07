@@ -14,37 +14,33 @@
             <th>*</th>
             <th>Delete report day</th>
             <th>*</th>
-            <th>Create report</th>
-            <th>*</th>
             <th>Details report</th>
             <th>*</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.ReportDayDTOs)
+        @if (Model.ReportDayDTOs is not null)
         {
-            <tr>
-                <td>@item.RecordDay.ToLongDateString()</td>
-                <td>*</td>
-                <td>
-                    <form method="post">
-                        <a asp-page="/ReportDay/DeleteReportDay" asp-route-id="@item.Id">Delete report day</a>
-                    </form>
-                </td>
-                <td>*</td>
-                <td>
-                    <form method="post">
-                        <a asp-page="CreateReport" asp-route-id="@item.Id">Create report</a>
-                    </form>
-                </td>
-                <td>*</td>
-                <td>
-                    <form method="post">
-                        <a asp-page="DetailsReport" asp-route-id="@item.Id">Details report</a>
-                    </form>
-                </td>
-                <td>*</td>
-            </tr>
+            @foreach (var item in Model.ReportDayDTOs)
+            {
+
+                <tr>
+                    <td>@item.RecordDay.ToLongDateString()</td>
+                    <td>*</td>
+                    <td>
+                        <form method="post">
+                            <a asp-page="/ReportDay/DeleteReportDay" asp-route-id="@item.Id">Delete report day</a>
+                        </form>
+                    </td>
+                    <td>*</td>
+                    <td>
+                        <form method="post">
+                            <a asp-page="DetailsReport" asp-route-id="@item.Id">Details report</a>
+                        </form>
+                    </td>
+                    <td>*</td>
+                </tr>
+            }
         }
     </tbody>
 </table>

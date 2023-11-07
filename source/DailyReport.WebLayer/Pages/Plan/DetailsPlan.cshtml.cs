@@ -32,7 +32,8 @@ namespace DailyReport.WebLayer.Pages.Plan
 
         public List<PlanDayDTO>? PlanDayDTOs { get; set; }
 
-        public List<PlanAndReportViewModel>? PlanLastnames { get; set; }
+        [BindProperty]
+        public List<PlanAndReportViewModel>? Persons { get; set; }
 
         [BindProperty]
         public int GetId { get; set; }
@@ -44,7 +45,7 @@ namespace DailyReport.WebLayer.Pages.Plan
             PersonDTOs = _servicePersonDTO.GetAll();
             WorkplaceDTOs = _serviceWorkplaceDTO.GetAll().Where(i => i.UserIdentityEmail ==
             User?.Identity?.Name);
-            PlanLastnames = (from p in PersonDTOs
+            Persons = (from p in PersonDTOs
                              join pl in PlanDTOs
                              on p.Id equals pl.PersonId
                              join wp in WorkplaceDTOs

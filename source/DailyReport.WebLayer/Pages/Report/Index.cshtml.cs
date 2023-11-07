@@ -18,7 +18,7 @@ namespace DailyReport.WebLayer.Pages.Report
         public void OnGet()
         {
             ReportDayDTOs = _serviceReportDayDTO.GetAll().Where(i => i.UserName
-            == User.Identity?.Name);
+             == User.Identity?.Name);
         }
     }
 }

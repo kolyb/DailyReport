@@ -108,7 +108,7 @@ namespace DailyReport.WebLayer.Pages.Person
 
         public async Task OnGet(int id)
         {
-            //PageId = id;
+            PageId = id;
             WorkplaceDTOs = _serviceWorkplaceDTO.GetAll().ToList();
             PositionDTOs = _servicePositionDTO.GetAll().ToList();
             ProfessionDTOs = _serviceProfessionDTO.GetAll().ToList();

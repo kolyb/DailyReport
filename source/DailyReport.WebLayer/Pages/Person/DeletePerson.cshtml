@@ -11,37 +11,43 @@
         </div>
     </div>
     <div>
-        <label>Birthday</label>
         <div>
-            <input asp-for="Birthday" disabled />
+            <input asp-for="Id" hidden />
+            <span asp-validation-for="Id"></span>
+        </div>
+    </div>
+    <div>
+        <label>@Model.Birthday</label>
+        <div>
+            <input asp-for="Birthday" hidden />
             <span asp-validation-for="Birthday"></span>
         </div>
     </div>
     <div>
-        <label>First Name</label>
+        <label>@Model.FirstName</label>
         <div>
-            <input asp-for="FirstName" disabled />
+            <input asp-for="FirstName" hidden />
             <span asp-validation-for="FirstName"></span>
         </div>
     </div>
     <div>
-        <label>Middle Name</label>
+        <label>@Model.MiddleName</label>
         <div>
-            <input asp-for="MiddleName" disabled />
+            <input asp-for="MiddleName" hidden />
             <span asp-validation-for="MiddleName"></span>
         </div>
     </div>
     <div>
-        <label>Last Name</label>
+        <label>@Model.LastName</label>
         <div>
-            <input asp-for="LastName" disabled />
+            <input asp-for="LastName" hidden />
             <span asp-validation-for="LastName"></span>
         </div>
     </div>
     <div>
-        <label>Phone number</label>
+        <label>@Model.PhoneNumber</label>
         <div>
-            <input asp-for="PhoneNumber" disabled />
+            <input asp-for="PhoneNumber" hidden />
             <span asp-validation-for="PhoneNumber"></span>
         </div>
     </div>

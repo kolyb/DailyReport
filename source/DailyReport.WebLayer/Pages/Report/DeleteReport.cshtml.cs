@@ -1,5 +1,6 @@
 using DailyReport.BusinessLogic.Interfaces;
 using DailyReport.BusinessLogic.ModelsDTO;
+using DailyReport.DataAccess.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -60,7 +61,7 @@ namespace DailyReport.WebLayer.Pages.Report
                     await _serviceReportDTO.DeleteAsync(reportDTO);
                 }
             }
-            return RedirectToPage("Index");
+            return RedirectToPage("DetailsReport", new { id = ReportDayId });
         }
 
         public ActionResult OnPostCancel()

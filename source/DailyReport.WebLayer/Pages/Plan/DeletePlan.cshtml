@@ -2,33 +2,38 @@
 @model DailyReport.WebLayer.Pages.Plan.DeletePlanModel
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
-<form method="post">
+<form asp-page="DeletePlan" method="post">
     <div asp-validation-summary="All"></div>
     <div>
-        <label>Plan day</label>
         <div>
-            <input asp-for="PlanDayId" />
+            <input asp-for="Id" hidden />
+            <span asp-validation-for="Id"></span>
+        </div>
+    </div>
+    <div>
+        <div>
+            <input asp-for="PlanDayId" hidden/>
             <span asp-validation-for="PlanDayId"></span>
         </div>
     </div>
     <div>
-        <label>Start Time</label>
+        <label>@Model.StartTime</label>
         <div>
-            <input asp-for="StartTime" />
+            <input asp-for="StartTime" hidden/>
             <span asp-validation-for="StartTime"></span>
         </div>
     </div>
     <div>
-        <label>Finish Time</label>
+        <label>@Model.FinishTime</label>
         <div>
-            <input asp-for="FinishTime" />
+            <input asp-for="FinishTime" hidden/>
             <span asp-validation-for="FinishTime"></span>
         </div>
     </div>
     <div>
-        <label>Interval Time</label>
+        <label>@Model.IntervalTime</label>
         <div>
-            <input asp-for="IntervalTime" />
+            <input asp-for="IntervalTime" hidden/>
             <span asp-validation-for="IntervalTime"></span>
         </div>
     </div>
@@ -38,6 +43,4 @@
         <input asp-page-handler="Cancel" type="submit" style="background-color:green"value="Refuse" class="btn btn-info btn-md" />
     </div>
 </form>
-<div>
-    <a asp-controller="Home" asp-action="Index">Back</a>
-</div>
+

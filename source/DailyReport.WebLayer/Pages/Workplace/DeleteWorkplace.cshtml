@@ -17,30 +17,30 @@
         </div>
     </div>
     <div>
-        <label>Description</label>
+        <label>@Model.Description</label>
         <div>
-            <input asp-for="Description"/>
+            <input asp-for="Description" hidden/>
             <span asp-validation-for="Description"></span>
         </div>
     </div>
     <div>
-        <label>City</label>
+        <label>@Model.AdressCity</label>
         <div>
-            <input asp-for="AdressCity"/>
+            <input asp-for="AdressCity" hidden/>
             <span asp-validation-for="AdressCity"></span>
         </div>
     </div>
     <div>
-        <label>Street</label>
+        <label>@Model.AdressStreet</label>
         <div>
-            <input asp-for="AdressStreet"/>
+            <input asp-for="AdressStreet" hidden/>
             <span asp-validation-for="AdressStreet"></span>
         </div>
     </div>
     <div>
-        <label>House</label>
+        <label>@Model.AdressHouse</label>
         <div>
-            <input asp-for="AdressHouse"/>
+            <input asp-for="AdressHouse" hidden/>
             <span asp-validation-for="AdressHouse"></span>
         </div>
     </div>

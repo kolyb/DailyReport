@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.DataProtection;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+
 builder.Services.AddMvc();
 builder.Services.ConfigureDailyReportBusinessLogic();
 builder.Services.AddHttpContextAccessor();
@@ -39,9 +39,6 @@ app.UseRouting();
 app.UseAuthorization();
 app.UseAuthentication();
 
-//app.MapControllerRoute(
-//    name: "default",
-//    pattern: "{controller=Home}/{action=Index}/{id?}");
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapDefaultControllerRoute();
