@@ -73,7 +73,7 @@ namespace DailyReport.BusinessLogic.Servicies
             return professionDTO;
         }
 
-        public async Task UpdateAsync(ProfessionDTO item)
+        public async Task UpdateAsync(ProfessionDTO? item)
         {
             if (item == null)
             {

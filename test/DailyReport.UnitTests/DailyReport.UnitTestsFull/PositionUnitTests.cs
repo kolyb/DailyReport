@@ -166,5 +166,31 @@ namespace DailyReport.UnitTests.DailyReport.UnitTestsFull
             });
         }
 
+        [Test]
+        public async Task UpdateAsync_WhenIdPositionEqulsOrLessZero_ShouldThrowException()
+        {
+            // Arrange
+            var positionMock = new Mock<IRepository<Position>>();
+
+            positionMock.Setup(m => m.GetAll()).Returns(new List<Position>
+            {
+                new Position { Id = 13, Description = "Врач" },
+            });
+
+            var positions = new PositionService(positionMock.Object);
+
+            PositionDTO? newPosition = new PositionDTO { Id = 0, Description = "Интерн" };
+
+            // Act
+            await Task.Run(() =>
+            {
+                AsyncTestDelegate testAction = async () => await positions.UpdateAsync(newPosition);
+
+                // Assert
+                var ex = Assert.ThrowsAsync<ValidationException>(testAction);
+                Assert.That(ex.Message, Is.EqualTo("It is impossible"));
+            });
+        }
+
     }
 }

@@ -2,8 +2,14 @@
 @model DailyReport.WebLayer.Pages.Workplace.EditWorkplaceModel
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
-<form method="post">
+<form asp-page="EditWorkplace" method="post">
     <div asp-validation-summary="All"></div>
+    <div>
+        <div>
+            <input asp-for="Id" hidden />
+            <span asp-validation-for="Id"></span>
+        </div>
+    </div>
     <div>
         <label>Description</label>
         <div>
@@ -38,6 +44,4 @@
         <input asp-page-handler="Cancel" type="submit" value=Refuse class="btn btn-info btn-md" />
     </div>
 </form>
-<div>
-    <a asp-controller="Home" asp-action="Index">Back</a>
-</div>
+

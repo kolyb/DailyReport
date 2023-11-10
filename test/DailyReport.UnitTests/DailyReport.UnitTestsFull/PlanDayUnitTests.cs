@@ -94,6 +94,37 @@ namespace DailyReport.UnitTests.DailyReport.UnitTestsFull
         }
 
         [Test]
+        public async Task GetByIdAsync_WhenIdPlanDayEqulsOrLessZero_ShouldThrowException()
+        {
+            // Arrange
+            var planDayMock = new Mock<IRepository<PlanDay>>();
+
+            planDayMock.Setup(m => m.GetAll()).Returns(new List<PlanDay>
+            {
+                new PlanDay { Id = 2, Day = new DateTime(2024, 11, 11), UserName = "gg@mail.ru" },
+            }); ;
+
+            var planDays = new PlanDayService(planDayMock.Object);
+
+            PlanDayDTO? newPlanDay = new PlanDayDTO
+            {
+                Id = 0,
+                Day = new DateTime(2023, 12, 11),
+                UserName = "cat@mail.ru"
+            };
+
+            // Act
+            await Task.Run(() =>
+            {
+                AsyncTestDelegate testAction = async () => await planDays.GetByIdAsync(newPlanDay.Id);
+
+                // Assert
+                var ex = Assert.ThrowsAsync<ValidationException>(testAction);
+                Assert.That(ex.Message, Is.EqualTo("It is impossible"));
+            });
+        }
+
+        [Test]
         public async Task UpdateAsync_WhenPlanDayReferenceNotSet_ShouldThrowException()
         {
             // Arrange

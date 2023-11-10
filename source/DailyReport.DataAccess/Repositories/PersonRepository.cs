@@ -84,11 +84,11 @@ namespace DailyReport.DataAccess.Repositories
         public async Task<Person> GetByIdAsync(int? id)
         {
             var result = await _db.Persons.FindAsync(id);
-            //if (result == null)
-            //{
-            //    //
-            //    throw new Exception();
-            //}
+            if (result == null)
+            {
+                //
+                throw new Exception();
+            }
             return result;
         }
 
@@ -96,12 +96,6 @@ namespace DailyReport.DataAccess.Repositories
         {
             _db.Entry(item).State = EntityState.Modified;
             await _db.SaveChangesAsync();
-            //_db.Database.ExecuteSqlRaw("UpdatePerson @personId ={0},@birthday ={1}," +
-            //    "@firstName ={2},@middleName={3}, @lastName={4}, @workLocationId={5}," +
-            //    "@workLocation={6}, @positionWorkLocation={7}, @userIdentityId={8}, @phoneNumber={9}",
-            //    item.Id, item.Birthday, item.FirstName, item.MiddleName, item.LastName,
-            //    item.WorkLocationId, item.WorkLocation, item.PositionWorkLocation, item.UserIdentityId,
-            //    item.PhoneNumber);
         }
     }  
     

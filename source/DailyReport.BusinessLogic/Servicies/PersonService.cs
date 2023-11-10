@@ -67,16 +67,17 @@ namespace DailyReport.BusinessLogic.Servicies
             //{
             //    throw new ValidationException("Can not get a person");
             //}
-            //if (id <= 0)
-            //{
-            //    throw new ValidationException("It is impossible");
-            //}
+            if (id <= 0)
+            {
+                throw new ValidationException("It is impossible");
+            }
+
             var person = await _personRepository.GetByIdAsync(id);
             PersonDTO personDTO = PersonMapper.ToDTO(person);
             return personDTO;
         }
 
-        public async Task UpdateAsync(PersonDTO item)
+        public async Task UpdateAsync(PersonDTO? item)
         {
             if (item == null)
             {
@@ -87,6 +88,7 @@ namespace DailyReport.BusinessLogic.Servicies
             {
                 throw new ValidationException("It is impossible");
             }
+
             Person person = PersonMapper.FromDTO(item);
             await _personRepository.UpdateAsync(person);
         }

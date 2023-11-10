@@ -47,6 +47,11 @@ namespace DailyReport.BusinessLogic.Servicies
                 throw new ValidationException("Can not delete a workplace");
             }
 
+            if (item.Id <= 0)
+            {
+                throw new ValidationException("It is impossible");
+            }
+
             Workplace workplace = WorkplaceMapper.FromDTO(item);
             await _workplaceRepository.DeleteAsync(workplace);
         }
@@ -82,9 +87,18 @@ namespace DailyReport.BusinessLogic.Servicies
             return workplaceDTO;
         }
 
-        public async Task UpdateAsync(WorkplaceDTO item)
-        {   
-            
+        public async Task UpdateAsync(WorkplaceDTO? item)
+        {
+            if (item == null)
+            {
+                throw new ValidationException("Can not update a workplace");
+            }
+
+            if (item.Id <= 0)
+            {
+                throw new ValidationException("It is impossible");
+            }
+
             Workplace workplace = WorkplaceMapper.FromDTO(item);
             await _workplaceRepository.UpdateAsync(workplace);
         }

@@ -119,6 +119,47 @@ namespace DailyReport.UnitTests.DailyReport.UnitTestsFull
         }
 
         [Test]
+        public async Task GetById_WhenIdPlanEqulsOrLessZero_ShouldThrowException()
+        {
+            // Arrange
+            var planMock = new Mock<IRepository<Plan>>();
+
+            planMock.Setup(m => m.GetAll()).Returns(new List<Plan>
+            {
+                new Plan {
+                    Id = 1,
+                    PersonId = 1,
+                    PlanDayId = 1,
+                    StartTime = new TimeSpan(09,00,00),
+                    FinishTime = new TimeSpan(10,00,00),
+                    IntervalTime = new TimeSpan(01,00,00),
+                },
+            });
+
+            var plans = new PlanService(planMock.Object);
+
+            PlanDTO? newPlan = new PlanDTO
+            {
+                Id = 0,
+                PersonId = 1,
+                PlanDayId = 1,
+                StartTime = new TimeSpan(11, 00, 00),
+                FinishTime = new TimeSpan(12, 00, 00),
+                IntervalTime = new TimeSpan(01, 00, 00),
+            };
+
+            // Act
+            await Task.Run(() =>
+            {
+                AsyncTestDelegate testAction = async () => await plans.GetByIdAsync(newPlan.Id);
+
+                // Assert
+                var ex = Assert.ThrowsAsync<ValidationException>(testAction);
+                Assert.That(ex.Message, Is.EqualTo("It is impossible"));
+            });
+        }
+
+        [Test]
         public async Task UpdateAsync_WhenPlanReferenceNotSet_ShouldThrowException()
         {
             // Arrange
@@ -149,6 +190,47 @@ namespace DailyReport.UnitTests.DailyReport.UnitTestsFull
                 // Assert
                 var ex = Assert.ThrowsAsync<ValidationException>(testAction);
                 Assert.That(ex.Message, Is.EqualTo("Can not update a plan"));
+            });
+        }
+
+        [Test]
+        public async Task UpdateAsync_WhenIdPlanEqulsOrLessZero_ShouldThrowException()
+        {
+            // Arrange
+            var planMock = new Mock<IRepository<Plan>>();
+
+            planMock.Setup(m => m.GetAll()).Returns(new List<Plan>
+            {
+                new Plan {
+                    Id = 1,
+                    PersonId = 1,
+                    PlanDayId = 1,
+                    StartTime = new TimeSpan(09,00,00),
+                    FinishTime = new TimeSpan(10,00,00),
+                    IntervalTime = new TimeSpan(01,00,00),
+                },
+            });
+
+            var plans = new PlanService(planMock.Object);
+
+            PlanDTO? newPlan = new PlanDTO
+            {
+                Id = 0,
+                PersonId = 1,
+                PlanDayId = 1,
+                StartTime = new TimeSpan(11, 00, 00),
+                FinishTime = new TimeSpan(12, 00, 00),
+                IntervalTime = new TimeSpan(01, 00, 00),
+            };
+
+            // Act
+            await Task.Run(() =>
+            {
+                AsyncTestDelegate testAction = async () => await plans.UpdateAsync(newPlan);
+
+                // Assert
+                var ex = Assert.ThrowsAsync<ValidationException>(testAction);
+                Assert.That(ex.Message, Is.EqualTo("It is impossible"));
             });
         }
     }
