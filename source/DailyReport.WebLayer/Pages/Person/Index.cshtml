@@ -1,14 +1,28 @@
 ﻿@page
 @model DailyReport.WebLayer.Pages.Person.IndexModel
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 
 <div>
-    <a asp-area="" asp-page="/Person/CreatePerson">Create person</a>
+    <div>
+        <a asp-page="CreatePerson" 
+           class="btn btn-info btn-md"
+           data-ajax="true"
+           data-ajax-update="#reg"
+           data-ajax-mode="replace"
+           data-ajax-method="get">
+            Create person
+        </a>
+    </div>
 </div>
 
-<table class="table">
-    <thead>
-        <tr>
+<div class="container">
+    <div class="container-wrapper" style="display:flex; justify-content: space-between; align-items:center">
+     <table class="table">
+       <thead>
+         <tr>
             <th>Last Name</th>
             <th>*</th>
             <th>Work place</th>
@@ -18,9 +32,9 @@
             <th>Delete</th>
             <th>*</th>
             <th>Details</th>
-        </tr>
-    </thead>
-    <tbody>
+         </tr>
+       </thead>
+       <tbody>
         @if (Model.Persons is not null)
         {
             @foreach (var item in Model.Persons)
@@ -30,28 +44,47 @@
                     <td>*</td>
                     <td>@item.DescriptionWorkplace</td>
                     <td>*</td>
-                    <td>
-                        <form method="post">
-                            <a asp-page="EditPerson" asp-route-id="@item.Id">Edit</a>
-                        </form>
-                    </td>
+                            <td>
+                                <a asp-page="EditPerson" asp-route-id="@item.Id"
+                                   class="btn btn-info btn-md"
+                                   data-ajax="true"
+                                   data-ajax-update="#reg"
+                                   data-ajax-mode="replace"
+                                   data-ajax-method="get">
+                                    Edit
+                                </a>
+                            </td>
                     <td>*</td>
-                    <td>
-                        <form method="post">
-                            <a asp-page="DeletePerson" asp-route-id="@item.Id">Delete</a>
-                        </form>
-                    </td>
+                            <td>
+                                <a asp-page="DeletePerson" asp-route-id="@item.Id"
+                                   class="btn btn-info btn-md"
+                                   data-ajax="true"
+                                   data-ajax-update="#reg"
+                                   data-ajax-mode="replace"
+                                   data-ajax-method="get">
+                                    Delete
+                                </a>
+                            </td>
                     <td>*</td>
-                    <td>
-                        <form method="post">
-                            <a asp-page="DetailsPerson" asp-route-id="@item.Id">Details</a>
-                        </form>
-                    </td>
+                            <td>
+                                <a asp-page="DetailsPerson" asp-route-id="@item.Id"
+                                   class="btn btn-info btn-md"
+                                   data-ajax="true"
+                                   data-ajax-update="#reg"
+                                   data-ajax-mode="replace"
+                                   data-ajax-method="get">
+                                    Details
+                                </a>
+                            </td>
+                    <td>*</td>
                 </tr>
             }
         }
-    </tbody>
-</table>
+      </tbody>
+     </table>
+       <div class="main" id="reg" style="align-self:flex-end"></div>
+    </div>
+</div>
 
 
 <div>

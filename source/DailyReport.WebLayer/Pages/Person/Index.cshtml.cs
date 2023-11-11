@@ -35,6 +35,7 @@ namespace DailyReport.WebLayer.Pages.Person
             Persons = (from ps in PersonDTOs
                              join wp in WorkplaceDTOs
                              on ps.WorkplaceId equals wp.Id
+                             orderby ps.LastName
                              select new PlanAndReportViewModel
                              {   
                                  Id = ps.Id,

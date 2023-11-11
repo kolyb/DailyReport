@@ -1,8 +1,8 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@using Microsoft.AspNetCore.Mvc.Localization
+@* @using Microsoft.AspNetCore.Mvc.Localization *@
 
 
 @if (User.Identity.IsAuthenticated)
@@ -17,9 +17,28 @@
 else
 {
     <div>
-        <a asp-controller="Account" asp-action="Register">Registration</a>
+        @* <a asp-controller="Account" asp-action="Register">Registration</a> *@
+        <a asp-controller="Account"
+           asp-action="Register"
+           data-ajax="true"
+           data-ajax-update="#reg"
+           data-ajax-mode="replace"
+           data-ajax-method="get">
+            Registration
+        </a>
     </div>
     <div>
-        <a asp-controller="Account" asp-action="Login">Login</a>
+        @* <a asp-controller="Account" asp-action="Login">Login</a> *@
+        <a asp-controller="Account"
+           asp-action="Login"
+           data-ajax="true"
+           data-ajax-update="#reg"
+           data-ajax-mode="replace"
+           data-ajax-method="get">
+            Login
+        </a>
     </div>
 }
+
+<div id="reg">
+</div>

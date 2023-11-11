@@ -45,7 +45,7 @@ namespace DailyReport.WebLayer.Pages.ReportDay
 
         public ActionResult OnPostCancel()
         {
-            return RedirectToPage("Index");
+            return RedirectToPage("/Report/Index");
         }
     }
 }

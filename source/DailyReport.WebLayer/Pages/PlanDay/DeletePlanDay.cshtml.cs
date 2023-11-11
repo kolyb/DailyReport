@@ -50,7 +50,7 @@ namespace DailyReport.WebLayer.Pages.PlanDay
 
         public ActionResult OnPostCancel()
         {
-            return RedirectToPage("Index");
+            return RedirectToPage("/Plan/Index");
         }
     }
 }

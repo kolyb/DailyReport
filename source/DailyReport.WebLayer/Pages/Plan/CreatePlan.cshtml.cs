@@ -102,7 +102,7 @@ namespace DailyReport.WebLayer.Pages.Plan
 
         public ActionResult OnPostCancel()
         {
-            return RedirectToPage("Index");
+            return RedirectToPage("DetailsPlan", new { id = Id });
         }
     }
 }

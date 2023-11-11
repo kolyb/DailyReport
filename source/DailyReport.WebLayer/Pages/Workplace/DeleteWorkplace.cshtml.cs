@@ -2,7 +2,6 @@ using DailyReport.BusinessLogic.Interfaces;
 using DailyReport.BusinessLogic.ModelsDTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using static DailyReport.BusinessLogic.Exceptions.ExceptionValidator;
 
 namespace DailyReport.WebLayer.Pages.Workplace
@@ -113,10 +112,8 @@ namespace DailyReport.WebLayer.Pages.Workplace
                         personNewDTO.PhoneNumber = i.PhoneNumber;
 
                         await _servicePersonDTO.CreateAsync(personNewDTO);
-                    }
-                    
+                    }                   
                 }
-
             }
             catch (ValidationException ex) 
             {

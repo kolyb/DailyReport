@@ -66,7 +66,7 @@ namespace DailyReport.WebLayer.Pages.Report
 
         public ActionResult OnPostCancel()
         {
-            return RedirectToPage("Index");
+            return RedirectToPage("DetailsReport", new { id = ReportDayId });
         }
     }
 }

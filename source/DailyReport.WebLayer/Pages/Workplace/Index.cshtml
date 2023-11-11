@@ -1,31 +1,42 @@
 ﻿@page
 @model DailyReport.WebLayer.Pages.Workplace.IndexModel
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 
 <div>
-    <a asp-area="" asp-page="/Workplace/CreateWorkplace">Create Workplace</a>
+    <a asp-page="CreateWorkplace" 
+       class="btn btn-info btn-md"
+       data-ajax="true"
+       data-ajax-update="#reg"
+       data-ajax-mode="replace"
+       data-ajax-method="get">
+        Create workplace
+    </a>
 </div>
 
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>Description</th>
-            <th>*</th>
-            <th>AdressCity</th>
-            <th>*</th>
-            <th>AdressStreet</th>
-            <th>
+<div class="container">
+    <div class="container-wrapper" style="display:flex; justify-content: space-between; align-items:center">
+       <table class="table">
+         <thead>
+           <tr>
+              <th>Description</th>
+              <th>*</th>
+              <th>AdressCity</th>
+              <th>*</th>
+              <th>AdressStreet</th>
+              <th>
                 *
-            </th>
-            <th>AdressHouse</th>
-            <th>*</th>
-            <th>Edit</th>
-        </tr>
-    </thead>
-    <tbody>
-        @if (Model.WorkplaceDTOs is not null)
-        {
+              </th>
+              <th>AdressHouse</th>
+              <th>*</th>
+              <th>Edit</th>
+           </tr>
+         </thead>
+         <tbody>
+          @if (Model.WorkplaceDTOs is not null)
+          {
             @foreach (var item in Model.WorkplaceDTOs)
             {
                 <tr>
@@ -50,15 +61,11 @@
                 </tr>
             }
         }
-    </tbody>
-</table>
-
-<div id="reg">
+        </tbody>
+      </table>
+        <div class="main" id="reg" style="align-self:flex-end"></div>
+    </div>
 </div>
-
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
-<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script src="~/lib/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.min.js"></script>
 
 <div>
     <a asp-controller="Home" asp-action="Index">Back</a>
