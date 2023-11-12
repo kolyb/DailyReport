@@ -23,7 +23,6 @@ namespace DailyReport.WebLayer.Pages.ReportDay
         [BindProperty]
         public string? UserName { get; set; }
 
-
         public async Task OnGet(int id)
         {
             ReportDayDTO reportDayDTO = await _serviceReportDayDTO.GetByIdAsync(id);

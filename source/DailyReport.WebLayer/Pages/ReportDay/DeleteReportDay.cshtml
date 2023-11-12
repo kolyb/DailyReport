@@ -2,6 +2,7 @@
 @model DailyReport.WebLayer.Pages.ReportDay.DeleteReportDayModel
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
+<h2>Delete the report day</h2>
 <form method="post">
     <div asp-validation-summary="All"></div>
     <div>
@@ -23,7 +24,7 @@
             <span asp-validation-for="UserName"></span>
         </div>
     </div>
-    <div>
+    <div class="main" style="display:flex">
         <input type="submit" style="background-color:red" value="Delete" class="btn btn-info btn-md" />
         &nbsp;
         <input asp-page-handler="Cancel" type="submit" style="background-color:green" value="Refuse" class="btn btn-info btn-md" />

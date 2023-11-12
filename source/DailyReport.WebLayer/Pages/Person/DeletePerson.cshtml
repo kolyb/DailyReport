@@ -2,6 +2,7 @@
 @model DailyReport.WebLayer.Pages.Person.DeletePersonModel
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
+<h2>Delete the person</h2>
 <form asp-page="DeletePerson" method="post">
     <div asp-validation-summary="All"></div>
     <div>
@@ -57,6 +58,7 @@
         <input asp-page-handler="Cancel" type="submit" style="background-color:green" value="Refuse" class="btn btn-info btn-md" />
     </div>
 </form>
+
 <div>
     <a asp-page="Index">Back</a>
 </div>

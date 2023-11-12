@@ -1,32 +1,49 @@
 ﻿@page
 @model DailyReport.WebLayer.Pages.Profession.IndexModel
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 
+<h2>Professions</h2>
 <div>
-    <a asp-area="" asp-page="/Profession/CreateProfession">Create Profession</a>
+    <div>
+        <a asp-page="CreateProfession"
+           class="btn btn-info btn-md"
+           data-ajax="true"
+           data-ajax-update="#reg"
+           data-ajax-mode="replace"
+           data-ajax-method="get">
+            Create profession
+        </a>
+    </div>
 </div>
 
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>Description</th>
-            <th>*</th>
-        </tr>
-    </thead>
-    <tbody>
-        @if (Model.ProfessionDTOs is not null)
-        {
-            @foreach (var item in Model.ProfessionDTOs)
-            {
+<div class="container">
+    <div class="container-wrapper" style="display:flex; justify-content: space-between; align-items:center">
+        <table class="table">
+            <thead>
                 <tr>
-                    <td>@item.Description</td>
-                    <td>*</td>
+                    <th>Description</th>
+                    <th>*</th>
                 </tr>
-            }
-        }
-    </tbody>
-</table>
+            </thead>
+            <tbody>
+                @if (Model.ProfessionDTOs is not null)
+                {
+                    @foreach (var item in Model.ProfessionDTOs)
+                    {
+                        <tr>
+                            <td>@item.Description</td>
+                            <td>*</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+        <div class="main" id="reg" style="align-self:flex-end"></div>
+    </div>
+</div>
 
 
 <div>

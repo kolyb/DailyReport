@@ -1,6 +1,5 @@
 using DailyReport.BusinessLogic.Interfaces;
 using DailyReport.BusinessLogic.ModelsDTO;
-using DailyReport.DataAccess.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -32,7 +31,6 @@ namespace DailyReport.WebLayer.Pages.Report
 
         [BindProperty]
         public TimeSpan? IntervalTime { get; set; }
-
 
         public async Task OnGet(int id)
         {

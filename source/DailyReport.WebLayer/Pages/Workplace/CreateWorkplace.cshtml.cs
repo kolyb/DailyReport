@@ -46,7 +46,6 @@ namespace DailyReport.WebLayer.Pages.Workplace
                     workplaceDTO.AdressHouse = AdressHouse;
 
                     await _serviceWorkplaceDTO.CreateAsync(workplaceDTO);
-
                 }
             }
             catch (ValidationException ex) 

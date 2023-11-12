@@ -2,43 +2,48 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@* @using Microsoft.AspNetCore.Mvc.Localization *@
+@using Microsoft.AspNetCore.Mvc.Localization
 
 
-@if (User.Identity.IsAuthenticated)
-{   
-    <p>@User.Identity.Name</p>
-    <div>
-        <form method="post" asp-controller="Account" asp-action="Logout">
-            <input type="submit" value=Exit />
-        </form>
-    </div>
-}
-else
-{
-    <div>
-        @* <a asp-controller="Account" asp-action="Register">Registration</a> *@
-        <a asp-controller="Account"
-           asp-action="Register"
-           data-ajax="true"
-           data-ajax-update="#reg"
-           data-ajax-mode="replace"
-           data-ajax-method="get">
-            Registration
-        </a>
-    </div>
-    <div>
-        @* <a asp-controller="Account" asp-action="Login">Login</a> *@
-        <a asp-controller="Account"
-           asp-action="Login"
-           data-ajax="true"
-           data-ajax-update="#reg"
-           data-ajax-mode="replace"
-           data-ajax-method="get">
-            Login
-        </a>
-    </div>
-}
+<div class="container">
+    <div class="container-wrapper" style="display:flex; justify-content: space-between; align-items:center">
+        @if (User.Identity.IsAuthenticated)
+        {
+            <p>@User.Identity.Name</p>
+            <div>
+                <form method="post" asp-controller="Account" asp-action="Logout">
+                    <input type="submit" value=Exit />
+                </form>
+            </div>
+        }
+        else
+        {
+            <div>
+                @* <a asp-controller="Account" asp-action="Register">Registration</a> *@
+                <a asp-controller="Account"
+                   asp-action="Register"
+                   data-ajax="true"
+                   data-ajax-update="#reg"
+                   data-ajax-mode="replace"
+                   data-ajax-method="get">
+                    Registration
+                </a>
+            </div>
+            <div>
+                @* <a asp-controller="Account" asp-action="Login">Login</a> *@
+                <a asp-controller="Account"
+                   asp-action="Login"
+                   data-ajax="true"
+                   data-ajax-update="#reg"
+                   data-ajax-mode="replace"
+                   data-ajax-method="get">
+                    Login
+                </a>
+            </div>
+        }
+        <div class="main" id="reg" style="align-self:flex-end">
 
-<div id="reg">
+        </div>
+    </div>
 </div>
+

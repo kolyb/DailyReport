@@ -10,27 +10,25 @@ namespace DailyReport.WebLayer.Pages.Plan
     {
         private readonly IService<PersonDTO> _servicePersonDTO;
         private readonly IService<PlanDTO> _servicePlanDTO;
-        private readonly IService<PlanDayDTO> _servicePlanDayDTO;
         private readonly IService<WorkplaceDTO> _serviceWorkplaceDTO;
 
         public DetailsPlanModel(IService<PersonDTO> servicePersonDTO,
             IService<PlanDTO> servicePlanDTO,
-            IService<PlanDayDTO> servicePlanDayDTO,
             IService<WorkplaceDTO> serviceWorkplaceDTO)
         {
             _servicePersonDTO = servicePersonDTO;
             _servicePlanDTO = servicePlanDTO;
-            _servicePlanDayDTO = servicePlanDayDTO;
             _serviceWorkplaceDTO = serviceWorkplaceDTO;
         }
 
+        [BindProperty]
         public IEnumerable<PersonDTO>? PersonDTOs { get; set; }
 
+        [BindProperty]
         public IEnumerable<WorkplaceDTO>? WorkplaceDTOs { get; set; }
 
+        [BindProperty]
         public IEnumerable<PlanDTO>? PlanDTOs { get; set; }
-
-        public List<PlanDayDTO>? PlanDayDTOs { get; set; }
 
         [BindProperty]
         public List<PlanAndReportViewModel>? Persons { get; set; }

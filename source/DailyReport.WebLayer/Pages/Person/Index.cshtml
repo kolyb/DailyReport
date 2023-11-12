@@ -5,6 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<h2>Persons</h2>
 <div>
     <div>
         <a asp-page="CreatePerson" 
@@ -20,30 +21,30 @@
 
 <div class="container">
     <div class="container-wrapper" style="display:flex; justify-content: space-between; align-items:center">
-     <table class="table">
-       <thead>
-         <tr>
-            <th>Last Name</th>
-            <th>*</th>
-            <th>Work place</th>
-            <th>*</th>
-            <th>Edit</th>
-            <th>*</th>
-            <th>Delete</th>
-            <th>*</th>
-            <th>Details</th>
-         </tr>
-       </thead>
-       <tbody>
-        @if (Model.Persons is not null)
-        {
-            @foreach (var item in Model.Persons)
-            {
+        <table class="table">
+            <thead>
                 <tr>
-                    <td>@item.Lastname</td>
-                    <td>*</td>
-                    <td>@item.DescriptionWorkplace</td>
-                    <td>*</td>
+                    <th>Last Name</th>
+                    <th>*</th>
+                    <th>Work place</th>
+                    <th>*</th>
+                    <th>Edit</th>
+                    <th>*</th>
+                    <th>Delete</th>
+                    <th>*</th>
+                    <th>Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Persons is not null)
+                {
+                    @foreach (var item in Model.Persons)
+                    {
+                        <tr>
+                            <td>@item.Lastname</td>
+                            <td>*</td>
+                            <td>@item.DescriptionWorkplace</td>
+                            <td>*</td>
                             <td>
                                 <a asp-page="EditPerson" asp-route-id="@item.Id"
                                    class="btn btn-info btn-md"
@@ -54,7 +55,7 @@
                                     Edit
                                 </a>
                             </td>
-                    <td>*</td>
+                            <td>*</td>
                             <td>
                                 <a asp-page="DeletePerson" asp-route-id="@item.Id"
                                    class="btn btn-info btn-md"
@@ -65,7 +66,7 @@
                                     Delete
                                 </a>
                             </td>
-                    <td>*</td>
+                            <td>*</td>
                             <td>
                                 <a asp-page="DetailsPerson" asp-route-id="@item.Id"
                                    class="btn btn-info btn-md"
@@ -76,12 +77,12 @@
                                     Details
                                 </a>
                             </td>
-                    <td>*</td>
-                </tr>
-            }
-        }
-      </tbody>
-     </table>
+                            <td>*</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
        <div class="main" id="reg" style="align-self:flex-end"></div>
     </div>
 </div>

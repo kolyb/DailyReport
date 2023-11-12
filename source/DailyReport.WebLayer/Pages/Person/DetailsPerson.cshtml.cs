@@ -62,12 +62,16 @@ namespace DailyReport.WebLayer.Pages.Person
         [BindProperty]
         public string? PhoneNumber { get; set; }
 
+        [BindProperty]
         public List<PersonDTO>? PersonDTOs { get; set; }
 
+        [BindProperty]
         public List<WorkplaceDTO>? WorkplaceDTOs { get; set; }
 
+        [BindProperty]
         public List<PositionDTO>? PositionDTOs { get; set; }
 
+        [BindProperty]
         public List<ProfessionDTO>? ProfessionDTOs { get; set; }
 
         public async Task OnGetAsync(int id)

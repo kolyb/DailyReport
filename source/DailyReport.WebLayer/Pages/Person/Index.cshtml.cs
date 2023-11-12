@@ -18,10 +18,10 @@ namespace DailyReport.WebLayer.Pages.Person
             _serviceWorkplaceDTO = serviceWorkplaceDTO;
         }
 
+        [BindProperty]
         public IEnumerable<PersonDTO>? PersonDTOs { get; set; }
 
-        public IEnumerable<PersonDTO>? PersonNewDTOs { get; set; }
-
+        [BindProperty]
         public IEnumerable<WorkplaceDTO>? WorkplaceDTOs { get; set; }
 
         [BindProperty]

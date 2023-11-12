@@ -1,49 +1,65 @@
 ﻿@page
 @model DailyReport.WebLayer.Pages.Plan.IndexModel
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 
+<h2>Plans</h2>
 <div>
-    <a asp-area="" asp-page="/PlanDay/CreatePlanDay">Create plan day</a>
+    <div>
+        <a asp-page="/PlanDay/CreatePlanDay"
+           class="btn btn-info btn-md"
+           data-ajax="true"
+           data-ajax-update="#reg"
+           data-ajax-mode="replace"
+           data-ajax-method="get">
+            Create plan day
+        </a>
+    </div>
 </div>
 
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>Plan day</th>
-            <th>*</th>
-            <th>Delete Plan day</th>
-            <th>*</th>
-            <th>Details plan</th>
-            <th>*</th>
-        </tr>
-    </thead>
-    <tbody>
-        @if (Model.PlanDayDTOs is not null)
-        {
-            @foreach (var item in Model.PlanDayDTOs)
-            {
+<div class="container">
+    <div class="container-wrapper" style="display:flex; justify-content: space-between; align-items:center">
+        <table class="table">
+            <thead>
                 <tr>
-                    <td>@item.Day.ToLongDateString()</td>
-                    <td>*</td>
-                    <td>
-                        <form method="post">
-                            <a asp-page="/PlanDay/DeletePlanDay" asp-route-id="@item.Id">Delete plan day</a>
-                        </form>
-                    </td>
-                    <td>*</td>
-                    <td>
-                        <form method="post">
-                            <a asp-page="DetailsPlan" asp-route-id="@item.Id">Details plan</a>
-                        </form>
-                    </td>
-                    <td>*</td>
+                    <th>Plan day</th>
+                    <th>*</th>
+                    <th>Delete Plan day</th>
+                    <th>*</th>
+                    <th>Details plan</th>
+                    <th>*</th>
                 </tr>
-            }
-        }
-    </tbody>
-</table>
-
+            </thead>
+            <tbody>
+                @if (Model.PlanDayDTOs is not null)
+                {
+                    @foreach (var item in Model.PlanDayDTOs)
+                    {
+                        <tr>
+                            <td>@item.Day.ToLongDateString()</td>
+                            <td>*</td>
+                            <td>
+                                <form method="post">
+                                    <a asp-page="/PlanDay/DeletePlanDay" asp-route-id="@item.Id">Delete</a>
+                                </form>
+                            </td>
+                            <td>*</td>
+                            <td>
+                                <form method="post">
+                                    <a asp-page="DetailsPlan" asp-route-id="@item.Id">Details plan</a>
+                                </form>
+                            </td>
+                            <td>*</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+        <div class="main" id="reg" style="align-self:flex-end"></div>
+    </div>
+</div>
 
 <div>
     <a asp-controller="Home" asp-action="Index">Back</a>

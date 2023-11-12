@@ -1,39 +1,62 @@
 ﻿@page
 @model DailyReport.WebLayer.Pages.Position.IndexModel
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 
+<h2>Positions</h2>
 <div>
-    <a asp-area="" asp-page="/Position/CreatePosition">Create Position</a>
+    <div>
+        <a asp-page="CreatePosition"
+           class="btn btn-info btn-md"
+           data-ajax="true"
+           data-ajax-update="#reg"
+           data-ajax-mode="replace"
+           data-ajax-method="get">
+            Create position
+        </a>
+    </div>
 </div>
 
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Description</th>
-            <th>*</th>
-            <th>Edit</th>
-        </tr>
-    </thead>
-    <tbody>
-        @if (Model.PositionDTOs is not null)
-        {
-            @foreach (var item in Model.PositionDTOs)
-            {
+<div class="container">
+    <div class="container-wrapper" style="display:flex; justify-content: space-between; align-items:center">
+        <table class="table">
+            <thead>
                 <tr>
-                    <td>@item.Description</td>
-                    <td>*</td>
-                    <td>
-                        <form method="post">
-                            <a asp-page="EditPosition" asp-route-id="@item.Id">Edit</a>
-                        </form>
-                    </td>
+                    <th>Description</th>
+                    <th>*</th>
+                    <th>Edit</th>
                 </tr>
-            }
-        }
-    </tbody>
-</table>
-
+            </thead>
+            <tbody>
+                @if (Model.PositionDTOs is not null)
+                {
+                    @foreach (var item in Model.PositionDTOs)
+                    {
+                        <tr>
+                            <td>@item.Description</td>
+                            <td>*</td>
+                            <td>
+                                <a asp-page="EditPosition" asp-route-id="@item.Id"
+                                   class="btn btn-info btn-md"
+                                   data-ajax="true"
+                                   data-ajax-update="#reg"
+                                   data-ajax-mode="replace"
+                                   data-ajax-method="get">
+                                    Edit
+                                </a>
+                            </td>
+                            <td>*</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+        <div class="main" id="reg" style="align-self:flex-end"></div>
+   </div>
+</div>
 
 <div>
     <a asp-controller="Home" asp-action="Index">Back</a>

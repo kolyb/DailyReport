@@ -31,9 +31,6 @@ namespace DailyReport.WebLayer.Pages.Person
             _serviceReportDTO = serviceReportDTO;
         }
 
-        //[BindProperty]
-        //public int? Id { get; set; }
-
         [BindProperty]
         public int? PageId { get; set; }
 
@@ -160,13 +157,6 @@ namespace DailyReport.WebLayer.Pages.Person
             ReportDTOs = _serviceReportDTO.GetAll().Where(i => i.PersonId == PageId);
 
             PersonDTOs = _servicePersonDTO.GetAll().Where(i => i.Id == PageId);
-            //WorkplaceDTOsPost = _serviceWorkplaceDTO.GetAll().ToList();
-
-            //var saveWorkplaceId = (from wl in WorkplaceDTOsPost
-            //                       join ps in PersonDTOs
-            //                       on wl.Id equals ps.WorkplaceId
-            //                       select wl.Id).FirstOrDefault();
-
 
             if (ModelState.IsValid)
             {
@@ -184,10 +174,8 @@ namespace DailyReport.WebLayer.Pages.Person
                     //personDTO.ProfessionId = ProfessionId;
                     //personDTO.PhoneNumber = PhoneNumber;
 
-
                     await _servicePersonDTO.DeleteAsync(personDTO);
                 }
-
 
                 PersonDTO personNewDTO = new PersonDTO();
                 personNewDTO.Birthday = Birthday;
@@ -207,9 +195,7 @@ namespace DailyReport.WebLayer.Pages.Person
             int? getId = (from ps in PersonNewDTOs
                           where ps.WorkplaceId == WorkplaceId
                           && ps.LastName == LastName
-                          select ps.Id).FirstOrDefault();
-
-                                       
+                          select ps.Id).FirstOrDefault();                                     
 
              foreach (var i in PlanDTOs)
              {
@@ -234,7 +220,6 @@ namespace DailyReport.WebLayer.Pages.Person
 
                 await _serviceReportDTO.CreateAsync(reportDTO);
             }
-
             return RedirectToPage("Index");
         }
 

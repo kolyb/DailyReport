@@ -5,6 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<h2>Workplaces</h2>
 <div>
     <a asp-page="CreateWorkplace" 
        class="btn btn-info btn-md"
@@ -18,52 +19,54 @@
 
 <div class="container">
     <div class="container-wrapper" style="display:flex; justify-content: space-between; align-items:center">
-       <table class="table">
-         <thead>
-           <tr>
-              <th>Description</th>
-              <th>*</th>
-              <th>AdressCity</th>
-              <th>*</th>
-              <th>AdressStreet</th>
-              <th>
-                *
-              </th>
-              <th>AdressHouse</th>
-              <th>*</th>
-              <th>Edit</th>
-           </tr>
-         </thead>
-         <tbody>
-          @if (Model.WorkplaceDTOs is not null)
-          {
-            @foreach (var item in Model.WorkplaceDTOs)
-            {
+        <table class="table">
+            <thead>
                 <tr>
-                    <td>@item.Description</td>
-                    <td>*</td>
-                    <td>@item.AdressCity</td>
-                    <td>*</td>
-                    <td>@item.AdressStreet</td>
-                    <td>*</td>
-                    <td>@item.AdressHouse</td>
-                    <td>*</td>
-                    <td>
-                        <a asp-page="EditWorkplace" asp-route-id="@item.Id"
-                           class="btn btn-info btn-md"
-                           data-ajax="true"
-                           data-ajax-update="#reg"
-                           data-ajax-mode="replace"
-                           data-ajax-method="get">
-                            Edit
-                        </a>
-                    </td>
+                    <th>Description</th>
+                    <th>*</th>
+                    <th>AdressCity</th>
+                    <th>*</th>
+                    <th>AdressStreet</th>
+                    <th>
+                        *
+                    </th>
+                    <th>AdressHouse</th>
+                    <th>*</th>
+                    <th>Edit</th>
                 </tr>
-            }
-        }
-        </tbody>
-      </table>
-        <div class="main" id="reg" style="align-self:flex-end"></div>
+            </thead>
+            <tbody>
+                @if (Model.WorkplaceDTOs is not null)
+                {
+                    @foreach (var item in Model.WorkplaceDTOs)
+                    {
+                        <tr>
+                            <td>@item.Description</td>
+                            <td>*</td>
+                            <td>@item.AdressCity</td>
+                            <td>*</td>
+                            <td>@item.AdressStreet</td>
+                            <td>*</td>
+                            <td>@item.AdressHouse</td>
+                            <td>*</td>
+                            <td>
+                                <a asp-page="EditWorkplace" asp-route-id="@item.Id"
+                                   class="btn btn-info btn-md"
+                                   data-ajax="true"
+                                   data-ajax-update="#reg"
+                                   data-ajax-mode="replace"
+                                   data-ajax-method="get">
+                                    Edit
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+        <div class="main" id="reg" style="align-self:flex-end">
+
+        </div>
     </div>
 </div>
 
