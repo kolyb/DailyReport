@@ -68,7 +68,7 @@ namespace DailyReport.WebLayer.Pages.Person
         public IEnumerable<PositionDTO>? PositionDTOs { get; set; }
 
         [BindProperty]
-        public List<SelectListItem>? Options { get; set; }
+        public List<SelectListItem>? Workplaces { get; set; }
 
         [BindProperty]
         public List<SelectListItem>? Positions { get; set; }
@@ -81,7 +81,7 @@ namespace DailyReport.WebLayer.Pages.Person
             WorkplaceDTOs = _serviceWorkplaceDTO.GetAll();
             PersonDTOs = _servicePersonDTO.GetAll();
 
-            Options = _serviceWorkplaceDTO.GetAll().Where(i =>i.UserIdentityEmail == User.Identity
+            Workplaces = _serviceWorkplaceDTO.GetAll().Where(i =>i.UserIdentityEmail == User.Identity
             ?.Name).
             Select(a =>
                                   new SelectListItem

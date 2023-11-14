@@ -11,15 +11,17 @@ namespace DailyReport.WebLayer.Pages.Report
         private readonly IService<PersonDTO> _servicePersonDTO;
         private readonly IService<ReportDTO> _serviceReportDTO;
         private readonly IService<WorkplaceDTO> _serviceWorkplaceDTO;
+        private readonly IService<ReportDayDTO> _serviceReportDayDTO;
 
         public DetailsReportModel(IService<PersonDTO> servicePersonDTO,
             IService<ReportDTO> serviceReportDTO,
-            IService<ReportDayDTO> serviceReportDayDTO,
-            IService<WorkplaceDTO> serviceWorkplaceDTO)
+            IService<WorkplaceDTO> serviceWorkplaceDTO,
+            IService<ReportDayDTO> serviceReportDayDTO)
         {
             _servicePersonDTO = servicePersonDTO;
             _serviceReportDTO = serviceReportDTO;
             _serviceWorkplaceDTO = serviceWorkplaceDTO;
+            _serviceReportDayDTO = serviceReportDayDTO;
         }
 
         [BindProperty]
@@ -37,9 +39,19 @@ namespace DailyReport.WebLayer.Pages.Report
         [BindProperty]
         public int GetId { get; set; }
 
+        [BindProperty]
+        public IEnumerable<ReportDayDTO>? ReportDayDTOs { get; set; }
+
+        [BindProperty]
+        public DateTime DayDetailsReport { get; set; }
+
         public void OnGetAsync(int id)
         {
             GetId = id;
+            ReportDayDTOs = _serviceReportDayDTO.GetAll();
+            DayDetailsReport = (from dt in ReportDayDTOs
+                              where dt.Id == id
+                              select dt.RecordDay).FirstOrDefault();
             ReportDTOs = _serviceReportDTO.GetAll().ToList().Where(i => i.ReportDayId
             == id).ToList();
             PersonDTOs = _servicePersonDTO.GetAll().ToList();

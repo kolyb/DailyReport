@@ -6,8 +6,8 @@
 
 
 <div class="container">
-    <div class="container-wrapper" style="display:flex; justify-content: space-between; align-items:center">
-        @if (User.Identity.IsAuthenticated)
+    <div class="container-wrapper" style="display:flex; justify-content:space-between; align-items:flex-start">
+        @if (User?.Identity?.IsAuthenticated == true)
         {
             <p>@User.Identity.Name</p>
             <div>
@@ -19,24 +19,35 @@
         else
         {
             <div>
-                @* <a asp-controller="Account" asp-action="Register">Registration</a> *@
                 <a asp-controller="Account"
                    asp-action="Register"
                    data-ajax="true"
                    data-ajax-update="#reg"
                    data-ajax-mode="replace"
-                   data-ajax-method="get">
+                   data-ajax-method="get"
+                   style="font-size:larger">
                     Registration
                 </a>
             </div>
             <div>
-                @* <a asp-controller="Account" asp-action="Login">Login</a> *@
+                <a asp-controller="Home"
+                   asp-action="Privacy"
+                   data-ajax="true"
+                   data-ajax-update="#reg"
+                   data-ajax-mode="replace"
+                   data-ajax-method="get"
+                   style="font-size:larger">
+                    Privacy
+                </a>
+            </div>
+            <div>
                 <a asp-controller="Account"
                    asp-action="Login"
                    data-ajax="true"
                    data-ajax-update="#reg"
                    data-ajax-mode="replace"
-                   data-ajax-method="get">
+                   data-ajax-method="get"
+                   style="font-size:larger">
                     Login
                 </a>
             </div>
