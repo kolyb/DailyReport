@@ -197,14 +197,7 @@ IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[
 ALTER TABLE [dbo].[AspNetUserTokens] CHECK CONSTRAINT [FK_AspNetUserTokens_AspNetUsers_UserId]
 GO
 
---insert into dbo.Workplaces
---values ('Without workplace','Without workplace','Without workplace','Without workplace','Without workplace')
 
-
---ALTER TABLE [dbo].[Persons]WITH CHECK ADD CONSTRAINT [FK_AspNetUser_Person] FOREIGN KEY ([UserIdentityEmail])     
---    REFERENCES [dbo].[AspNetUsers] ([Email])
---ON UPDATE CASCADE
---GO
 
 
 

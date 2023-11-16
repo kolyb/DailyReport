@@ -79,7 +79,6 @@
     <Build Include="Tables\PlanDays.sql" />
     <Build Include="ForeignKeys\FK_PlanDay_Plan.sql" />
     <Build Include="Tables\Reports.sql" />
-    <Build Include="ForeignKeys\FK_AspNetUser_Person.sql" />
     <Build Include="Tables\ReportDays.sql" />
     <Build Include="ForeignKeys\FK_Person_Report.sql" />
     <Build Include="ForeignKeys\FK_ReportDay_Report.sql" />

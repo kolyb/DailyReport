@@ -67,6 +67,8 @@ namespace DailyReport.WebLayer.Pages.Report
             PersonDTOs = _servicePersonDTO.GetAll();
             WorkplaceDTOs = _serviceWorkplaceDTO.GetAll().Where(i => i.UserIdentityEmail
             == User?.Identity?.Name);
+            
+
             Persons = (from ps in PersonDTOs
                        join wp in WorkplaceDTOs
                        on ps.WorkplaceId equals wp.Id
