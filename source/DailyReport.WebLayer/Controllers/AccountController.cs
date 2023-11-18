@@ -97,6 +97,7 @@ namespace DailyReport.WebLayer.Controllers
                     await _serviceWorkplaceDTO.CreateAsync(workplaceDTO);
 
                     return RedirectToAction("Index", "Home");
+
                 }
                 return View(model);
             }

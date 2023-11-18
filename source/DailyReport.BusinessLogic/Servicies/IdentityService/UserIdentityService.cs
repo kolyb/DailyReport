@@ -50,14 +50,19 @@ namespace DailyReport.BusinessLogic.Servicies.IdentityService
                 throw new Exception("There is no current user!");
             }
 
-            var user = await _userManager.FindByIdAsync(item.Id);
+            if (item.Id != null)
+            {
+                throw new Exception("User is already consits");
+            }
+
+            //var user = await _userManager.FindByIdAsync(item.Id);          
 
             if (item.Password == null)
             {
                 throw new Exception("There is no current user!");
             }
 
-            user = new UserIdentity
+            var user = new UserIdentity
             {
                 PasswordHash = HashPassword(item.Password),
                 Email = item.Email,
