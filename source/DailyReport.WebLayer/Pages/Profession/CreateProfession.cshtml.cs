@@ -2,6 +2,7 @@ using DailyReport.BusinessLogic.Interfaces;
 using DailyReport.BusinessLogic.ModelsDTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Text.RegularExpressions;
 using static DailyReport.BusinessLogic.Exceptions.ExceptionValidator;
 
 namespace DailyReport.WebLayer.Pages.Profession
@@ -26,10 +27,17 @@ namespace DailyReport.WebLayer.Pages.Profession
         {
             try
             {
+                var reg = "^[^0-9!@#$%^&*()_+={}<>?:,.|'¹;?]+$";
                 if (ModelState.IsValid)
                 {
                     ProfessionDTO professionDTO = new ProfessionDTO();
-                    professionDTO.Description = Description;
+                    if (Description != null)
+                    {
+                        if (Regex.IsMatch(Description, reg))
+                        {
+                            professionDTO.Description = Description;
+                        }
+                    }
 
                     await _serviceProfessionDTO.CreateAsync(professionDTO);
                 }

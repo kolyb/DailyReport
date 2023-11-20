@@ -26,7 +26,12 @@ namespace DailyReport.BusinessLogic.Servicies
 
             if (PositionValidator.PositionExists(item.Description, _positionRepository))
             {
-                throw new ValidationException($"Position '{item.Description}' already exists");
+                throw new ValidationException($"Position '{item.Description}' already exists or input correct data");
+            }
+
+            if(item.Description == null) 
+            {
+                throw new ValidationException($"Input only letter");
             }
 
             Position position = PositionMapper.FromDTO(item);
@@ -83,6 +88,11 @@ namespace DailyReport.BusinessLogic.Servicies
             if (item.Id <= 0)
             {
                 throw new ValidationException("It is impossible");
+            }
+
+            if (PositionValidator.PositionExists(item.Description, _positionRepository))
+            {
+                throw new ValidationException($"Position already exists or input correct data");
             }
 
             Position position = PositionMapper.FromDTO(item);

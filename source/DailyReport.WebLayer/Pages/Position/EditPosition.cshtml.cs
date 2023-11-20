@@ -2,6 +2,8 @@ using DailyReport.BusinessLogic.Interfaces;
 using DailyReport.BusinessLogic.ModelsDTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Text.RegularExpressions;
+using static DailyReport.BusinessLogic.Exceptions.ExceptionValidator;
 
 namespace DailyReport.WebLayer.Pages.Position
 {
@@ -29,16 +31,30 @@ namespace DailyReport.WebLayer.Pages.Position
 
         public async Task<IActionResult> OnPost()
         {
-            if (ModelState.IsValid)
+            try
             {
-                PositionDTO positionDTO = await _servicePositionDTO.GetByIdAsync(Id);
-                if (positionDTO != null)
+                var reg = "^[^0-9!@#$%^&*()_+={}<>?:,.|'¹;?]+$";
+                if (ModelState.IsValid)
                 {
-                    positionDTO.Id = Id;
-                    positionDTO.Description = Description;
+                    PositionDTO positionDTO = await _servicePositionDTO.GetByIdAsync(Id);
+                    if (positionDTO != null)
+                    {
+                        positionDTO.Id = Id;
+                        if (Description != null)
+                        {
+                            if (Regex.IsMatch(Description, reg))
+                            {
+                                positionDTO.Description = Description;
+                            }
+                        }
 
-                    await _servicePositionDTO.UpdateAsync(positionDTO);
+                        await _servicePositionDTO.UpdateAsync(positionDTO);
+                    }
                 }
+            }
+            catch (ValidationException ex)
+            {
+                return Content(ex.Message);
             }
             return RedirectToPage("Index");
         }

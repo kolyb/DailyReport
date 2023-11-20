@@ -29,6 +29,11 @@ namespace DailyReport.BusinessLogic.Servicies
                 throw new ValidationException($"Profession '{item.Description}' already exists");
             }
 
+            if (item.Description == null)
+            {
+                throw new ValidationException($"Input only letter");
+            }
+
             Profession profession = ProfessionMapper.FromDTO(item);
             await _professionRepository.CreateAsync(profession);
         }
