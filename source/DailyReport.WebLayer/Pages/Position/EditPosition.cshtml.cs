@@ -34,6 +34,7 @@ namespace DailyReport.WebLayer.Pages.Position
             try
             {
                 var reg = "^[^0-9!@#$%^&*()_+={}<>?:,.|'¹;?]+$";
+
                 if (ModelState.IsValid)
                 {
                     PositionDTO positionDTO = await _servicePositionDTO.GetByIdAsync(Id);

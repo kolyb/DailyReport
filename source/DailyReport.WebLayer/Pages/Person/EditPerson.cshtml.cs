@@ -3,6 +3,7 @@ using DailyReport.BusinessLogic.ModelsDTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Text.RegularExpressions;
 using static DailyReport.BusinessLogic.Exceptions.ExceptionValidator;
 
 namespace DailyReport.WebLayer.Pages.Person
@@ -152,73 +153,70 @@ namespace DailyReport.WebLayer.Pages.Person
 
         public async Task<IActionResult> OnPost()
         {
-            PlanDTOs = _servicePlanDTO.GetAll().Where(i => i.PersonId == PageId);
-
-            ReportDTOs = _serviceReportDTO.GetAll().Where(i => i.PersonId == PageId);
-
-            PersonDTOs = _servicePersonDTO.GetAll().Where(i => i.Id == PageId);
-
-            if (ModelState.IsValid)
+            try
             {
+                PlanDTOs = _servicePlanDTO.GetAll().Where(i => i.PersonId == PageId);
 
-                PersonDTO personDTO = await _servicePersonDTO.GetByIdAsync(PageId);
-                if (personDTO != null)
+                ReportDTOs = _serviceReportDTO.GetAll().Where(i => i.PersonId == PageId);
+
+                PersonDTOs = _servicePersonDTO.GetAll().Where(i => i.Id == PageId);
+
+                if (ModelState.IsValid)
                 {
-                    //personDTO.Id = PageId;
-                    //personDTO.Birthday = Birthday;
-                    //personDTO.FirstName = FirstName;
-                    //personDTO.MiddleName = MiddleName;
-                    //personDTO.LastName = LastName;
-                    //personDTO.WorkplaceId = WorkplaceId;
-                    //personDTO.PositionId = PositionId;
-                    //personDTO.ProfessionId = ProfessionId;
-                    //personDTO.PhoneNumber = PhoneNumber;
 
-                    await _servicePersonDTO.DeleteAsync(personDTO);
+                    PersonDTO personDTO = await _servicePersonDTO.GetByIdAsync(PageId);
+                    if (personDTO != null)
+                    {
+                        await _servicePersonDTO.DeleteAsync(personDTO);
+                    }
+
+                    PersonDTO personNewDTO = new PersonDTO();
+                    personNewDTO.Birthday = Birthday;
+                    personNewDTO.FirstName = FirstName;
+                    personNewDTO.MiddleName = MiddleName;
+                    personNewDTO.LastName = LastName;
+                    personNewDTO.WorkplaceId = WorkplaceId;
+                    personNewDTO.PositionId = PositionId;
+                    personNewDTO.ProfessionId = ProfessionId;
+                    personNewDTO.PhoneNumber= PhoneNumber;
+
+                    await _servicePersonDTO.CreateAsync(personNewDTO);
                 }
 
-                PersonDTO personNewDTO = new PersonDTO();
-                personNewDTO.Birthday = Birthday;
-                personNewDTO.FirstName = FirstName;
-                personNewDTO.MiddleName = MiddleName;
-                personNewDTO.LastName = LastName;
-                personNewDTO.WorkplaceId = WorkplaceId;
-                personNewDTO.PositionId = PositionId;
-                personNewDTO.ProfessionId = ProfessionId;
-                personNewDTO.PhoneNumber = PhoneNumber;
+                PersonNewDTOs = _servicePersonDTO.GetAll();
 
-                await _servicePersonDTO.CreateAsync(personNewDTO);
+                int? getId = (from ps in PersonNewDTOs
+                              where ps.WorkplaceId == WorkplaceId
+                              && ps.LastName == LastName
+                              select ps.Id).FirstOrDefault();
+
+                foreach (var i in PlanDTOs)
+                {
+                    PlanDTO planDTO = new PlanDTO();
+                    planDTO.StartTime = i.StartTime;
+                    planDTO.FinishTime = i.FinishTime;
+                    planDTO.IntervalTime = i.FinishTime - i.StartTime;
+                    planDTO.PersonId = getId;
+                    planDTO.PlanDayId = i.PlanDayId;
+
+                    await _servicePlanDTO.CreateAsync(planDTO);
+                }
+
+                foreach (var i in ReportDTOs)
+                {
+                    ReportDTO reportDTO = new ReportDTO();
+                    reportDTO.StartTime = i.StartTime;
+                    reportDTO.FinishTime = i.FinishTime;
+                    reportDTO.IntervalTime = i.FinishTime - i.StartTime;
+                    reportDTO.PersonId = getId;
+                    reportDTO.ReportDayId = i.ReportDayId;
+
+                    await _serviceReportDTO.CreateAsync(reportDTO);
+                }
             }
-
-            PersonNewDTOs = _servicePersonDTO.GetAll();
-
-            int? getId = (from ps in PersonNewDTOs
-                          where ps.WorkplaceId == WorkplaceId
-                          && ps.LastName == LastName
-                          select ps.Id).FirstOrDefault();                                     
-
-             foreach (var i in PlanDTOs)
-             {
-                 PlanDTO planDTO = new PlanDTO();
-                 planDTO.StartTime = i.StartTime;
-                 planDTO.FinishTime = i.FinishTime;
-                 planDTO.IntervalTime = i.FinishTime - i.StartTime;
-                 planDTO.PersonId = getId;
-                 planDTO.PlanDayId = i.PlanDayId;
-
-                 await _servicePlanDTO.CreateAsync(planDTO);
-             }
-
-            foreach (var i in ReportDTOs)
+            catch(ValidationException ex)
             {
-                ReportDTO reportDTO = new ReportDTO();
-                reportDTO.StartTime = i.StartTime;
-                reportDTO.FinishTime = i.FinishTime;
-                reportDTO.IntervalTime = i.FinishTime - i.StartTime;
-                reportDTO.PersonId = getId;
-                reportDTO.ReportDayId = i.ReportDayId;
-
-                await _serviceReportDTO.CreateAsync(reportDTO);
+                return Content(ex.Message);
             }
             return RedirectToPage("Index");
         }

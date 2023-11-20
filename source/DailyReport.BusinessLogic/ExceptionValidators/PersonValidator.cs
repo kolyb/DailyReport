@@ -12,6 +12,5 @@ namespace DailyReport.BusinessLogic.ExceptionValidators
             && x.MiddleName == middlename && x.LastName == lastname
             && x.WorkplaceId == workplaceid);
         }
-
     }
 }

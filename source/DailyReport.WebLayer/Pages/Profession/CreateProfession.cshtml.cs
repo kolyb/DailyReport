@@ -28,6 +28,7 @@ namespace DailyReport.WebLayer.Pages.Profession
             try
             {
                 var reg = "^[^0-9!@#$%^&*()_+={}<>?:,.|'¹;?]+$";
+
                 if (ModelState.IsValid)
                 {
                     ProfessionDTO professionDTO = new ProfessionDTO();

@@ -4,6 +4,7 @@ using DailyReport.BusinessLogic.Mappers;
 using DailyReport.BusinessLogic.ModelsDTO;
 using DailyReport.DataAccess.Interfaces;
 using DailyReport.DataAccess.Models;
+using DailyReport.DataAccess.Repositories;
 using static DailyReport.BusinessLogic.Exceptions.ExceptionValidator;
 
 namespace DailyReport.BusinessLogic.Servicies
@@ -28,6 +29,11 @@ namespace DailyReport.BusinessLogic.Servicies
                 item.LastName, item.WorkplaceId, _personRepository))
             {
                 throw new ValidationException($"Person '{item.LastName} {item.MiddleName} {item.FirstName}' already exists");
+            }
+
+            if (item.PhoneNumber == null)
+            {
+                throw new ValidationException($"Input correct phone number");
             }
 
             Person person = PersonMapper.FromDTO(item);

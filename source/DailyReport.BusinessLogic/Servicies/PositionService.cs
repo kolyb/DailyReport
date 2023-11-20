@@ -29,7 +29,7 @@ namespace DailyReport.BusinessLogic.Servicies
                 throw new ValidationException($"Position '{item.Description}' already exists or input correct data");
             }
 
-            if(item.Description == null) 
+            if (item.Description == null) 
             {
                 throw new ValidationException($"Input only letter");
             }
