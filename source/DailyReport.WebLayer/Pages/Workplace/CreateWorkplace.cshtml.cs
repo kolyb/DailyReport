@@ -2,6 +2,7 @@ using DailyReport.BusinessLogic.Interfaces;
 using DailyReport.BusinessLogic.ModelsDTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Text.RegularExpressions;
 using static DailyReport.BusinessLogic.Exceptions.ExceptionValidator;
 
 namespace DailyReport.WebLayer.Pages.Workplace
@@ -36,14 +37,46 @@ namespace DailyReport.WebLayer.Pages.Workplace
         {
             try
             {
+                var regForDescriptionAndAdressHouse = "^[^!@#$%^&*()_+={}<>?:,.|'¹;?]+$";
+
+                var regForAdressCityAndAdressStreet = "^[^0-9!@#$%^&*()_+={}<>?:,.|'¹;?]+$";
+
                 if (ModelState.IsValid)
                 {
                     WorkplaceDTO workplaceDTO = new WorkplaceDTO();
                     workplaceDTO.UserIdentityEmail = User.Identity?.Name;
-                    workplaceDTO.Description = Description;
-                    workplaceDTO.AdressCity = AdressCity;
-                    workplaceDTO.AdressStreet = AdressStreet;
-                    workplaceDTO.AdressHouse = AdressHouse;
+
+                    if (Description != null)
+                    {
+                        if (Regex.IsMatch(Description, regForDescriptionAndAdressHouse))
+                        {
+                            workplaceDTO.Description = Description;
+                        }
+                    }
+
+                    if (AdressCity != null)
+                    {
+                        if (Regex.IsMatch(AdressCity, regForAdressCityAndAdressStreet))
+                        {
+                            workplaceDTO.AdressCity = AdressCity;
+                        }
+                    }
+
+                    if (AdressStreet != null)
+                    {
+                        if (Regex.IsMatch(AdressStreet, regForAdressCityAndAdressStreet))
+                        {
+                            workplaceDTO.AdressStreet = AdressStreet;
+                        }
+                    }
+
+                    if (AdressHouse != null)
+                    {
+                        if (Regex.IsMatch(AdressHouse, regForDescriptionAndAdressHouse))
+                        {
+                            workplaceDTO.AdressHouse = AdressHouse;
+                        }
+                    }
 
                     await _serviceWorkplaceDTO.CreateAsync(workplaceDTO);
                 }

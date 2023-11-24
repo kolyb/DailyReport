@@ -4,6 +4,7 @@ using DailyReport.BusinessLogic.Mappers;
 using DailyReport.BusinessLogic.ModelsDTO;
 using DailyReport.DataAccess.Interfaces;
 using DailyReport.DataAccess.Models;
+using DailyReport.DataAccess.Repositories;
 using static DailyReport.BusinessLogic.Exceptions.ExceptionValidator;
 
 namespace DailyReport.BusinessLogic.Servicies
@@ -34,6 +35,26 @@ namespace DailyReport.BusinessLogic.Servicies
             {
                 throw new ValidationException($"Workplcace '{item.Description} {item.AdressCity}, {item.AdressStreet}, " +
                     $"{item.AdressHouse}' already exists");
+            }
+
+            if (item.Description == null)
+            {
+                throw new ValidationException($"Input only letter and number");
+            }
+
+            if (item.AdressCity == null)
+            {
+                throw new ValidationException($"Input only letter");
+            }
+
+            if (item.AdressStreet == null)
+            {
+                throw new ValidationException($"Input only letter");
+            }
+
+            if (item.AdressHouse == null)
+            {
+                throw new ValidationException($"Input only letter and number");
             }
 
             Workplace workplace = WorkplaceMapper.FromDTO(item);
@@ -97,6 +118,17 @@ namespace DailyReport.BusinessLogic.Servicies
             if (item.Id <= 0)
             {
                 throw new ValidationException("It is impossible");
+            }
+
+            if (WorkplaceValidator.WorkplaceExists(
+                item.Description,
+                item.AdressCity,
+                item.AdressStreet,
+                item.AdressHouse,
+                item.UserIdentityEmail,
+                _workplaceRepository))
+            {
+                throw new ValidationException($"Workplace already exists or input correct data");
             }
 
             Workplace workplace = WorkplaceMapper.FromDTO(item);

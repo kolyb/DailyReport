@@ -31,7 +31,7 @@ namespace DailyReport.BusinessLogic.Servicies
                 throw new ValidationException($"Person '{item.LastName} {item.MiddleName} {item.FirstName}' already exists");
             }
 
-            if (item.PhoneNumber == null)
+            if (item.PhoneNumber == "")
             {
                 throw new ValidationException($"Input correct phone number");
             }

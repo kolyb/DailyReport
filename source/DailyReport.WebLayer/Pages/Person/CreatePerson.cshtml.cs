@@ -3,7 +3,6 @@ using DailyReport.BusinessLogic.ModelsDTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.IdentityModel.Tokens;
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 using ValidationException = DailyReport.BusinessLogic.Exceptions.ExceptionValidator.ValidationException;
@@ -126,18 +125,19 @@ namespace DailyReport.WebLayer.Pages.Person
                     personDTO.WorkplaceId = WorkplaceId;
                     personDTO.PositionId = PositionId;
                     personDTO.ProfessionId = ProfessionId;
-                    if (PhoneNumber == "")
+
+                    if (PhoneNumber == null)
                     {
                         personDTO.PhoneNumber = PhoneNumber;
                     }
 
-                    if (PhoneNumber != "")
+                    else if (PhoneNumber != null)
                     {
                         if (Regex.IsMatch(PhoneNumber, reg))
                         {
                             personDTO.PhoneNumber = PhoneNumber;
                         }
-                    }
+                    }                   
 
                     await _servicePersonDTO.CreateAsync(personDTO);
                 }
