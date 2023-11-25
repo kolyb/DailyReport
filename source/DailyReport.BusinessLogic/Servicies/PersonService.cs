@@ -31,9 +31,9 @@ namespace DailyReport.BusinessLogic.Servicies
                 throw new ValidationException($"Person '{item.LastName} {item.MiddleName} {item.FirstName}' already exists");
             }
 
-            if (item.PhoneNumber == "")
+            if (item.FirstName == null || item.MiddleName == null || item.LastName == null)
             {
-                throw new ValidationException($"Input correct phone number");
+                throw new ValidationException($"Input only letter");
             }
 
             Person person = PersonMapper.FromDTO(item);
@@ -69,10 +69,6 @@ namespace DailyReport.BusinessLogic.Servicies
 
         public async Task<PersonDTO> GetByIdAsync(int? id)
         {
-            //if (id == null)
-            //{
-            //    throw new ValidationException("Can not get a person");
-            //}
             if (id <= 0)
             {
                 throw new ValidationException("It is impossible");

@@ -110,6 +110,8 @@ namespace DailyReport.WebLayer.Pages.Person
             {
                 var reg = "^[^à-ÿ¸À-ß¨a-zA-Z!@#$%^&*()_={}<>?:,.|'¹;?]+$";
 
+                var regForFirstMiddleLastName = "^[^0-9!@#$%^&*()_+={}<>?:,.|'¹;?]+$";
+
                 if (WorkplaceId == 0)
                 {
                     return RedirectToPage("Index");
@@ -119,9 +121,32 @@ namespace DailyReport.WebLayer.Pages.Person
                 {
                     PersonDTO personDTO = new PersonDTO();
                     personDTO.Birthday = Birthday;
-                    personDTO.FirstName = FirstName;
-                    personDTO.MiddleName = MiddleName;
-                    personDTO.LastName = LastName;
+
+                    if (FirstName != null)
+                    {
+                        if (Regex.IsMatch(FirstName, regForFirstMiddleLastName))
+                        {
+                            personDTO.FirstName = FirstName;
+                        }
+                    }
+
+                    if (MiddleName != null)
+                    {
+                        if (Regex.IsMatch(MiddleName, regForFirstMiddleLastName))
+                        {
+                            personDTO.MiddleName = MiddleName;
+                        }
+                    }
+
+                    if (LastName != null)
+                    {
+                        if (Regex.IsMatch(LastName, regForFirstMiddleLastName))
+                        {
+                            personDTO.LastName = LastName;
+                      
+                        }
+                    }
+
                     personDTO.WorkplaceId = WorkplaceId;
                     personDTO.PositionId = PositionId;
                     personDTO.ProfessionId = ProfessionId;
@@ -131,7 +156,7 @@ namespace DailyReport.WebLayer.Pages.Person
                         personDTO.PhoneNumber = PhoneNumber;
                     }
 
-                    else if (PhoneNumber != null)
+                    else
                     {
                         if (Regex.IsMatch(PhoneNumber, reg))
                         {
