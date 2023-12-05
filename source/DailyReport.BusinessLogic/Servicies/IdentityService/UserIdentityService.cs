@@ -1,4 +1,5 @@
-﻿using DailyReport.BusinessLogic.Interfaces.IdentityInterface;
+﻿using Azure.Messaging;
+using DailyReport.BusinessLogic.Interfaces.IdentityInterface;
 using DailyReport.BusinessLogic.ModelsDTO.IdentityDTO;
 using DailyReport.DataAccess.Models.Identity;
 using Microsoft.AspNetCore.Identity;
@@ -68,6 +69,7 @@ namespace DailyReport.BusinessLogic.Servicies.IdentityService
                 Email = item.Email,
                 UserName = item.Email,
             };
+           
             await _userManager.CreateAsync(user);
         }
 

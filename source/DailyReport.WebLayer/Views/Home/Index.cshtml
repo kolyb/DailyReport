@@ -1,57 +1,27 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+ 
 @using Microsoft.AspNetCore.Mvc.Localization
 
-
-<div class="container" style="font-weight:700; width:auto">
-    <div class="container-wrapper" style="display:flex; justify-content:space-between; align-items:center">
-        @if (User?.Identity?.IsAuthenticated == true)
-        {
-            <p>@User.Identity.Name</p>
-            <div>
-                <form method="post" asp-controller="Account" asp-action="Logout">
-                    <input type="submit" value=Exit />
-                </form>
-            </div>
-        }
-        else
-        {   
-            <div>
-                <a asp-controller="Account"
-                   asp-action="Register"
-                   data-ajax="true"
-                   data-ajax-update="#reg"
-                   data-ajax-mode="replace"
-                   data-ajax-method="get"
-                   style="font-size:larger">
-                    Registration
-                </a>
-            </div>
-            <div id="reg">
-                <a asp-controller="Home"
-                   asp-action="Privacy"
-                   data-ajax="true"
-                   data-ajax-update="#reg"
-                   data-ajax-mode="replace"
-                   data-ajax-method="get"
-                   style="font-size:larger">
-                    Privacy
-                </a>
-            </div>
-            <div>
-                <a asp-controller="Account"
-                   asp-action="Login"
-                   data-ajax="true"
-                   data-ajax-update="#reg"
-                   data-ajax-mode="replace"
-                   data-ajax-method="get"
-                   style="font-size:larger">
-                    Login
-                </a>
-            </div>
-        }
+<div>
+    <h2>Daily Report</h2>
+</div>
+<div class="container" style="font-weight:700; width:auto"> 
+    <div class= "container-wrapper" style="display:flex; justify-content:space-between; align-items:center">
+        <div>
+            @if (User?.Identity?.IsAuthenticated == true)
+            {
+                <p>
+                    @User.Identity.Name
+                </p>
+                <div>
+                    <form method="post" asp-controller="Account" asp-action="Logout">
+                        <input type="submit" value=Exit />
+                    </form>
+                </div>
+            }
+        </div>       
     </div>
 </div>
 

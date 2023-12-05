@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/DailyReport.WebLayer.styles.css" asp-append-version="true" />
 </head>
-<body>
-    <header>
+<body style="min-width: 375px">
+    <header id="reg" style="padding:2px">
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
                 @* <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">DailyReport.WebLayer</a> *@
@@ -42,20 +42,49 @@
                         </ul>
                     </div>
                 }
+                @if (User?.Identity?.IsAuthenticated == false)
+                {
+                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Account"
+                                   asp-action="Register"
+                                   data-ajax="true"
+                                   data-ajax-update="#reg"
+                                   data-ajax-mode="replace"
+                                   data-ajax-method="get"
+                                   style="font-size:larger">
+                                    Registration
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Account"
+                                   asp-action="Login"
+                                   data-ajax="true"
+                                   data-ajax-update="#reg"
+                                   data-ajax-mode="replace"
+                                   data-ajax-method="get"
+                                   style="font-size:larger">
+                                    Login
+                                </a>
+                            </li>                              
+                        </ul>
+                    </div>
+                }
             </div>
         </nav>
     </header>
-    <div class="container">
+    <div class="container" > 
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
     <footer class="border-top footer text-muted">
-        <div class="container">
+        <div class="container"> 
             &copy; 2023 - DailyReport.WebLayer - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
-    </footer>
+     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/lib/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.min.js"></script>

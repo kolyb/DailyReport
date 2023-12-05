@@ -96,7 +96,7 @@ namespace DailyReport.WebLayer.Controllers
 
                     await _serviceWorkplaceDTO.CreateAsync(workplaceDTO);
 
-                    return RedirectToAction("Index", "Home");
+                    return Content("You passed registration. Use Log in");
 
                 }
                 return View(model);
