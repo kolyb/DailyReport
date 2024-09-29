@@ -7,13 +7,10 @@ namespace DailyReport.WebLayer.Pages.Workplace
     public class IndexModel : PageModel
     {
         private readonly IService<WorkplaceDTO> _serviceWorkplaceDTO;
-        private readonly IService<PersonDTO> _servicePersonDTO;
 
-        public IndexModel(IService<WorkplaceDTO> serviceWorkplaceDTO,
-            IService<PersonDTO> servicePersonDTO)
+        public IndexModel(IService<WorkplaceDTO> serviceWorkplaceDTO)
         {
             _serviceWorkplaceDTO = serviceWorkplaceDTO;
-            _servicePersonDTO = servicePersonDTO;
         }
 
         public IEnumerable<WorkplaceDTO>? WorkplaceDTOs { get; set; }
